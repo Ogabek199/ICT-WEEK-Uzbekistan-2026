@@ -1,0 +1,49 @@
+:root {
+  /* Colors */
+  --bg-primary: #05080e;
+  --bg-secondary: #0b111a;
+  --bg-surface: rgba(18, 27, 38, 0.5);
+  --bg-surface-hover: rgba(28, 41, 58, 0.65);
+  --bg-surface-card: rgba(18, 27, 38, 0.6);
+  --bg-pill: rgba(255, 255, 255, 0.05);
+
+  /* Brand Colors */
+  --brand-green: #83ffc1;
+  --brand-green-hover: #a1ffcf;
+  --brand-green-glow: rgba(131, 255, 193, 0.25);
+  --brand-cyan: #38ef7d;
+  --brand-dark-text: #121b26;
+
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-heading: #ededf2;
+  --text-secondary: rgba(255, 255, 255, 0.75);
+  --text-muted: #b4b2b1;
+  --text-dimmed: rgba(255, 255, 255, 0.5);
+  --text-placeholder: #6c798b;
+
+  /* Borders & Strokes */
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(131, 255, 193, 0.4);
+  --border-glow: 1px solid rgba(131, 255, 193, 0.2);
+
+  /* Typography */
+  --font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* Max Widths */
+  --container-max-width: 1280px;
+  --header-max-width: 1040px;
+
+  /* Shadows & Glass */
+  --glass-blur: blur(24px);
+  --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glow-brand: 0 0 35px rgba(131, 255, 193, 0.35);
+}
