@@ -1,0 +1,517 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "program": "Dastur",
+    "partners": "Hamkorlar",
+    "incentives": "Imtiyozlar",
+    "register": "Ro'yxatdan o'tish"
+  },
+  "hero": {
+    "badgeDate": "22–26-Sentabr, 2026",
+    "badgeVenue": "CAEx, Toshkent",
+    "titleLine1": "Dunyodagi eng tez rivojlanayotgan",
+    "titleLine2": "Ekotizimni kashf eting",
+    "subtitle": "rivojlanayotgan o'zbek texnologik ekotizimi haqida hamma narsani — atigi bir haftada bilib oling",
+    "registerBtn": "Ro'yxatdan o'tish",
+    "agendaBtn": "To'liq dastur",
+    "countdownLabel": "TADBIR BOSHLANISHIGA QOLDI",
+    "days": "KUN",
+    "hours": "SOAT",
+    "minutes": "DAQIQA",
+    "seconds": "SONIYA",
+    "stats": {
+      "dealroomVal": "Startap\nEkotizim\nBahosi",
+      "dealroomRank": "Venchur investitsiyalar\no'sishi bo'yicha\ndunyoda #1",
+      "startupblinkGrowth": "O'sish sur'ati\nbo'yicha dunyoda\n#1 ekotizim",
+      "startupblinkHub": "Markaziy Osiyoda\n#1 Startap Xab\n(Toshkent)",
+      "unicorns": "Fintex\nUnikornlar"
+    }
+  },
+  "savespot": {
+    "title": "O'z o'rningizni hoziroq band qiling!",
+    "desc": "Har bir unikorn bitta yulduzdan boshlanadi.\nBirgalikda ular Shimol yog'dusiga aylanadi.\n\nO'zbekistonga xush kelibsiz — bu yerda hukumatning innovatsion qo'llab-quvvatlashi va kuchli ekotizim startapchilarga o'z g'oyalarini global miqyosga olib chiqishda yordam beradi.\n\nBu yerda startaplar va texnologiya kompaniyalari nafaqat Shimol yog'dusining bir qismiga aylanadi, balki o'z Qutb yulduzini topib, xalqaro muvaffaqiyat sari intiladilar.",
+    "p1_1": "Har bir unikorn bitta yulduzdan boshlanadi.",
+    "p1_2": "Birgalikda ular Shimol yog'dusiga aylanadi.",
+    "p2": "O'zbekistonga xush kelibsiz — bu yerda hukumatning innovatsion qo'llab-quvvatlashi va kuchli ekotizim startapchilarga o'z g'oyalarini global miqyosga olib chiqishda yordam beradi.",
+    "p3": "Bu yerda startaplar va texnologiya kompaniyalari nafaqat Shimol yog'dusining bir qismiga aylanadi, balki o'z Qutb yulduzini topib, xalqaro muvaffaqiyat sari intiladilar.",
+    "btn": "Ro'yxatdan o'tish"
+  },
+  "attendees": {
+    "title": "Avvalgi Ishtirokchilarimiz",
+    "subtitle": "Dunyoning yetakchi texnologiya gigantlari, venchur fondlari va yirik kompaniyalari ishonchi."
+  },
+  "summits": {
+    "badge": "KONFERENSIYALAR VA SAMMITLAR",
+    "title": "ICTWEEK 2026 Sammit Treklari",
+    "subtitle": "Yuqori darajadagi maxsus sammitlar, ixtisoslashtirilgan forumlar va xalqaro netvorking maydonlari.",
+    "tabEnterprise": "Enterprise Uzbekistan",
+    "tabStartup": "Startup & VC",
+    "tabOutsourcing": "Xizmat Ko'rsatuvchi Kompaniyalar",
+    "tabGlobal": "Global Bridge",
+    "tabGamedev": "Gamedev",
+    "tabAi": "AI NATIVE",
+    "idealFor": "Kimlar uchun:",
+    "idealForLabel": "Kimlar uchun:",
+    "idealForShort": "Kimlar uchun",
+    "registerHoverBtn": "Ro'yxatdan o'tish →",
+    "tracks": {
+      "enterprise": {
+        "title": "Enterprise Uzbekistan Sammiti",
+        "cardTitle": "Enterprise Uzbekistan Sammiti",
+        "cardSubtitle": "Yangi biznes modellari va ilg'or texnologiyalar uchun qonun bilan himoyalangan sinov muhiti.",
+        "date": "23-Sentabr, 2026",
+        "time": "10:00 - 12:00",
+        "location": "CAEx, 1-Zal",
+        "description": "Global texnologik biznes uchun yaratilgan mamlakatdagi birinchi maxsus yurisdiksiya — Enterprise Uzbekistan bilan tanishing.",
+        "bullets": [
+          "Ingliz va Uels huquqi elementlariga asoslangan holda, u siz qo'shilgan kundan boshlab belgilanadigan va 2100-yilgacha kafolatlangan huquqiy muhitni taklif etadi — IT eksportchilari, ma'lumotlar markazlari, startaplar va infratuzilma investorlari uchun.",
+          "23-sentabr kuni Enterprise Uzbekistan o'z tizimini shaxsan taqdim etish uchun ICT Week sahnasiga chiqadi. Uni yaratayotgan mutaxassislar bilan uchrashing, tuzilishini ko'ring va uning ichida ishlash imkoniyatlarini o'rganing.",
+          "CAEx, Asosiy Zalga tashrif buyuring — uni boshqalardan oldin ko'ring."
+        ],
+        "idealFor": "global texnologiya kompaniyalari, investorlar, yuridik va moliyaviy maslahatchilar hamda davlat vakillari"
+      },
+      "startup": {
+        "title": "Startap va Venchur Sammiti",
+        "events": [
+          {
+            "title": "Startap va Venchur Sammiti",
+            "date": "22-Sentabr, 2026",
+            "time": "14:00 - 17:00",
+            "venue": "CAEX, Asosiy Zal",
+            "desc": "Markaziy Osiyo startap ekotizimining asosiy yig'ilishi — mintaqaning keyingi o'sish bosqichini muhokama qilish uchun asoschilar, investorlar va davlat yetakchilarini birlashtiradi.",
+            "bullets": [
+              "Yetakchi xalqaro venchur investorlarining asosiy ma'ruzalari",
+              "Rivojlanayotgan texnologik trendlar va investitsiya jalb qilish bo'yicha panellar",
+              "500+ dan ortiq investorlar va asoschilar bilan yuqori darajadagi netvorking"
+            ],
+            "idealFor": "Asoschilar, venchur fondlar, biznes-farishtalar, akseleratorlar va startap rahbarlari."
+          },
+          {
+            "title": "Startup Blink Mukofotlari",
+            "date": "23-Sentabr, 2026",
+            "time": "16:00 - 18:00",
+            "venue": "CAEX, 3-Zal",
+            "desc": "Global innovatsiya maydonini shakllantirayotgan eng yaxshi startap ekotizimlari va ekotizim yaratuvchilarini taqdirlash rasmiy marosimi.",
+            "bullets": [
+              "Global Startup Ecosystem Index 2026 hisobotining taqdimoti",
+              "Eng tez o'sayotgan mintaqaviy startap xablarini e'tirof etish",
+              "Eng faol texnologik novatorlar uchun tantanali mukofotlash"
+            ],
+            "idealFor": "Ekotizim yaratuvchilari, davlat arboblari, tahlilchilar va OAV."
+          },
+          {
+            "title": "Startup World Cup - O'zbekiston Mintaqaviy Finali",
+            "date": "24-Sentabr, 2026",
+            "time": "10:00 - 17:00",
+            "venue": "CAEX, Asosiy Zal",
+            "desc": "Dunyoning eng yirik startap tanlovining mintaqaviy finali: eng yaxshi startaplar Kremniy vodiysidagi global finalda ishtirok etish va 1 million dollardan ortiq investitsiya uchun kurashadilar.",
+            "bullets": [
+              "Sahna ortida saralangan eng kuchli 10 ta startapning jonli taqdimoti",
+              "Kremniy vodiysi top investorlaridan iborat xalqaro hakamlar hay'ati",
+              "G'olib San-Frantsiskodagi Katta Finalga yo'llanmani qo'lga kiritadi"
+            ],
+            "idealFor": "Ilk va o'sish bosqichidagi startaplar, investorlar va akseleratorlar."
+          },
+          {
+            "title": "Ignyte Challenge",
+            "date": "25-Sentabr, 2026",
+            "time": "11:00 - 13:00",
+            "venue": "CAEX, 3-Zal",
+            "desc": "DIFC Innovation Hub va IGNYTE hamkorligida o'tkaziladigan, startaplarni xalqaro investorlar va Yaqin Sharq bozoriga kirish bilan bog'laydigan qizg'in pitch tanlovi.",
+            "bullets": [
+              "Dubai Future District Fund va DIFC ekotizimiga to'g'ridan-to'g'ri kirish",
+              "Tezlashtirilgan inkubatsiya va xalqaro bozorga chiqish dasturlari",
+              "Pul grantlari va bepul kompaniya ochish paketlari"
+            ],
+            "idealFor": "Fintex, Web3, Sun'iy intellekt va B2B dasturiy ta'minot startaplari."
+          },
+          {
+            "title": "Taqdimot (Startap Pitchlari)",
+            "date": "25-Sentabr, 2026",
+            "time": "14:00 - 17:00",
+            "venue": "CAEX, 2-Zal",
+            "desc": "Umidli xalqaro va mahalliy startaplarni investorlar, korporatsiyalar va hamkorlarga namoyish etuvchi jonli pitch sessiyalari.",
+            "bullets": [
+              "3 daqiqalik qisqa pitch + 2 daqiqalik investorlar savol-javobi",
+              "Yuzma-yuz investorlar bilan uchrashuv zali",
+              "Tezkor investitsiya shartnomalari va kelishuvlar imkoniyati"
+            ],
+            "idealFor": "Biznes-farishtalar, oilaviy ofislar, sindikat yetakchilari va asoschilar."
+          }
+        ]
+      },
+      "service": {
+        "title": "Texnologiya va Xizmatlar Outsourcing Konferensiyasi",
+        "cardTitle": "Tartibga solish sinov maydoni (Sandbox)",
+        "cardSubtitle": "Yangi biznes modellari va ilg'or texnologiyalar uchun qonun bilan himoyalangan sinov muhiti.",
+        "date": "23-Sentabr, 2026",
+        "time": "12:00 - 14:00",
+        "location": "CAEx, 3-Zal",
+        "description": "Markaziy Osiyo markazidan turib global xizmatlar va autsorsing kelajagini kashf eting. Nima uchun O'zbekiston ITES kompaniyalari va investitsiyalar uchun navbatdagi yirik manzilga aylanayotganini bilib oling.",
+        "bullets": [
+          "Kompaniyalar uchun 0% soliq imtiyozlari haqida to'liq ma'lumot",
+          "21 milliondan ortiq ko'p tilli, texnologik yosh ishchi kuchiga kirish",
+          "Maxsus IT-viza va 3 yillik bepul ofis taqdim etish dasturi"
+        ],
+        "idealFor": "autsorsing kompaniyalari, IT yetakchilari, global xizmat ko'rsatuvchilar, investorlar va davlat vakillari"
+      },
+      "bridge": {
+        "title": "Global Bridge (Xalqaro Hamkorlik)",
+        "events": [
+          {
+            "title": "O'zbekiston-Yaponiya Raqamli Hamjamiyat Forumi",
+            "date": "22-Sentabr, 2026",
+            "time": "15:00 - 18:00",
+            "venue": "CAEX, 3-Zal",
+            "desc": "AKT sohasida O'zbekiston va Yaponiya o'rtasida birgalikda dasturiy ta'minot ishlab chiqishdan tortib mutaxassislar almashinuvi va bozorga kirishgacha bo'lgan yangi imkoniyatlarni o'rganing.",
+            "bullets": [
+              "Yaponiyaning IT autsorsing hamkorligidagi tajribasi",
+              "Yapon kompaniyalari uchun o'zbek IT mutaxassislari bazasiga kirish",
+              "Ikki tomonlama texnologik tashabbuslarni davlat tomonidan qo'llab-quvvatlash"
+            ],
+            "idealFor": "Yaponiya texnologiya kompaniyalari, IT yetakchilar, davlat xizmatchilari va investorlar"
+          },
+          {
+            "title": "Turkiy Davlatlar Tashkiloti (TDT) Texnologiya Forumi",
+            "date": "23-Sentabr, 2026",
+            "time": "12:00 - 14:00",
+            "venue": "CAEX, 2-Zal",
+            "desc": "Forum raqamli innovatsiyalar va startap ekotizimlari sohasidagi hamkorlikni rivojlantirish uchun Turkiy Davlatlar Tashkilotining asosiy vakillarini birlashtiradi.",
+            "bullets": [
+              "Hukumatlar boshchiligidagi innovatsion ekotizim tahlillari",
+              "Startaplarni qo'llab-quvvatlash va transchegaraviy o'sish bo'yicha panel",
+              "TDT innovatsion ekotizimi bo'ylab strategik netvorking"
+            ],
+            "idealFor": "Davlat vakillari, texnoparklar, innovatsiya agentliklari, startap ekotizim yetakchilari, investorlar, ta'sischilar"
+          },
+          {
+            "title": "O'zbekiston - Yaqin Sharq Texnologiya Sammiti",
+            "date": "24-Sentabr, 2026",
+            "time": "14:00 - 16:30",
+            "venue": "IT Park Majmuasi",
+            "desc": "Sammit IT eksportini kengaytirish va Yaqin Sharq bozorida yangi imkoniyatlarni ochish uchun O'zbekiston texnologik ekotizimini arab investorlari bilan bog'laydi.",
+            "bullets": [
+              "O'zbekistonning IT va raqamli infratuzilmasiga investitsiyalar",
+              "Yaqin Sharq texnologiya kompaniyalarining Markaziy Osiyoga kirishi",
+              "O'zbek startaplari va IT kompaniyalarining Fors ko'rfazi bozorlariga kengayishi"
+            ],
+            "idealFor": "Texnologiya asoschilari, institutsional investorlar, korporativ delegatsiyalar va savdo vakillari"
+          },
+          {
+            "title": "Sabriya: Raqamli Iqtisodiyotda Ayollar",
+            "date": "24-Sentabr, 2026",
+            "time": "14:00 - 16:30",
+            "venue": "CAEX, 3-Zal",
+            "desc": "O'zbekiston va xalqaro miqyosda xotin-qizlarning raqamli iqtisodiyotda yetakchilik qilishini qo'llab-quvvatlovchi IT Park tashabbusi — Sabriya bilan tanishing.",
+            "bullets": [
+              "Ayollar boshchiligidagi startaplar uchun grantlar va mentorlik dasturlari",
+              "Ayol asoschilar va texnologiya yetakchilarining keng tarmog'iga kirish",
+              "IT sohasida karyera o'sishi bo'yicha amaliy tavsiyalar"
+            ],
+            "idealFor": "Tadbirkor ayollar, dasturchilar, investorlar va ekotizim hamkorlari"
+          },
+          {
+            "title": "AWS Community Day",
+            "date": "25-Sentabr, 2026",
+            "time": "10:00 - 17:00",
+            "venue": "CAEX, Asosiy Zal",
+            "desc": "AWS ekspertlari va mintaqaviy dasturchilar hamjamiyati tomonidan o'tkaziladigan bulutli texnologiyalar bo'yicha to'liq kunlik amaliy sessiyalarga qo'shiling.",
+            "bullets": [
+              "Eng so'nggi AWS xizmatlari va bulut arxitekturasi bo'yicha ma'lumotlar",
+              "Bulut amaliyotchilarining real keyslari va tajribalari",
+              "Dasturchilar, arxitektorlar va DevOps muhandislari bilan netvorking"
+            ],
+            "idealFor": "Dasturchilar, bulutli arxitektorlar, DevOps muhandislari va IT rahbarlari"
+          }
+        ]
+      },
+      "gamedev": {
+        "title": "GameGap: Gamedev Konferensiyasi",
+        "cardTitle": "GameGap: Gamedev Konferensiyasi",
+        "cardSubtitle": "Markaziy Osiyodagi eng yirik o'yin ishlab chiqish va interaktiv ko'ngilochar forum.",
+        "date": "25-Sentabr, 2026",
+        "time": "14:00 - 17:00",
+        "location": "CAEx, 3-Zal",
+        "description": "Markaziy Osiyo markazidan turib o'yin sanoati kelajagini kashf eting. Nima uchun O'zbekiston o'yin studiyalari, nashriyotchilar va investorlar uchun muhim markazga aylanayotganini bilib oling.",
+        "bullets": [
+          "Dunyo darajasidagi o'yin sanoati ekspertlarining tavsiyalari",
+          "O'sib borayotgan mintaqaviy iste'dodlar va o'yin bozoriga kirish",
+          "Nashriyotchilar, investorlar va studiya asoschilari bilan netvorking"
+        ],
+        "idealFor": "o'yin yaratuvchilari, nashriyotchilar, investorlar, gamedev rahbarlari va soha mutaxassislari"
+      },
+      "ai": {
+        "title": "AI NATIVE: G'OYALARDAN INNOVATSIYALARGA",
+        "cardTitle": "AI NATIVE: G'OYALARDAN INNOVATSIYALARGA",
+        "cardSubtitle": "Rivojlanayotgan bozorlarda ilg'or sun'iy intellekt va mashina o'rganish amaliyotlari.",
+        "date": "24-Sentabr, 2026",
+        "time": "10:00 – 12:15",
+        "location": "CAEx, 3-Zal",
+        "description": "Sun'iy intellekt fikrlaydigan, gapiradigan, yaratadigan va harakatlanadigan dunyoga qadam qo'ying — aqlli agentlar va LLM modellaridan tortib bulut texnologiyalari va robototexnikagacha.",
+        "bullets": [
+          "LLM va bulutli sun'iy intellektni jonli, amaliy demolarda sinab ko'ring",
+          "Sahnada robototexnikani ko'ring — ishchi prototiplardan tortib real ishlar uchun yaratilgan SI gacha",
+          "“Join the AI Game” bilan o'zingiz ham maydonga chiqing: ta'lim dasturlari, karyera imkoniyatlari va xakatonlarni kashf eting"
+        ],
+        "idealFor": "SI dasturchilari, texnologiya ta'sischilari, robototexnika novatorlari, korporativ IT rahbarlari va talabalar"
+      }
+    }
+  },
+  "bento": {
+    "badge": "STRATEGIK IMTIYOZLAR VA TAHLILLAR",
+    "title": "Raqamli Startaplar Dasturi va IT Park Ko'rsatkichlari",
+    "subtitle": "To'liq eksport tahlillari, xalqaro geografiya va misli ko'rilmagan soliq hamda huquqiy imtiyozlar.",
+    "slides": {
+      "s0": "RAQAMLI STARTAPLAR DASTURI",
+      "s1": "IT PARK A'ZOLARINING ASOSIY KO'RSATKICHLARI",
+      "s2": "ENTERPRISE UZBEKISTAN",
+      "s3": "RAQAMLI XIZMATLAR VA MAHSULOTLAR EKSPORTINI RIVOJLANTIRISH"
+    },
+    "startups": {
+      "f0": "Patentlash va tovar belgisini ro'yxatdan o'tkazish xarajatlarini 100% qoplash",
+      "f1": "Tezkor sinovlar uchun maxsus huquqiy rejim — \"Tartibga solish Sandboxi\"",
+      "f2": "Akseleratsiya dasturlaridagi mentor va murabbiylar xarajatlarini $50K gacha qoplash",
+      "f3": "Xorijiy investitsiyalarga tengma-teng (1+1) qo'shma moliyalashtirish mexanizmi",
+      "f4": "Xalqaro akseleratsiya dasturlarida qatnashish xarajatlarini $20K gacha qoplash",
+      "f5": "Startaplar uchun ulkan Raqamli Ma'lumotlar Platformasidan 1 yil bepul foydalanish",
+      "f6": "Yetakchi ekspertlar bilan 1 yil davomida bepul maxsus yuridik va moliyaviy maslahatlar",
+      "f7": "Milliy xakatonlar va ideatonlar g'oliblariga to'g'ridan-to'g'ri $10K gacha grantlar berish",
+      "ctaText": "Raqamli Startaplar Dasturi – istiqbolli o'zbek texnologik startaplari uchun ishga tushirilgan {amount} lik tashabbus. Moliyalashtirish, mentorlik, intellektual mulk himoyasi va global bozorga chiqish – barchasi bitta platformada – {platform}",
+      "ctaAmount": "$50 million",
+      "platformName": "startupbase.uz"
+    },
+    "analytics": {
+      "exportGeoTitle": "EKSPORT GEOGRAFIYASI",
+      "northAmerica": "SHIMOLIY AMERIKA",
+      "cisApac": "MDH & APAC",
+      "euUk": "YEVROPA VA BUYUK BRITANIYA",
+      "mena": "YAQIN SHARQ (MENA)",
+      "exportTypesTitle": "Eksport Turlari",
+      "creativeGamedev": "Kreativ\n& GameDev",
+      "bpo": "BPO",
+      "itServices": "IT Xizmatlar",
+      "softwareProducts": "Dasturiy\nMahsulotlar",
+      "ictRevenueTitle": "AKT Eksport Daromadi",
+      "revenueMembersTitle": "A'zolar Daromadi",
+      "membersCountTitle": "A'zo Kompaniyalar\nSoni",
+      "foreignCapitalTitle": "Xorijiy Kapitalga Ega\nKompaniyalar O'sishi",
+      "millionUsd": "(Million USD)",
+      "increase": "o'sish",
+      "ytd2025": "2025\nYILGACHA",
+      "officesAbroadTitle": "XORIJDA 6 TA VAKOLATXONA",
+      "usa": "AQSH",
+      "germany": "Germaniya",
+      "saudiArabia": "Saudiya Arabistoni",
+      "china": "Xitoy",
+      "southKorea": "Janubiy Koreya",
+      "japan": "Yaponiya",
+      "americanCapitalNote": "Amerika kapitaliga ega kompaniyalar soni"
+    },
+    "enterprise": {
+      "card0Title": "Tartibga solish Sandboxi",
+      "card0Desc": "Yangi biznes modellari va ilg'or texnologiyalar uchun qonun bilan himoyalangan sinov muhiti.",
+      "card1Title": "Valyuta erkinligi",
+      "card1Desc": "Majburiy konvertatsiyasiz xorijiy valyuta operatsiyalari, ish haqi va kapital harakati erkinligi.",
+      "card2Title": "Soliq va bojxona",
+      "card2Desc": "Eksportga yo'naltirilgan kompaniyalar uchun foyda solig'idan ozod qilish; uskunalarni bojsiz olib kirish.",
+      "card3Title": "Mehnat munosabatlari",
+      "card3Desc": "Xalqaro mehnat standartlariga to'liq moslashtirilgan xalqaro darajadagi bandlik tuzilmasi.",
+      "card4Title": "Shaxsiy ma'lumotlar",
+      "card4Desc": "Transchegaraviy ma'lumotlarni qayta ishlashni to'liq qo'llab-quvvatlovchi xalqaro standartdagi qoidalar.",
+      "card5Title": "Davlat xizmatlari",
+      "card5Desc": "Xorijiy rezidentlar uchun to'liq davlat xizmatlari — shu jumladan masofaviy ro'yxatdan o'tish va litsenziyalash.",
+      "card6Title": "Intellektual mulk",
+      "card6Desc": "Sun'iy intellekt mahsulotlari va dasturiy ta'minotlar uchun kengaytirilgan intellektual mulk himoyasi.",
+      "card7Title": "Investitsiyalarni jalb qilish",
+      "card7Desc": "Venchur moliyalashtirish uchun maxsus yaratilgan investitsiya vositalari — SAFE, konvertatsiya qilinadigan qarzlar.",
+      "card8Title": "Eksportni rag'batlantirish",
+      "card8Desc": "To'siqlarsiz xalqaro savdoga ega bo'lgan eksport kompaniyalari uchun qulay ish sharoitlari."
+    },
+    "exportDev": {
+      "taxTitle": "IT PARK A'ZOLARI UCHUN\nBERILADIGAN IMTIYOZLAR",
+      "corpTaxes": "FOYDA VA KORPORATIV SOLIQLAR",
+      "socialTax": "IJTIMOIY SOLIQ",
+      "propertyTax": "MOL-MULK VA YER SOLIG'I",
+      "noVat": "IMPORT XIZMATLARIDA QQS YO'Q",
+      "dividendTax": "DIVIDENDLAR BO'YICHA SOLIQ",
+      "incomeTax": "JISMONIY SHAXSLAR DAROMAD SOLIG'I",
+      "noWord": "0%",
+      "zeroRiskTitle": "ZERO RISK XARAJATLARNI\nQOPLASH DASTURI",
+      "freeOffice": "1 yil davomida bepul ofis",
+      "techEquipment": "1 yil davomida texnik jihozlar",
+      "windFarms": "Shamol elektr stantsiyalari",
+      "windFarmsDesc": "Yirik yashil va shamol quvvatiga ega energiya quvvati",
+      "electricityGrid": "Elektr uzatish tarmog'i",
+      "electricityGridDesc": "Kengaytirilgan yuqori kuchlanishli tarmoq tizimi",
+      "specialTerms": "MAXSUS SHARTLAR",
+      "electricityRate": "$0.05 kVt/soat",
+      "electricityRateDesc": "Raqobatbardosh elektr energiyasi tarifi",
+      "waterSupply": "$0.08-$0.12",
+      "waterSupplyDesc": "Arzon suv ta'minoti narxi",
+      "softlandingTitle": "SOFTLANDING QO'LLAB-QUVVATLASH",
+      "regDays": "3 kunda kompaniyani ro'yxatdan o'tkazish",
+      "bankingSupport": "Bank xizmatlarida to'liq ko'mak",
+      "turnkeyLegal": "Buxgalteriya va yuridik xizmatlar",
+      "recruitment": "Iste'dodli kadrlarni tanlash va jalb qilish",
+      "itVisaTitle": "IT-VIZA",
+      "noWorkPermit": "Ish ruxsatnomasi talab qilinmaydi",
+      "salaryForeign": "Xorijiy valyutada ish haqi olish",
+      "dividendsForeign": "Xorijiy valyutada dividendlar olish",
+      "datavoltPitch": "Ma'lumotlar markazingizni ilg'or infratuzilmaga aylantiring:",
+      "aiAndMining": "SUN'IY INTELLEKT & MAYNING",
+      "capacity": "QUVVAT",
+      "investment": "INVESTITSIYA",
+      "aiInfrastructureInv": "Sun'iy intellekt infratuzilmasiga investitsiya",
+      "noCustomsVat": "BOJXONA BOJI VA QQS YO'Q",
+      "noCustomsSub": "Import qilinadigan serverlar va GPUlar soliqlardan ozod",
+      "fastTrackTitle": "Tezlashtirilgan qurilish",
+      "fastTrackDesc": "Mintaqada soddalashtirilgan yer ajratish bilan tezkor loyihalash va qurish",
+      "directPaymentsTitle": "To'g'ridan-to'g'ri xalqaro to'lovlar",
+      "directPaymentsDesc": "Mahalliy bank vositachilarisiz to'g'ridan-to'g'ri transchegaraviy operatsiyalar"
+    }
+  },
+  "partners": {
+    "badge": "EKOTIZIM VA HAMKORLAR",
+    "title": "Bizning Hamkorlarimiz",
+    "subtitle": "Davlat tashkilotlari, xalqaro venchur fondlari va zamonaviy texnologik infratuzilma ko'magida.",
+    "sponsorBannerTitle": "Homiylik yoki ko'rgazma ishtirokchisi bo'lishni xohlaysizmi?",
+    "sponsorBannerDesc": "O'z brendingizni 10,000+ dan ortiq xalqaro ta'sischilar, investorlar va texnologiya rahbarlariga namoyish eting.",
+    "becomePartnerBtn": "Hamkor bo'lish"
+  },
+  "form": {
+    "badge": "RASMIY RO'YXATDAN O'TISH",
+    "title": "ICTWEEK Uzbekistan 2026 ga ro'yxatdan o'tish",
+    "subtitle": "Toshkentda global texnologiya yetakchilari, korporativ delegatlar va investorlarga qo'shiling.\nChiptangizni olish uchun quyidagi ma'lumotlarni to'ldiring.",
+    "fullName": "To'liq ism-familiya",
+    "fullNamePlaceholder": "masalan: Alisher Navoiy",
+    "email": "Elektron pochta",
+    "emailPlaceholder": "masalan: info@company.com",
+    "company": "Kompaniya / Tashkilot",
+    "companyPlaceholder": "masalan: Tech Global Inc.",
+    "category": "Qatnashuvchi toifasi",
+    "categoryPlaceholder": "Toifani tanlang...",
+    "source": "Biz haqimizda qayerdan bildingiz?",
+    "sourcePlaceholder": "Manbani tanlang...",
+    "country": "Davlat",
+    "countryPlaceholder": "Davlatni tanlang...",
+    "phone": "Telefon raqami",
+    "phonePlaceholder": "masalan: +998 (90) 123-45-67",
+    "position": "Lavozim",
+    "positionPlaceholder": "masalan: Bosh direktor / CTO",
+    "tracks": "Qatnashmoqchi bo'lgan trek(lar)ingiz (barchasini belgilang)",
+    "tracksPlaceholder": "Trek(lar)ni tanlang...",
+    "focalPoint": "IT Park dagi aloqa shaxsi (agar mavjud bo'lsa)",
+    "focalPointPlaceholder": "masalan: Aloqa shaxsi yoki xodim ismi",
+    "consent": "Ha, men IT Park Uzbekistan jamoasi mening so'rovim yuzasidan e-mail orqali bog'lanishiga roziman va shaxsiy ma'lumotlarim saqlanishidan xabardorman. Bu rozilikni istalgan vaqtda qaytarib olish mumkin.",
+    "submitBtn": "Ro'yxatdan o'tish",
+    "submitting": "Yuborilmoqda...",
+    "categories": [
+      "Investor",
+      "Korporativ Delegat",
+      "Startap Asoschisi",
+      "Ekotizim Yaratuvchisi",
+      "IT Autsorsing",
+      "OAV"
+    ],
+    "sources": [
+      "Internet reklamasi (Instagram, Facebook, LinkedIn, Google)",
+      "Hamkorlar tarmog'i orqali",
+      "IT Park vakili orqali",
+      "Qidiruv tizimlari / Veb-sayt"
+    ],
+    "countries": [
+      "O'zbekiston",
+      "AQSH",
+      "Buyuk Britaniya",
+      "BAA",
+      "Yaponiya",
+      "Germaniya",
+      "Singapur",
+      "Qozog'iston",
+      "Turkiya",
+      "Janubiy Koreya",
+      "Xitoy",
+      "Saudiya Arabistoni",
+      "Qatar",
+      "Hindiston",
+      "Boshqa"
+    ],
+    "simpleTracks": [
+      "Enterprise Uzbekistan Sammiti",
+      "Startap va Venchur Sammiti",
+      "Texnologiya va Xizmatlar autsorsing konferensiyasi",
+      "Global Bridge (Xalqaro Hamkorlik)",
+      "GameGap: GameDev Konferensiyasi",
+      "AI Native: G'oyalardan innovatsiyalarga"
+    ],
+    "focalTracks": [
+      {
+        "id": "enterprise",
+        "title": "Enterprise Uzbekistan Sammiti"
+      },
+      {
+        "id": "startup",
+        "title": "Startap va Venchur Sammiti",
+        "subtracks": [
+          "Startap va Venchur Sammiti",
+          "Startup blink Mukofotlari",
+          "Startup World Cup - O'zbekiston Mintaqaviy Finali",
+          "Ignyte Challenge",
+          "Taqdimot (Startap pitchlari)"
+        ]
+      },
+      {
+        "id": "service",
+        "title": "Texnologiya va Xizmatlar autsorsing konferensiyasi"
+      },
+      {
+        "id": "bridge",
+        "title": "Global Bridge (Xalqaro Hamkorlik)",
+        "subtracks": [
+          "O'zbekiston-Yaponiya Raqamli Hamjamiyat Forumi",
+          "Turkiy Davlatlar Tashkiloti (TDT) Texnologiya Forumi",
+          "O'zbekiston - Yaqin Sharq Texnologiya Sammiti",
+          "Sabriya: Raqamli Iqtisodiyotda Ayollar",
+          "AWS Community Day"
+        ]
+      },
+      {
+        "id": "gamedev",
+        "title": "GameGap: GameDev Konferensiyasi"
+      },
+      {
+        "id": "ai",
+        "title": "AI Native: G'oyalardan innovatsiyalarga"
+      }
+    ],
+    "errors": {
+      "name": "Iltimos, to'liq ism-familiyangizni kiriting (kamida 2 ta harf)",
+      "email": "Iltimos, to'g'ri elektron pochta manzilini kiriting (masalan: info@company.com)",
+      "company": "Iltimos, kompaniya yoki tashkilot nomini kiriting",
+      "phone": "Iltimos, mamlakat kodi bilan to'g'ri telefon raqamini kiriting",
+      "category": "Iltimos, qatnashuvchi toifasini tanlang",
+      "country": "Iltimos, davlatingizni tanlang",
+      "tracks": "Iltimos, kamida bitta trekni tanlang",
+      "consent": "Davom etish uchun shartlarga rozilik bildirishingiz kerak"
+    }
+  },
+  "thankYou": {
+    "titleLine1": "Ro'yxatdan o'tish yakunlandi —",
+    "titleLine2": "ICTWEEK 2026 ga xush kelibsiz!",
+    "subtitle": "Ro'yxatdan o'tganingiz uchun tashakkur. Tasdiq xati pochtangizga yuborilmoqda va tez orada IT Park Uzbekistan jamoasi a'zosi siz bilan rasmiy delegat beydjingiz va keyingi qadamlar bo'yicha bog'lanadi.",
+    "backHome": "Bosh sahifaga qaytish"
+  },
+  "footer": {
+    "about": "Markaziy Osiyodagi eng yirik axborot-kommunikatsiya texnologiyalari sammiti. Startap ta'sischilari, yirik korporatsiyalar va global venchur fondlarini birlashtiradi.",
+    "organizers": "Raqamli Texnologiyalar Vazirligi & IT Park Uzbekistan tomonidan tashkillashtirilgan",
+    "navigation": "Navigatsiya",
+    "summits": "Sammitlar va Treklar",
+    "venueContact": "Manzil va Bog'lanish",
+    "rights": "© 2026 ICTWEEK Uzbekistan. Barcha huquqlar himoyalangan.",
+    "privacyPolicy": "Maxfiylik siyosati",
+    "terms": "Ishtirok etish shartlari",
+    "pressKit": "Press-kit",
+    "venueName": "CAEx Ko'rgazma Markazi",
+    "venueCity": "Toshkent, O'zbekiston"
+  }
+}

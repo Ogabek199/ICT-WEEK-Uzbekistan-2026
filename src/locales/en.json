@@ -1,0 +1,517 @@
+{
+  "nav": {
+    "home": "Home",
+    "program": "Program",
+    "partners": "Partners",
+    "incentives": "Incentives",
+    "register": "Register now"
+  },
+  "hero": {
+    "badgeDate": "September 22–26, 2026",
+    "badgeVenue": "CAEx, Tashkent",
+    "titleLine1": "Unlock the World's Fastest",
+    "titleLine2": "Growing Ecosystem",
+    "subtitle": "learn everything about the thriving uzbek tech ecosystem — in just one week",
+    "registerBtn": "Register now",
+    "agendaBtn": "Full agenda",
+    "countdownLabel": "EVENT STARTS IN",
+    "days": "DAYS",
+    "hours": "HOURS",
+    "minutes": "MINUTES",
+    "seconds": "SECONDS",
+    "stats": {
+      "dealroomVal": "Startup\nEcosystem\nValuation",
+      "dealroomRank": "In venture\ninvestment\ngrowth globally",
+      "startupblinkGrowth": "Ecosystem in the\nWorld by Growth\nRate",
+      "startupblinkHub": "Startup Hub in\nCentral Asia\n(Tashkent)",
+      "unicorns": "Fintech\nUnicorns"
+    }
+  },
+  "savespot": {
+    "title": "Save your spot today!",
+    "desc": "Every unicorn starts as a single star.\nTogether they become the Northern Lights.\n\nWelcome to Uzbekistan, where visionary government support and a thriving innovation ecosystem help founders turn bold ideas into global ventures.\n\nHere, startups and tech companies don’t just become part of the Northern Lights—they discover their North Star and follow it all the way to international success.",
+    "p1_1": "Every unicorn starts as a single star.",
+    "p1_2": "Together they become the Northern Lights.",
+    "p2": "Welcome to Uzbekistan, where visionary government support and a thriving innovation ecosystem help founders turn bold ideas into global ventures.",
+    "p3": "Here, startups and tech companies don’t just become part of the Northern Lights—they discover their North Star and follow it all the way to international success.",
+    "btn": "Register now"
+  },
+  "attendees": {
+    "title": "Past Attendees Include",
+    "subtitle": "Trusted by global tech giants, venture capital firms, and hyper-growth unicorns."
+  },
+  "summits": {
+    "badge": "CONFERENCES & SUMMITS",
+    "title": "ICTWEEK 2026 Summit Tracks",
+    "subtitle": "Explore dedicated high-level summits, specialized forums, and global networking tracks.",
+    "tabEnterprise": "Enterprise Uzbekistan",
+    "tabStartup": "Startup & VC",
+    "tabOutsourcing": "Service Companies",
+    "tabGlobal": "Global Bridge",
+    "tabGamedev": "Gamedev",
+    "tabAi": "AI NATIVE",
+    "idealFor": "Ideal for:",
+    "idealForLabel": "Ideal for:",
+    "idealForShort": "Ideal for",
+    "registerHoverBtn": "Register now →",
+    "tracks": {
+      "enterprise": {
+        "title": "Enterprise Uzbekistan Summit",
+        "cardTitle": "Enterprise Uzbekistan Summit",
+        "cardSubtitle": "Legally protected testing environment for new business models and frontier technologies.",
+        "date": "September 23, 2026",
+        "time": "10:00 - 12:00",
+        "location": "CAEx, Hall 1",
+        "description": "Discover Enterprise Uzbekistan — the country's first dedicated jurisdiction built for global technology business.",
+        "bullets": [
+          "Running on elements of English and Welsh law, it offers a legal environment that locks in the day you enter and remains guaranteed through 2100 — for IT exporters, data centers, startups, and infrastructure and institutional investors alike.",
+          "On September 23, Enterprise Uzbekistan takes the stage at ICT Week to open the framework up in person. Meet the people building it, see how it's structured, and get a first look at what it means to operate inside it.",
+          "Join us at CAEx, Main Hall — come see it before everyone else does."
+        ],
+        "idealFor": "global tech companies, investors, legal and financial advisors, and government officials"
+      },
+      "startup": {
+        "title": "Startup & Venture Summit",
+        "events": [
+          {
+            "title": "Startup & Venture Summit",
+            "date": "Sep 22, 2026",
+            "time": "14:00 - 17:00",
+            "venue": "CAEX, Main Hall",
+            "desc": "The flagship gathering of Central Asia's startup ecosystem — bringing together founders, investors, and government leaders to discuss the region's next stage of hyper-growth.",
+            "bullets": [
+              "Keynote addresses from leading global venture capitalists",
+              "Panels on emerging tech trends and fundraising strategies",
+              "High-impact networking with 500+ investors and founders"
+            ],
+            "idealFor": "Founders, VCs, angel investors, accelerators, and startup executives."
+          },
+          {
+            "title": "Startup Blink Awards",
+            "date": "Sep 23, 2026",
+            "time": "16:00 - 18:00",
+            "venue": "CAEX, Hall 3",
+            "desc": "An official award ceremony celebrating top-performing startup ecosystems and ecosystem builders shaping the global innovation landscape.",
+            "bullets": [
+              "Presentation of Global Startup Ecosystem Index 2026",
+              "Recognition of fastest-growing regional startup hubs",
+              "Award ceremony for outstanding tech innovators"
+            ],
+            "idealFor": "Ecosystem builders, policymakers, researchers, and media."
+          },
+          {
+            "title": "Startup World Cup - Uzbekistan Regional Final",
+            "date": "Sep 24, 2026",
+            "time": "10:00 - 17:00",
+            "venue": "CAEX, Main Hall",
+            "desc": "The regional final of the world's largest startup competition, where top regional startups compete for a spot in the global final in Silicon Valley and a share of $1M+ in investment.",
+            "bullets": [
+              "Top 10 shortlisted startups pitching live on stage",
+              "International jury of top-tier Silicon Valley VCs",
+              "Winner secures ticket to San Francisco Grand Finale"
+            ],
+            "idealFor": "Early and growth-stage tech startups, investors, and accelerators."
+          },
+          {
+            "title": "Ignyte Challenge",
+            "date": "Sep 25, 2026",
+            "time": "11:00 - 13:00",
+            "venue": "CAEX, Hall 3",
+            "desc": "A high-energy pitch competition in partnership with DIFC Innovation Hub and IGNYTE connecting ambitious startups with international investors and MENA market entry.",
+            "bullets": [
+              "Direct access to Dubai Future District Fund & DIFC ecosystem",
+              "Fast-track incubation and market expansion programs",
+              "Cash grants and zero-cost incorporation packages"
+            ],
+            "idealFor": "Fintech, Web3, AI, and enterprise software startups."
+          },
+          {
+            "title": "Taqdimot (Startup Pitches)",
+            "date": "Sep 25, 2026",
+            "time": "14:00 - 17:00",
+            "venue": "CAEX, Hall 2",
+            "desc": "Live pitch sessions showcasing promising global startups to investors, corporates, and ecosystem partners, serving as a high-velocity matchmaking platform.",
+            "bullets": [
+              "Curated 3-minute pitches + 2-minute investor Q&A",
+              "1-on-1 investor matchmaking lounge",
+              "Instant term sheet and deal-making opportunities"
+            ],
+            "idealFor": "Angel investors, family offices, syndicate leads, and founders."
+          }
+        ]
+      },
+      "service": {
+        "title": "Tech & Service Outsourcing Conference",
+        "cardTitle": "Regulatory Sandbox",
+        "cardSubtitle": "Legally protected testing environment for new business models and frontier technologies.",
+        "date": "September 23, 2026",
+        "time": "12:00 - 14:00",
+        "location": "CAEx, Hall 3",
+        "description": "Explore the future of global services and outsourcing from the heart of Central Asia. Discover why Uzbekistan is the next big outsourcing destination for ITES companies and investment.",
+        "bullets": [
+          "Insights into 0% tax breaks for companies",
+          "Access a multilingual, tech-savvy workforce of 21 million+",
+          "Special IT visa and 3-year zero-cost office support program"
+        ],
+        "idealFor": "outsourcing companies, IT leaders, global service providers, investors, and government officials"
+      },
+      "bridge": {
+        "title": "Global Bridge",
+        "events": [
+          {
+            "title": "Uzbek-Japan Digital Community Forum",
+            "date": "September 22, 2026",
+            "time": "15:00 - 18:00",
+            "venue": "CAEX, Hall 3",
+            "desc": "Explore new opportunities for collaboration between Uzbekistan and Japan in the ICT sector, from joint software development to talent exchange and market entry support.",
+            "bullets": [
+              "Insights into Japan's approach to IT outsourcing partnerships",
+              "Access to a growing pool of Uzbek IT talent for Japanese companies",
+              "Government-backed support for bilateral tech initiatives"
+            ],
+            "idealFor": "Japanese tech companies, IT leaders, government officials and investors"
+          },
+          {
+            "title": "OTS Technology Forum",
+            "date": "September 23, 2026",
+            "time": "12:00 - 14:00",
+            "venue": "CAEX, Hall 2",
+            "desc": "The forum unites key stakeholders from the Organization of Turkic States (OTS) to advance cooperation in digital innovation and startup ecosystems.",
+            "bullets": [
+              "Government-led innovation ecosystem insights",
+              "Panel on startup support and cross-border growth",
+              "Strategic networking across the OTS innovation ecosystem"
+            ],
+            "idealFor": "Government representatives, technology parks, innovation agencies, startup ecosystem leaders, investors, founders"
+          },
+          {
+            "title": "Uzbekistan - Middle East Tech Summit",
+            "date": "Sep 24, 2026",
+            "time": "14:00 - 16:30",
+            "venue": "IT Park Complex",
+            "desc": "The Summit connects Uzbekistan's tech ecosystem with Middle Eastern investors to expand IT exports and unlock new growth in the MENA region.",
+            "bullets": [
+              "Investment into Uzbekistan IT and digital infrastructure sector",
+              "Market entry of Middle Eastern technology companies into Central Asia",
+              "Expansion of Uzbek startups and IT service companies into GCC markets"
+            ],
+            "idealFor": "Tech founders, institutional investors, enterprise delegations, and trade representatives"
+          },
+          {
+            "title": "Sabriya: Women in Digital Economy",
+            "date": "Sep 24, 2026",
+            "time": "14:00 - 16:30",
+            "venue": "CAEX, Hall 3",
+            "desc": "Discover Sabriya — IT Park's initiative empowering women to lead and grow in the digital economy across Uzbekistan and beyond.",
+            "bullets": [
+              "Insights into funding and mentorship programs for women-led startups",
+              "Access to a growing network of female founders and tech leaders",
+              "Practical guidance on career growth in tech"
+            ],
+            "idealFor": "Women entrepreneurs, developers, investors and ecosystem partners"
+          },
+          {
+            "title": "AWS Community Day",
+            "date": "Sep 25, 2026",
+            "time": "10:00 - 17:00",
+            "venue": "CAEX, Main Hall",
+            "desc": "Join a full day of cloud technology talks and hands-on sessions led by AWS experts and the regional developer community.",
+            "bullets": [
+              "Insights into the latest AWS services and cloud architecture",
+              "Access to real-world case studies from cloud practitioners",
+              "Networking with developers, architects and DevOps engineers"
+            ],
+            "idealFor": "Developers, cloud architects, DevOps engineers and IT leaders"
+          }
+        ]
+      },
+      "gamedev": {
+        "title": "GameGap: Gamedev Conference",
+        "cardTitle": "GameGap: Gamedev Conference",
+        "cardSubtitle": "Central Asia’s premier game development and interactive entertainment forum.",
+        "date": "September 25, 2026",
+        "time": "14:00 - 17:00",
+        "location": "CAEx, Hall 3",
+        "description": "Discover the future of gaming from the heart of Central Asia. Explore why Uzbekistan's GameDev ecosystem is becoming a key hub for studios, publishers and investors in the region.",
+        "bullets": [
+          "Insights from world-class gaming industry experts",
+          "Access to a growing regional talent pool and gaming market",
+          "Networking with publishers, investors and studio founders"
+        ],
+        "idealFor": "game developers, publishers, investors, gaming executives and industry professionals"
+      },
+      "ai": {
+        "title": "AI NATIVE: IDEAS TO INNOVATION",
+        "cardTitle": "AI NATIVE: IDEAS TO INNOVATION",
+        "cardSubtitle": "Frontier artificial intelligence and machine learning applications in emerging markets.",
+        "date": "September 24, 2026",
+        "time": "10:00 – 12:15",
+        "location": "CAEx, Hall 3",
+        "description": "Step into a world where AI thinks, speaks, creates, and moves — from intelligent agents and LLMs to cloud technologies and real-world robotics.",
+        "bullets": [
+          "Experience LLMs and cloud AI in action with live, hands-on demos",
+          "See robotics on stage — from working prototypes to AI built for real jobs",
+          "Step into the arena yourself with “Join the AI Game” and discover study programs, career opportunities, and hackathons"
+        ],
+        "idealFor": "AI developers, tech founders, robotics innovators, enterprise IT leaders, and students"
+      }
+    }
+  },
+  "bento": {
+    "badge": "STRATEGIC INCENTIVES & ANALYTICS",
+    "title": "Digital Startups Program & IT Park Key Indicators",
+    "subtitle": "Explore comprehensive growth metrics, export analytics, and unmatched legal & tax incentives.",
+    "slides": {
+      "s0": "DIGITAL STARTUPS PROGRAM",
+      "s1": "KEY INDICATORS OF IT PARK MEMBERS",
+      "s2": "ENTERPRISE UZBEKISTAN",
+      "s3": "DIGITAL SERVICE AND PRODUCTS EXPORT DEVELOPMENT"
+    },
+    "startups": {
+      "f0": "Reimbursement for patenting and trademark registration",
+      "f1": "Special legal regime \"Regulatory Sandbox\" for rapid piloting",
+      "f2": "Reimbursement for mentor/trainer costs in acceleration programs",
+      "f3": "Co-funding mechanism matching foreign investment dollar-for-dollar",
+      "f4": "Reimbursement of international acceleration program costs",
+      "f5": "Free access to the massive Digital Data Platform for Startups",
+      "f6": "Free dedicated legal and financial consultations with top experts",
+      "f7": "Awarding grants directly to winners of national hackathons and ideathons",
+      "ctaText": "Digital Startups Program – a {amount} initiative, launched for promising Uzbek tech startups. Funding, mentorship, intellectual property protection and access to the global market – all available on one platform – {platform}",
+      "ctaAmount": "$50 million",
+      "platformName": "startupbase.uz"
+    },
+    "analytics": {
+      "exportGeoTitle": "EXPORT GEOGRAPHY",
+      "northAmerica": "NORTH AMERICA",
+      "cisApac": "CIS & APAC",
+      "euUk": "EU AND UK",
+      "mena": "MENA",
+      "exportTypesTitle": "Types of Export",
+      "creativeGamedev": "Creative\n& GameDev",
+      "bpo": "BPO",
+      "itServices": "IT Services",
+      "softwareProducts": "Software\nProducts",
+      "ictRevenueTitle": "ICT Export Revenue",
+      "revenueMembersTitle": "Revenue of Members",
+      "membersCountTitle": "Number of Member\nCompanies",
+      "foreignCapitalTitle": "Growth of Companies\nwith Foreign Capital",
+      "millionUsd": "(Million USD)",
+      "increase": "increase",
+      "ytd2025": "YTD\n2025",
+      "officesAbroadTitle": "6 REPRESENTATIVE OFFICES ABROAD",
+      "usa": "USA",
+      "germany": "Germany",
+      "saudiArabia": "Saudi Arabia",
+      "china": "China",
+      "southKorea": "South Korea",
+      "japan": "Japan",
+      "americanCapitalNote": "Number of American capital companies"
+    },
+    "enterprise": {
+      "card0Title": "Regulatory Sandbox",
+      "card0Desc": "Legally protected testing environment for new business models and frontier technologies.",
+      "card1Title": "Foreign exchange freedom",
+      "card1Desc": "Foreign currency operations, payroll, and capital flows without conversion mandates.",
+      "card2Title": "Tax & customs",
+      "card2Desc": "Corporate tax exemption for export-led companies; customs-duty exemption on equipment imports.",
+      "card3Title": "Labour relations",
+      "card3Desc": "International-grade employment structures aligned with global labour standards.",
+      "card4Title": "Personal data",
+      "card4Desc": "Internationally aligned data protection rules with full support for cross-border processing.",
+      "card5Title": "Government services",
+      "card5Desc": "Full government services for foreign residents — including remote registration and licensing.",
+      "card6Title": "Intellectual property",
+      "card6Desc": "Enhanced IP protections with specific provisions for AI-generated outputs and software assets.",
+      "card7Title": "Investment attraction",
+      "card7Desc": "Investment instruments purpose-built for venture financing — SAFEs, convertibles, hybrid structures.",
+      "card8Title": "Export promotion",
+      "card8Desc": "Favourable operating conditions for export-driven companies with zero-friction outbound trade."
+    },
+    "exportDev": {
+      "taxTitle": "BENEFITS FOR IT PARK\nMEMBER COMPANIES",
+      "corpTaxes": "CORPORATE TAXES",
+      "socialTax": "SOCIAL TAX",
+      "propertyTax": "PROPERTY & LAND TAX",
+      "noVat": "VAT ON IMPORTED SERVICES",
+      "dividendTax": "TAX ON DIVIDENDS",
+      "incomeTax": "PERSONAL INCOME TAX",
+      "noWord": "NO",
+      "zeroRiskTitle": "ZERO RISK EXPENSE\nREIMBURSEMENT",
+      "freeOffice": "Free office for 1 year",
+      "techEquipment": "Technical Equipment for 1 year",
+      "windFarms": "Wind farms",
+      "windFarmsDesc": "Major green, wind-powered energy capacity",
+      "electricityGrid": "Electricity grid",
+      "electricityGridDesc": "Extensive high-voltage transmission network",
+      "specialTerms": "SPECIAL TERMS",
+      "electricityRate": "$0.05 kWh",
+      "electricityRateDesc": "Competitive electricity rate",
+      "waterSupply": "$0.08-$0.12",
+      "waterSupplyDesc": "Low-cost water supply",
+      "softlandingTitle": "SOFTLANDING SUPPORT",
+      "regDays": "3 days Company registration",
+      "bankingSupport": "Banking support",
+      "turnkeyLegal": "Turnkey Accounting and Legal Services",
+      "recruitment": "Talent and Staff Recruitment",
+      "itVisaTitle": "IT-VISA",
+      "noWorkPermit": "No work permit",
+      "salaryForeign": "Salary in foreign currency",
+      "dividendsForeign": "Dividends in foreign currency",
+      "datavoltPitch": "Turn your Data Center into the cutting edge infrastructure for",
+      "aiAndMining": "AI & MINING",
+      "capacity": "CAPACITY",
+      "investment": "INVESTMENT",
+      "aiInfrastructureInv": "Investment in AI infrastructure",
+      "noCustomsVat": "NO CUSTOMS & VAT",
+      "noCustomsSub": "Imported servers/gpus exempt from taxes",
+      "fastTrackTitle": "Fast-track construction",
+      "fastTrackDesc": "Accelerated Design-Procure-Build with streamlined land allocation in region",
+      "directPaymentsTitle": "Direct international payments",
+      "directPaymentsDesc": "Cross-border transactions without local bank intermediaries"
+    }
+  },
+  "partners": {
+    "badge": "ECOSYSTEM & SUPPORTERS",
+    "title": "Our Partners",
+    "subtitle": "Supported by state organizations, international venture funds, and world-class technology infrastructure.",
+    "sponsorBannerTitle": "Interested in becoming a sponsor or exhibitor?",
+    "sponsorBannerDesc": "Showcase your brand to over 10,000+ international tech founders, CTOs, and investors.",
+    "becomePartnerBtn": "Become a partner"
+  },
+  "form": {
+    "badge": "OFFICIAL PASS REGISTRATION",
+    "title": "Register for ICTWEEK Uzbekistan 2026",
+    "subtitle": "Join global tech leaders, enterprise delegates, and investors in Tashkent.\nComplete your details below to secure your pass.",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "e.g. John Doe",
+    "email": "Email",
+    "emailPlaceholder": "e.g. alex@company.com",
+    "company": "Company",
+    "companyPlaceholder": "e.g. Tech Global Inc.",
+    "category": "I am attending as",
+    "categoryPlaceholder": "Select category...",
+    "source": "How did you hear about us?",
+    "sourcePlaceholder": "Select source...",
+    "country": "Country",
+    "countryPlaceholder": "Select country...",
+    "phone": "Phone number",
+    "phonePlaceholder": "e.g. +998 (90) 123-45-67",
+    "position": "Position",
+    "positionPlaceholder": "e.g. Managing Director",
+    "tracks": "Event track(s) you plan to attend (Select all that apply)",
+    "tracksPlaceholder": "Select track(s)...",
+    "focalPoint": "Name of focal point in IT Park (if available)",
+    "focalPointPlaceholder": "e.g. Contact person or team member name",
+    "consent": "Yes, I agree that IT Park Uzbekistan team may contact me by e-mail to inquire about my request, and I am aware that my shared personal data will be saved. This consent can be withdrawn at any time.",
+    "submitBtn": "Register now",
+    "submitting": "Submitting...",
+    "categories": [
+      "Investor",
+      "Corporate Delegate",
+      "Startup Founder",
+      "Ecosystem Builder",
+      "IT Outsourcing",
+      "Media"
+    ],
+    "sources": [
+      "Online Advertisement (Instagram, Facebook, LinkedIn, Google)",
+      "Partner Network",
+      "IT Park Representative",
+      "Organic Search / Website"
+    ],
+    "countries": [
+      "Uzbekistan",
+      "United States",
+      "United Kingdom",
+      "United Arab Emirates",
+      "Japan",
+      "Germany",
+      "Singapore",
+      "Kazakhstan",
+      "Turkey",
+      "South Korea",
+      "China",
+      "Saudi Arabia",
+      "Qatar",
+      "India",
+      "Other"
+    ],
+    "simpleTracks": [
+      "Enterprise Uzbekistan Summit",
+      "Startup & Venture Summit",
+      "Tech & Service outsourcing conference",
+      "Global Bridge (International Partnerships)",
+      "GameGap: GameDev Conference",
+      "AI Native: Ideas to innovation"
+    ],
+    "focalTracks": [
+      {
+        "id": "enterprise",
+        "title": "Enterprise Uzbekistan Summit"
+      },
+      {
+        "id": "startup",
+        "title": "Startup & Venture Summit",
+        "subtracks": [
+          "Startup & Venture Summit",
+          "Startup blink Awards",
+          "Startup World Cup - Uzbekistan Regional Final",
+          "Ignyte Challenge",
+          "Taqdimot (Startup pitches)"
+        ]
+      },
+      {
+        "id": "service",
+        "title": "Tech & Service outsourcing conference"
+      },
+      {
+        "id": "bridge",
+        "title": "Global Bridge (International Partnerships)",
+        "subtracks": [
+          "Uzbek-Japan Digital Community Forum",
+          "OTS Technology forum",
+          "Uzbekistan - Middle east tech summit",
+          "Sabriya: Women in Digital Economy",
+          "AWS Community Day"
+        ]
+      },
+      {
+        "id": "gamedev",
+        "title": "GameGap: GameDev Conference"
+      },
+      {
+        "id": "ai",
+        "title": "AI Native: Ideas to innovation"
+      }
+    ],
+    "errors": {
+      "name": "Please enter your full name (at least 2 letters)",
+      "email": "Please enter a valid email address (e.g. name@company.com)",
+      "company": "Please enter your company or organization name",
+      "phone": "Please enter a valid phone number with country code",
+      "category": "Please select a category",
+      "country": "Please select your country",
+      "tracks": "Please select at least one event track",
+      "consent": "Please agree to the terms to continue"
+    }
+  },
+  "thankYou": {
+    "titleLine1": "Registration Submitted —",
+    "titleLine2": "Welcome to ICTWEEK 2026!",
+    "subtitle": "Thank you for registering. A confirmation email is on its way, and a member of the IT Park Uzbekistan team will contact you shortly with your official delegate pass and next steps.",
+    "backHome": "Back to homepage"
+  },
+  "footer": {
+    "about": "The premier information and communication technology summit in Central Asia. Connecting founders, enterprise innovators, and global venture funds.",
+    "organizers": "Organized by Ministry of Digital Technologies & IT Park Uzbekistan",
+    "navigation": "Navigation",
+    "summits": "Summits & Tracks",
+    "venueContact": "Venue & Contact",
+    "rights": "© 2026 ICTWEEK Uzbekistan. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "terms": "Terms of Participation",
+    "pressKit": "Press Kit",
+    "venueName": "CAEx Exhibition Center",
+    "venueCity": "Tashkent, Uzbekistan"
+  }
+}

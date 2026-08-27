@@ -1,31 +1,26 @@
 <template>
-  <!--
-    Figma: Blog (259:3796)
-    w=1280 h=408 radius=24 fill=rgba(0,6,14,0.40) pad=T36 R36 B36 L42 gap=32 dir=HORIZONTAL
-  -->
   <section id="save-spot" class="save-spot-section">
     <div class="page-container">
       <div class="save-spot-card">
         <!-- Left: Headline (603px) -->
         <div class="headline-col">
-          <!-- Title: Manrope 48 w700 rgba(237,237,242,1) -->
           <h2 class="section-title">{{ t('savespot.title') }}</h2>
 
           <!-- Description paragraphs -->
           <div class="section-text-content">
             <p class="text-paragraph">
-              Every unicorn starts as a single star.<br />
-              Together they become the Northern Lights.
+              {{ t('savespot.p1_1') }}<br />
+              {{ t('savespot.p1_2') }}
             </p>
             <p class="text-paragraph">
-              Welcome to Uzbekistan, where visionary government support and a thriving innovation ecosystem help founders turn bold ideas into global ventures.
+              {{ t('savespot.p2') }}
             </p>
             <p class="text-paragraph">
-              Here, startups and tech companies don’t just become part of the Northern Lights—they discover their North Star and follow it all the way to international success.
+              {{ t('savespot.p3') }}
             </p>
           </div>
 
-          <!-- Button: radius=12 fill=#83FFC1 pad=T12 R20 B12 L20 -->
+          <!-- Button -->
           <button class="btn-register-spot" @click="scrollToRegister" id="save-spot-register-btn">
             <span>{{ t('savespot.btn') }}</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="btn-arrow">
@@ -34,11 +29,11 @@
           </button>
         </div>
 
-        <!-- Right: Image (df913f5c9c35c1cfec5ab9bd170fd28c942bf917.png) radius=12 -->
+        <!-- Right: Image (ICT Week Main Stage Conference) -->
         <div class="image-col">
           <img
-            src="@/assets/images/df913f5c9c35c1cfec5ab9bd170fd28c942bf917.png"
-            alt="ICT Week Uzbekistan Main Stage"
+            :src="saveSpotBanner"
+            alt="ICT Week Uzbekistan Main Stage Conference"
             class="spot-image"
           />
         </div>
@@ -49,6 +44,7 @@
 
 <script setup>
 import { useI18n } from '@/composables/useI18n'
+import saveSpotBanner from '@/assets/images/save-spot-banner.jpg'
 
 const { t } = useI18n()
 
@@ -69,10 +65,6 @@ function scrollToRegister() {
   padding: 0 24px;
 }
 
-/*
-  Figma: Blog (259:3796)
-  w=1280 h=408 radius=24 fill=rgba(0,6,14,0.40) pad=T36 R36 B36 L42 gap=32 dir=HORIZONTAL
-*/
 .save-spot-card {
   display: flex;
   flex-direction: row;
@@ -87,7 +79,6 @@ function scrollToRegister() {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Left: Headline col (603px) */
 .headline-col {
   flex: 0 0 580px;
   max-width: 580px;
@@ -96,7 +87,6 @@ function scrollToRegister() {
   gap: 20px;
 }
 
-/* Title: Manrope 48 w700 rgba(237,237,242,1) */
 .section-title {
   font-family: 'Manrope', sans-serif;
   font-size: 44px;
@@ -120,9 +110,9 @@ function scrollToRegister() {
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.6;
   margin: 0;
+  white-space: pre-line;
 }
 
-/* Button matching screenshot */
 .btn-register-spot {
   display: inline-flex;
   align-items: center;
@@ -160,7 +150,6 @@ function scrollToRegister() {
   transform: translate(2px, -2px);
 }
 
-/* Right: Image col */
 .image-col {
   flex: 1;
   height: 336px;
@@ -194,12 +183,6 @@ function scrollToRegister() {
   .image-col {
     width: 100%;
     height: 260px;
-  }
-}
-
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 32px;
   }
 }
 </style>

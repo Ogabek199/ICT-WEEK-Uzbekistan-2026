@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65 42" fill="none">
+  <!-- Top Dot of 'i' -->
+  <circle cx="5.03" cy="5.43" r="4.91" fill="#FFFFFF"/>
+  
+  <!-- Top Text: ICT WEEK UZBEKISTAN 2026 -->
+  <text x="13.8" y="7.5" fill="#FFFFFF" font-family="'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="3.6" font-weight="800" letter-spacing="0.5px">ICT WEEK UZBEKISTAN 2026</text>
+  
+  <!-- 'i' Vertical Stem -->
+  <rect x="0" y="11.31" width="10.01" height="30.21" rx="5.0" fill="#FFFFFF"/>
+  
+  <!-- 'c' Left Spine -->
+  <rect x="10.86" y="11.31" width="10.00" height="30.21" rx="5.0" fill="#FFFFFF"/>
+  
+  <!-- 'c' Top Right Dot -->
+  <circle cx="26.71" cy="16.27" r="4.93" fill="#FFFFFF"/>
+  
+  <!-- 'c' Bottom Right Dot -->
+  <circle cx="26.71" cy="36.53" r="4.93" fill="#FFFFFF"/>
+  
+  <!-- Horizontal Connection Bar ('c' to 't') -->
+  <rect x="22.00" y="24.78" width="18.39" height="3.20" rx="1.6" fill="#FFFFFF"/>
+  
+  <!-- 't' Top Left Dot -->
+  <circle cx="37.50" cy="16.27" r="4.93" fill="#FFFFFF"/>
+  
+  <!-- 't' Vertical Stem -->
+  <rect x="43.28" y="11.30" width="10.02" height="30.21" rx="5.0" fill="#FFFFFF"/>
+  
+  <!-- 't' Top Right Dot -->
+  <circle cx="59.06" cy="16.27" r="4.93" fill="#FFFFFF"/>
+</svg>

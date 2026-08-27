@@ -32,7 +32,7 @@
             <span class="footer-col-title">{{ t('footer.navigation') }}</span>
             <ul class="footer-links">
               <li><a href="#home">{{ t('nav.home') }}</a></li>
-              <li><a href="#program">{{ t('nav.program') }}</a></li>
+              <li><a href="#summit-tracks">{{ t('nav.program') }}</a></li>
               <li><a href="#partners">{{ t('nav.partners') }}</a></li>
               <li><a href="#incentives">{{ t('nav.incentives') }}</a></li>
               <li><a href="#register">{{ t('nav.register') }}</a></li>
@@ -43,12 +43,12 @@
           <div class="footer-nav-col">
             <span class="footer-col-title">{{ t('footer.summits') }}</span>
             <ul class="footer-links">
-              <li><a href="#program">{{ t('summits.tabEnterprise') }}</a></li>
-              <li><a href="#program">{{ t('summits.tabStartup') }}</a></li>
-              <li><a href="#program">{{ t('summits.tabOutsourcing') }}</a></li>
-              <li><a href="#program">{{ t('summits.tabGlobal') }}</a></li>
-              <li><a href="#program">{{ t('summits.tabGamedev') }}</a></li>
-              <li><a href="#program">{{ t('summits.tabAi') }}</a></li>
+              <li><a href="#summit-tracks">{{ t('summits.tabEnterprise') }}</a></li>
+              <li><a href="#summit-tracks">{{ t('summits.tabStartup') }}</a></li>
+              <li><a href="#summit-tracks">{{ t('summits.tabOutsourcing') }}</a></li>
+              <li><a href="#summit-tracks">{{ t('summits.tabGlobal') }}</a></li>
+              <li><a href="#summit-tracks">{{ t('summits.tabGamedev') }}</a></li>
+              <li><a href="#summit-tracks">{{ t('summits.tabAi') }}</a></li>
             </ul>
           </div>
 
@@ -102,7 +102,7 @@
 </template>
 
 <script setup>
-import { useI18n } from '../composables/useI18n'
+import { useI18n } from '@/composables/useI18n'
 
 const { t } = useI18n()
 </script>

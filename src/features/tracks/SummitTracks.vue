@@ -25,11 +25,11 @@
 
         <!-- Main Title: CENTERED & ALL CAPS matching Image 2 -->
         <div class="title-block">
-          <h2 class="summit-title">{{ activeTrackData.title.toUpperCase() }}</h2>
+          <h2 class="summit-title">{{ activeTrackData.title?.toUpperCase() || '' }}</h2>
         </div>
 
         <!-- Metadata Bar matching Image 2 (green icons + 3 balanced columns) -->
-        <div class="meta-bar" v-if="!activeTrackData.isMultiCard">
+        <div class="meta-bar" v-if="!activeTrackData.isMultiCard && activeTrackData.date">
           <div class="meta-item">
             <svg width="18" height="18" viewBox="0 0 20 20" fill="none" class="meta-icon">
               <rect x="2.5" y="3.5" width="15" height="14" rx="2.5" stroke="#83FFC1" stroke-width="1.8"/>
@@ -122,7 +122,7 @@
                 <div class="event-ideal-for-box" v-if="ev.idealFor">
                   <div class="ideal-accent-line"></div>
                   <div class="ideal-for-text-group">
-                    <span class="ideal-for-tag">Ideal for</span>
+                    <span class="ideal-for-tag">{{ t('summits.idealFor') }}</span>
                     <p class="ideal-for-content">{{ ev.idealFor }}</p>
                   </div>
                 </div>
@@ -132,9 +132,19 @@
 
           <!-- SINGLE SHOWCASE VIEW matching GameGap & AI Native Figma Images -->
           <div v-else :key="activeTab + '-single'" class="content-card">
-            <!-- Left image -->
-            <div class="single-image-wrap">
+            <!-- Left image with hover overlay (only for Enterprise & Service) -->
+            <div class="single-image-wrap" :class="{ 'has-overlay': hasHoverOverlay }">
               <img :src="activeTrackData.image" :alt="activeTrackData.title" class="single-track-img" />
+              <!-- Hover Overlay (Only on Enterprise Uzbekistan & Service Companies) -->
+              <div v-if="hasHoverOverlay" class="event-card-hover-overlay">
+                <div class="hover-overlay-top">
+                  <h4 class="hover-overlay-title">{{ activeTrackData.cardTitle || activeTrackData.title }}</h4>
+                  <p class="hover-overlay-desc">{{ activeTrackData.cardSubtitle || activeTrackData.description }}</p>
+                </div>
+                <button class="hover-register-btn" @click="scrollToRegister">
+                  {{ t('summits.attendBtn') }}
+                </button>
+              </div>
             </div>
 
             <!-- Right content matching Figma Images -->
@@ -154,10 +164,10 @@
               </div>
 
               <!-- Ideal for box matching Figma Images -->
-              <div class="ideal-for-box">
+              <div class="ideal-for-box" v-if="activeTrackData.idealFor">
                 <div class="ideal-accent"></div>
                 <p class="ideal-text">
-                  <strong class="ideal-highlight">Ideal for:</strong> {{ activeTrackData.idealFor }}
+                  <strong class="ideal-highlight">{{ t('summits.idealFor') }}</strong> {{ activeTrackData.idealFor }}
                 </p>
               </div>
             </div>
@@ -194,7 +204,7 @@ import trackAwsImg from '@/assets/images/track-aws.png'
 
 const { t } = useI18n()
 
-const activeTab = ref('service')
+const activeTab = ref('enterprise')
 
 const tabs = [
   { id: 'enterprise', labelKey: 'summits.tabEnterprise' },
@@ -205,231 +215,130 @@ const tabs = [
   { id: 'ai', labelKey: 'summits.tabAi' },
 ]
 
-// Text exactly matching Image 2 and Figma 124:7171 / 118:7058
-const trackData = {
-  enterprise: {
-    isMultiCard: false,
-    title: 'Enterprise Uzbekistan Summit',
-    cardTitle: 'Enterprise Uzbekistan Summit',
-    cardSubtitle: 'Legally protected testing environment for new business models and frontier technologies.',
-    date: 'September 23, 2026',
-    time: '10:00 - 12:00',
-    location: 'CAEx, Hall 1',
-    image: enterpriseImg,
-    description: "Discover Enterprise Uzbekistan — the country's first dedicated jurisdiction built for global technology business.",
-    bullets: [
-      "Running on elements of English and Welsh law, it offers a legal environment that locks in the day you enter and remains guaranteed through 2100 — for IT exporters, data centers, startups, and infrastructure and institutional investors alike.",
-      "On September 23, Enterprise Uzbekistan takes the stage at ICT Week to open the framework up in person. Meet the people building it, see how it's structured, and get a first look at what it means to operate inside it.",
-      "Join us at CAEx, Main Hall — come see it before everyone else does.",
-    ],
-    idealFor: 'global tech companies, investors, legal and financial advisors, and government officials',
-  },
-  startup: {
-    isMultiCard: true,
-    title: 'Startup & Venture Summit',
-    events: [
-      {
-        title: 'Startup & Venture Summit',
-        image: trackStartupSummitImg,
-        date: 'Sep 22, 2026',
-        time: '14:00 - 17:00',
-        venue: 'CAEX, Main Hall',
-        desc: "The flagship gathering of Central Asia's startup ecosystem — bringing together founders, investors, and government leaders to discuss the region's next stage of hyper-growth.",
-        bullets: [
-          'Keynote addresses from leading global venture capitalists',
-          'Panels on emerging tech trends and fundraising strategies',
-          'High-impact networking with 500+ investors and founders',
-        ],
-        idealFor: 'Founders, VCs, angel investors, accelerators, and startup executives.',
-      },
-      {
-        title: 'Startup Blink Awards',
-        image: trackStartupBlinkImg,
-        date: 'Sep 23, 2026',
-        time: '16:00 - 18:00',
-        venue: 'CAEX, Hall 3',
-        desc: 'An official award ceremony celebrating top-performing startup ecosystems and ecosystem builders shaping the global innovation landscape.',
-        bullets: [
-          'Presentation of Global Startup Ecosystem Index 2026',
-          'Recognition of fastest-growing regional startup hubs',
-          'Award ceremony for outstanding tech innovators',
-        ],
-        idealFor: 'Ecosystem builders, policymakers, researchers, and media.',
-      },
-      {
-        title: 'Startup World Cup - Uzbekistan Regional Final',
-        image: trackStartupWorldCupImg,
-        date: 'Sep 24, 2026',
-        time: '10:00 - 17:00',
-        venue: 'CAEX, Main Hall',
-        desc: "The regional final of the world's largest startup competition, where top regional startups compete for a spot in the global final in Silicon Valley and a share of $1M+ in investment.",
-        bullets: [
-          'Top 10 shortlisted startups pitching live on stage',
-          'International jury of top-tier Silicon Valley VCs',
-          'Winner secures ticket to San Francisco Grand Finale',
-        ],
-        idealFor: 'Early and growth-stage tech startups, investors, and accelerators.',
-      },
-      {
-        title: 'Ignyte Challenge',
-        image: trackIgnyteImg,
-        date: 'Sep 25, 2026',
-        time: '11:00 - 13:00',
-        venue: 'CAEX, Hall 3',
-        desc: 'A high-energy pitch competition in partnership with DIFC Innovation Hub and IGNYTE connecting ambitious startups with international investors and MENA market entry.',
-        bullets: [
-          'Direct access to Dubai Future District Fund & DIFC ecosystem',
-          'Fast-track incubation and market expansion programs',
-          'Cash grants and zero-cost incorporation packages',
-        ],
-        idealFor: 'Fintech, Web3, AI, and enterprise software startups.',
-      },
-      {
-        title: 'Taqdimot (Startup Pitches)',
-        image: trackTaqdimotImg,
-        date: 'Sep 25, 2026',
-        time: '14:00 - 17:00',
-        venue: 'CAEX, Hall 2',
-        desc: 'Live pitch sessions showcasing promising global startups to investors, corporates, and ecosystem partners, serving as a high-velocity matchmaking platform.',
-        bullets: [
-          'Curated 3-minute pitches + 2-minute investor Q&A',
-          '1-on-1 investor matchmaking lounge',
-          'Instant term sheet and deal-making opportunities',
-        ],
-        idealFor: 'Angel investors, family offices, syndicate leads, and founders.',
-      },
-    ],
-  },
-  service: {
-    isMultiCard: false,
-    title: 'Tech & Service Outsourcing Conference',
-    cardTitle: 'Regulatory Sandbox',
-    cardSubtitle: 'Legally protected testing environment for new business models and frontier technologies.',
-    date: 'September 23, 2026',
-    time: '12:00-14:00',
-    location: 'CAEx, Hall 3',
-    image: serviceImg,
-    description: 'Explore the future of global services and outsourcing from the heart of Central Asia. Discover why Uzbekistan is the next big outsourcing destination for ITES companies and investment.',
-    bullets: [
-      'Insights into 0% tax breaks for companies',
-      'Access a multilingual, tech-savvy workforce of 21 million+',
-      'Special IT visa and 3-year zero-cost office support program',
-    ],
-    idealFor: 'outsourcing companies, IT leaders, global service providers, investors, and government officials',
-  },
-  bridge: {
-    isMultiCard: true,
-    title: 'Global Bridge',
-    events: [
-      {
-        title: 'Uzbek-Japan Digital Community Forum',
-        image: trackUzbekJapanImg,
-        date: 'September 22, 2026',
-        time: '15:00 - 18:00',
-        venue: 'CAEX, Hall 3',
-        desc: 'Explore new opportunities for collaboration between Uzbekistan and Japan in the ICT sector, from joint software development to talent exchange and market entry support.',
-        bullets: [
-          "Insights into Japan's approach to IT outsourcing partnerships",
-          'Access to a growing pool of Uzbek IT talent for Japanese companies',
-          'Government-backed support for bilateral tech initiatives',
-        ],
-        idealFor: 'Japanese tech companies, IT leaders, government officials and investors',
-      },
-      {
-        title: 'OTS Technology forum',
-        image: trackOtsForumImg,
-        date: 'September 23, 2026',
-        time: '12:00 - 14:00',
-        venue: 'CAEX, Hall 2',
-        desc: 'The forum unites key stakeholders from the Organization of Turkic States (OTS) to advance cooperation in digital innovation and startup ecosystems.',
-        bullets: [
-          'Government-led innovation ecosystem insights',
-          'Panel on startup support and cross-border growth',
-          'Strategic networking across the OTS innovation ecosystem',
-        ],
-        idealFor: 'Government representatives, technology parks, innovation agencies, startup ecosystem leaders, investors, founders',
-      },
-      {
-        title: 'Uzbekistan - Middle east tech summit',
-        image: trackMiddleEastImg,
-        date: 'Sep 24, 2026',
-        time: '14:00 - 16:30',
-        venue: 'IT Park Complex',
-        desc: "The Summit connects Uzbekistan's tech ecosystem with Middle Eastern investors to expand IT exports and unlock new growth in the MENA region.",
-        bullets: [
-          'Investment into Uzbekistan IT and digital infrastructure sector',
-          'Market entry of Middle Eastern technology companies into Central Asia',
-          'Expansion of Uzbek startups and IT service companies into GCC markets',
-        ],
-        idealFor: 'Women entrepreneurs, developers, investors and ecosystem partners',
-      },
-      {
-        title: 'Sabriya: Women in Digital Economy',
-        image: trackSabriyaImg,
-        date: 'Sep 24, 2026',
-        time: '14:00 - 16:30',
-        venue: 'CAEX, Hall 3',
-        desc: "Discover Sabriya — IT Park's initiative empowering women to lead and grow in the digital economy across Uzbekistan and beyond.",
-        bullets: [
-          'Insights into funding and mentorship programs for women-led startups',
-          'Access to a growing network of female founders and tech leaders',
-          'Practical guidance on career growth in tech',
-        ],
-        idealFor: 'Women entrepreneurs, developers, investors and ecosystem partners',
-      },
-      {
-        title: 'AWS Community Day',
-        image: trackAwsImg,
-        date: 'Sep 25, 2026',
-        time: '10:00 - 17:00',
-        venue: 'CAEX, Main Hall',
-        desc: 'Join a full day of cloud technology talks and hands-on sessions led by AWS experts and the regional developer community.',
-        bullets: [
-          'Insights into the latest AWS services and cloud architecture',
-          'Access to real-world case studies from cloud practitioners',
-          'Networking with developers, architects and DevOps engineers',
-        ],
-        idealFor: 'Developers, cloud architects, DevOps engineers and IT leaders',
-      },
-    ],
-  },
-  gamedev: {
-    isMultiCard: false,
-    title: 'GameGap: Gamedev Conference',
-    cardTitle: 'GameGap: Gamedev Conference',
-    cardSubtitle: 'Central Asia’s premier game development and interactive entertainment forum.',
-    date: 'September 25, 2026',
-    time: '14:00 - 17:00',
-    location: 'CAEx, Hall 3',
-    image: gamedevImg,
-    description: "Discover the future of gaming from the heart of Central Asia. Explore why Uzbekistan's GameDev ecosystem is becoming a key hub for studios, publishers and investors in the region.",
-    bullets: [
-      'Insights from world-class gaming industry experts',
-      'Access to a growing regional talent pool and gaming market',
-      'Networking with publishers, investors and studio founders',
-    ],
-    idealFor: 'game developers, publishers, investors, gaming executives and industry professionals',
-  },
-  ai: {
-    isMultiCard: false,
-    title: 'AI NATIVE: IDEAS TO INNOVATION',
-    cardTitle: 'AI NATIVE: IDEAS TO INNOVATION',
-    cardSubtitle: 'Frontier artificial intelligence and machine learning applications in emerging markets.',
-    date: 'September 24, 2026',
-    time: '10:00 – 12:15',
-    location: 'CAEx, Hall 3',
-    image: aiImg,
-    description: 'Step into a world where AI thinks, speaks, creates, and moves — from intelligent agents and LLMs to cloud technologies and real-world robotics.',
-    bullets: [
-      'Experience LLMs and cloud AI in action with live, hands-on demos',
-      'See robotics on stage — from working prototypes to AI built for real jobs',
-      'Step into the arena yourself with “Join the AI Game” and discover study programs, career opportunities, and hackathons',
-    ],
-    idealFor: 'AI developers, tech founders, robotics innovators, enterprise IT leaders, and students',
-  },
+const singleImages = {
+  enterprise: enterpriseImg,
+  service: serviceImg,
+  gamedev: gamedevImg,
+  ai: aiImg
 }
 
-const activeTrackData = computed(() => trackData[activeTab.value] || trackData.enterprise)
+const multiImages = {
+  startup: [
+    trackStartupSummitImg,
+    trackStartupBlinkImg,
+    trackStartupWorldCupImg,
+    trackIgnyteImg,
+    trackTaqdimotImg
+  ],
+  bridge: [
+    trackUzbekJapanImg,
+    trackOtsForumImg,
+    trackMiddleEastImg,
+    trackSabriyaImg,
+    trackAwsImg
+  ]
+}
+
+const activeTrackData = computed(() => {
+  const currentKey = activeTab.value
+  const raw = t(`summits.tracks.${currentKey}`)
+  if (!raw || typeof raw !== 'object') {
+    // Fallback default details if not nested in locales
+    const defaultData = {
+      enterprise: {
+        title: 'ENTERPRISE UZBEKISTAN SUMMIT',
+        date: 'Sept 22, 2026',
+        time: '10:00 - 18:00',
+        location: 'CAEx Main Hall',
+        description: 'Exclusive sovereign legal zone, common law principles, regulatory sandbox for international FinTech, AI, and enterprise tech ventures.',
+        bullets: [
+          'English common law jurisdiction & independent international commercial courts',
+          '0% Corporate, Dividend, and Property tax regimes for registered entities',
+          'Seamless capital repatriation with global banking integrations'
+        ],
+        idealFor: 'Multinational Corporations, Enterprise Founders, FinTech Institutions'
+      },
+      gamedev: {
+        title: 'GAMEDEV & CREATIVE SUMMIT',
+        date: 'Sept 24, 2026',
+        time: '11:00 - 17:30',
+        location: 'CAEx Hall B',
+        description: 'Connecting top regional game developers, publishers, 3D studios, and international gaming accelerators.',
+        bullets: [
+          'Direct publishing deals and angel investments for regional studios',
+          'Unreal Engine 5 and generative AI workflows in gaming showcase',
+          'Talent scouting & international outsourcing pipeline'
+        ],
+        idealFor: 'Game Developers, 3D Artists, Studio Founders, Publishers'
+      },
+      ai: {
+        title: 'AI NATIVE UZBEKISTAN',
+        date: 'Sept 25, 2026',
+        time: '10:00 - 18:00',
+        location: 'CAEx Main Stage',
+        description: 'The frontier artificial intelligence conference showcasing national supercomputing clusters, LLM research, and AI-driven automation.',
+        bullets: [
+          'High-performance GPU cluster compute subsidies for AI startups',
+          'State data sandbox access for training sovereign AI models',
+          'Direct VC funding rounds for AI native seed and series A ventures'
+        ],
+        idealFor: 'AI Researchers, Machine Learning Engineers, DeepTech Founders, VC Funds'
+      },
+      service: {
+        title: 'IT OUTSOURCING & SERVICE COMPANIES',
+        date: 'Sept 23, 2026',
+        time: '09:30 - 17:00',
+        location: 'CAEx Hall A',
+        description: 'Scale your engineering and BPO outsourcing operations with zero tax rates, state talent pipelines, and Zero-Risk programs.',
+        bullets: [
+          '100% tax incentives & Zero-Risk soft-landing package',
+          'Access to 20,000+ bilingual software engineers and developers annually',
+          'High-speed redundant international internet backbone'
+        ],
+        idealFor: 'BPO & IT Service Companies, Outsourcing Executives, Regional Directors'
+      }
+    }
+    const current = defaultData[currentKey] || {
+      title: 'ICTWEEK TRACK',
+      date: 'Sept 22–26, 2026',
+      time: '10:00 - 18:00',
+      location: 'CAEx, Tashkent',
+      description: 'Explore dedicated summits, keynotes, and high-impact international networking opportunities.',
+      bullets: [
+        'World-class keynote speakers and government delegates',
+        'Direct business matchmaking and B2B matchmaking lounges',
+        'International investor summits and demo days'
+      ],
+      idealFor: 'Tech Founders, C-Level Executives, Investors'
+    }
+    return {
+      ...current,
+      isMultiCard: false,
+      image: singleImages[currentKey] || enterpriseImg
+    }
+  }
+
+  const isMulti = currentKey === 'startup' || currentKey === 'bridge'
+  if (isMulti) {
+    const images = multiImages[currentKey] || []
+    return {
+      ...raw,
+      isMultiCard: true,
+      events: (raw.events || []).map((ev, i) => ({
+        ...ev,
+        image: images[i]
+      }))
+    }
+  } else {
+    return {
+      ...raw,
+      isMultiCard: false,
+      image: singleImages[currentKey]
+    }
+  }
+})
+
+const hasHoverOverlay = computed(() => activeTab.value === 'enterprise' || activeTab.value === 'service')
 
 function scrollToRegister() {
   const el = document.getElementById('register')
@@ -572,6 +481,10 @@ function scrollToRegister() {
   background: #080D11;
 }
 
+.single-image-wrap.has-overlay {
+  cursor: pointer;
+}
+
 .single-track-img {
   width: 100%;
   height: 100%;
@@ -608,7 +521,6 @@ function scrollToRegister() {
   align-items: flex-start;
 }
 
-/* Solid green circle with dark checkmark matching Figma */
 .check-circle-icon {
   width: 20px;
   height: 20px;
@@ -631,7 +543,6 @@ function scrollToRegister() {
   margin: 0;
 }
 
-/* Ideal for Box matching GameGap & AI Native Images */
 .ideal-for-box {
   display: flex;
   gap: 12px;
@@ -665,27 +576,24 @@ function scrollToRegister() {
   font-weight: 700;
 }
 
-/* Multi Events Grid: Row 1 has 2 cards (50% each), Row 2 has 3 cards (33.33% each) matching Figma Image 2 */
+/* Multi Events Grid */
 .multi-events-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 24px;
 }
 
-/* Row 1: 2 cards across (each takes 3 columns = 50%) */
 .event-sub-card:nth-child(1),
 .event-sub-card:nth-child(2) {
   grid-column: span 3;
 }
 
-/* Row 2: 3 cards across (each takes 2 columns = 33.33%) */
 .event-sub-card:nth-child(3),
 .event-sub-card:nth-child(4),
 .event-sub-card:nth-child(5) {
   grid-column: span 2;
 }
 
-/* Event Sub Card with Figma Gradient Border (Linear Gradient from #155B7F to #1BDB86) */
 .event-sub-card {
   background: 
     linear-gradient(180deg, rgba(14, 20, 27, 0.96) 0%, rgba(10, 16, 22, 0.96) 100%) padding-box,
@@ -716,6 +624,93 @@ function scrollToRegister() {
   overflow: hidden;
   position: relative;
   background: #080D11;
+}
+
+.event-card-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 13, 22, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 26px;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 5;
+  box-sizing: border-box;
+}
+
+.single-image-wrap.has-overlay:hover .event-card-hover-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hover-overlay-top {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  transform: translateY(-8px);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.single-image-wrap.has-overlay:hover .hover-overlay-top {
+  transform: translateY(0);
+}
+
+.hover-overlay-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.hover-overlay-desc {
+  font-family: 'Manrope', sans-serif;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hover-register-btn {
+  align-self: flex-start;
+  padding: 10px 22px;
+  background: #83FFC1;
+  color: #060d15;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transform: translateY(8px);
+  transition: background 0.2s ease, transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(131, 255, 193, 0.25);
+}
+
+.single-image-wrap.has-overlay:hover .hover-register-btn {
+  transform: translateY(0);
+}
+
+.hover-register-btn:hover {
+  background: #a8ffd4;
+  transform: scale(1.04) !important;
+  box-shadow: 0 6px 18px rgba(131, 255, 193, 0.35);
 }
 
 .event-sub-card:nth-child(1) .event-card-img-wrap,
@@ -782,7 +777,6 @@ function scrollToRegister() {
   margin: 0;
 }
 
-/* Event Bullets List matching Figma Image 2 */
 .event-bullets-list {
   display: flex;
   flex-direction: column;
@@ -816,7 +810,6 @@ function scrollToRegister() {
   line-height: 1.45;
 }
 
-/* Event Ideal For Box matching Figma Image 2 */
 .event-ideal-for-box {
   margin-top: auto;
   padding: 10px 14px;

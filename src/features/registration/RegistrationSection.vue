@@ -12,11 +12,8 @@
 
         <!-- Header -->
         <div class="reg-header">
-          <h2 class="reg-title">Register for ICTWEEK Uzbekistan 2026</h2>
-          <p class="reg-subtitle">
-            Join global tech leaders, enterprise delegates, and investors in Tashkent.<br />
-            Complete your details below to secure your pass.
-          </p>
+          <h2 class="reg-title">{{ t('form.title') }}</h2>
+          <p class="reg-subtitle" style="white-space: pre-line;">{{ t('form.subtitle') }}</p>
         </div>
 
         <!-- Form -->
@@ -29,57 +26,60 @@
             <div class="form-col">
 
               <!-- Full name -->
-              <div class="field-group">
-                <label class="field-label" for="reg-fullname">Full name</label>
-                <div class="input-wrap">
+              <div class="field-group" :class="{ 'has-error': errors.name }">
+                <label class="field-label" for="reg-fullname">{{ t('form.fullName') }}</label>
+                <div class="input-wrap" :class="{ 'error-wrap': errors.name }">
                   <input
                     v-model="form.name"
+                    @input="formatName"
+                    @blur="validateField('name')"
                     type="text"
-                    placeholder="e.g. John Doe"
+                    :placeholder="t('form.fullNamePlaceholder')"
                     class="field-input"
-                    required
                     id="reg-fullname"
                   />
                 </div>
               </div>
 
               <!-- Email -->
-              <div class="field-group">
-                <label class="field-label" for="reg-email">Email</label>
-                <div class="input-wrap">
+              <div class="field-group" :class="{ 'has-error': errors.email }">
+                <label class="field-label" for="reg-email">{{ t('form.email') }}</label>
+                <div class="input-wrap" :class="{ 'error-wrap': errors.email }">
                   <input
                     v-model="form.email"
+                    @input="errors.email = ''"
+                    @blur="validateField('email')"
                     type="email"
-                    placeholder="e.g. alex@company.com"
+                    :placeholder="t('form.emailPlaceholder')"
                     class="field-input"
-                    required
                     id="reg-email"
                   />
                 </div>
               </div>
 
               <!-- Company -->
-              <div class="field-group">
-                <label class="field-label" for="reg-company">Company</label>
-                <div class="input-wrap">
+              <div class="field-group" :class="{ 'has-error': errors.company }">
+                <label class="field-label" for="reg-company">{{ t('form.company') }}</label>
+                <div class="input-wrap" :class="{ 'error-wrap': errors.company }">
                   <input
                     v-model="form.company"
+                    @input="errors.company = ''"
+                    @blur="validateField('company')"
                     type="text"
-                    placeholder="e.g. Tech Global Inc."
+                    :placeholder="t('form.companyPlaceholder')"
                     class="field-input"
-                    required
                     id="reg-company"
                   />
                 </div>
               </div>
 
               <!-- I am attending as (2-col radio dropdown matching Image 2) -->
-              <div class="field-group">
-                <label class="field-label">I am attending as</label>
-                <div class="select-wrap" @click="toggleDropdown('category')" :class="{ open: openDropdown === 'category' }" id="reg-category">
+              <div class="field-group" :class="{ 'has-error': errors.category }">
+                <label class="field-label">{{ t('form.category') }}</label>
+                <div class="select-wrap" @click="toggleDropdown('category')" :class="{ open: openDropdown === 'category', 'error-wrap': errors.category }" id="reg-category">
                   <div class="select-display">
                     <span :class="{ placeholder: !form.category }">
-                      {{ form.category || 'Select category...' }}
+                      {{ form.category || t('form.categoryPlaceholder') }}
                     </span>
                     <svg class="chevron" :class="{ open: openDropdown === 'category' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
                       <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -106,11 +106,11 @@
 
               <!-- How did you hear about us? (Radio dropdown matching Image 1) -->
               <div class="field-group">
-                <label class="field-label">How did you hear about us?</label>
+                <label class="field-label">{{ t('form.source') }}</label>
                 <div class="select-wrap" @click="toggleDropdown('source')" :class="{ open: openDropdown === 'source' }" id="reg-source">
                   <div class="select-display">
                     <span :class="{ placeholder: !form.source }">
-                      {{ form.source || 'Select source...' }}
+                      {{ form.source || t('form.sourcePlaceholder') }}
                     </span>
                     <svg class="chevron" :class="{ open: openDropdown === 'source' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
                       <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -141,12 +141,12 @@
             <div class="form-col">
 
               <!-- Country (Dropdown) -->
-              <div class="field-group">
-                <label class="field-label">Country</label>
-                <div class="select-wrap" @click="toggleDropdown('country')" :class="{ open: openDropdown === 'country' }" id="reg-country">
+              <div class="field-group" :class="{ 'has-error': errors.country }">
+                <label class="field-label">{{ t('form.country') }}</label>
+                <div class="select-wrap" @click="toggleDropdown('country')" :class="{ open: openDropdown === 'country', 'error-wrap': errors.country }" id="reg-country">
                   <div class="select-display">
                     <span :class="{ placeholder: !form.country }">
-                      {{ form.country || 'Select country...' }}
+                      {{ form.country || t('form.countryPlaceholder') }}
                     </span>
                     <svg class="chevron" :class="{ open: openDropdown === 'country' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
                       <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -169,15 +169,16 @@
               </div>
 
               <!-- Phone number -->
-              <div class="field-group">
-                <label class="field-label" for="reg-phone">Phone number</label>
-                <div class="input-wrap">
+              <div class="field-group" :class="{ 'has-error': errors.phone }">
+                <label class="field-label" for="reg-phone">{{ t('form.phone') }}</label>
+                <div class="input-wrap" :class="{ 'error-wrap': errors.phone }">
                   <input
                     v-model="form.phone"
+                    @input="formatPhone"
+                    @blur="validateField('phone')"
                     type="tel"
-                    placeholder="e.g. +1 (555) 019-2834"
+                    :placeholder="t('form.phonePlaceholder')"
                     class="field-input"
-                    required
                     id="reg-phone"
                   />
                 </div>
@@ -185,26 +186,25 @@
 
               <!-- Position -->
               <div class="field-group">
-                <label class="field-label" for="reg-position">Position</label>
+                <label class="field-label" for="reg-position">{{ t('form.position') }}</label>
                 <div class="input-wrap">
                   <input
                     v-model="form.position"
                     type="text"
-                    placeholder="e.g. Managing Director"
+                    :placeholder="t('form.positionPlaceholder')"
                     class="field-input"
-                    required
                     id="reg-position"
                   />
                 </div>
               </div>
 
               <!-- Event track(s) you plan to attend (Multi-select WITHOUT sub-pages) -->
-              <div class="field-group">
-                <label class="field-label">Event track(s) you plan to attend (Select all that apply)</label>
-                <div class="select-wrap" @click="toggleDropdown('tracks')" :class="{ open: openDropdown === 'tracks' }" id="reg-tracks">
-                  <div class="select-display">
+              <div class="field-group" :class="{ 'has-error': errors.tracks }">
+                <label class="field-label">{{ t('form.tracks') }}</label>
+                <div class="select-wrap" @click="toggleDropdown('tracks')" :class="{ open: openDropdown === 'tracks', 'error-wrap': errors.tracks }" id="reg-tracks">
+                  <div class="select-display" :title="form.tracks.length ? form.tracks.join(', ') : ''">
                     <span :class="{ placeholder: !form.tracks.length }">
-                      {{ form.tracks.length ? form.tracks.join(', ') : 'Select track(s)...' }}
+                      {{ form.tracks.length ? form.tracks.join(', ') : t('form.tracksPlaceholder') }}
                     </span>
                     <svg class="chevron" :class="{ open: openDropdown === 'tracks' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
                       <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -222,7 +222,7 @@
                     >
                       <div class="custom-checkbox" :class="{ checked: form.tracks.includes(tName) }">
                         <svg v-if="form.tracks.includes(tName)" width="10" height="10" viewBox="0 0 12 12" fill="none">
-                          <path d="M2 6.2L4.5 8.7L10 3" stroke="#0B0F13" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </div>
                       <span class="option-text">{{ tName }}</span>
@@ -231,64 +231,57 @@
                 </div>
               </div>
 
-              <!-- Name of focal point in IT Park (if available) - SELECT DROPDOWN WITH SUB-PAGES matching user screenshot! -->
+              <!-- Name of focal point in IT Park (SELECT DROPDOWN WITH SUBPAGES matching screenshot) -->
               <div class="field-group">
-                <label class="field-label">Name of focal point in IT Park (if available)</label>
+                <label class="field-label">{{ t('form.focalPoint') }}</label>
                 <div class="select-wrap" @click="toggleDropdown('focal')" :class="{ open: openDropdown === 'focal' }" id="reg-focal">
                   <div class="select-display">
                     <span :class="{ placeholder: !form.focalPoint }">
-                      {{ form.focalPoint || 'e.g. Contact person or team member name' }}
+                      {{ form.focalPoint || t('form.focalPointPlaceholder') }}
                     </span>
                     <svg class="chevron" :class="{ open: openDropdown === 'focal' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
                       <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </div>
 
-                  <!-- Dropdown Menu WITH Left Sub-pages Flyout matching screenshot -->
-                  <div class="dropdown-menu tracks-menu" v-if="openDropdown === 'focal'" @click.stop>
-                    <div
-                      class="track-menu-row"
-                      v-for="track in focalTracksList"
-                      :key="track.id"
-                      @mouseenter="hoveredFocalTrack = track.id"
-                      @mouseleave="hoveredFocalTrack = null"
-                    >
-                      <!-- Main Option Item -->
+                  <!-- Main Focal Dropdown matching screenshot media_1787844960797.png -->
+                  <div class="focal-main-menu" v-if="openDropdown === 'focal'" @click.stop>
+                    <!-- Left Sub-page Flyout Menu (Only shown when hovered track has subtracks) -->
+                    <div class="focal-sub-flyout-left" v-if="hoveredFocalTrack?.subtracks">
                       <div
-                        class="checkbox-option-item"
-                        @click="selectFocal(track.title)"
-                        :class="{ selected: form.focalPoint === track.title || hoveredFocalTrack === track.id }"
+                        class="focal-row-item"
+                        v-for="sub in hoveredFocalTrack.subtracks"
+                        :key="sub"
+                        @click="selectFocal(sub)"
+                        :class="{ 'is-selected': form.focalPoint === sub }"
                       >
-                        <div class="custom-checkbox" :class="{ checked: isFocalChecked(track) }">
-                          <svg v-if="isFocalChecked(track)" width="10" height="10" viewBox="0 0 12 12" fill="none">
-                            <path d="M2 6.2L4.5 8.7L10 3" stroke="#0B0F13" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <div class="focal-checkbox-square" :class="{ checked: form.focalPoint === sub }">
+                          <svg v-if="form.focalPoint === sub" width="10" height="10" viewBox="0 0 12 12" fill="none">
+                            <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
                         </div>
-                        <span class="option-text">{{ track.title }}</span>
+                        <span class="focal-item-text">{{ sub }}</span>
                       </div>
+                    </div>
 
-                      <!-- Sub-page / Sub-menu Flyout (opens to the LEFT matching screenshot) -->
-                      <div
-                        class="subtracks-flyout"
-                        v-if="track.subtracks && track.subtracks.length && hoveredFocalTrack === track.id"
-                        @mouseenter="hoveredFocalTrack = track.id"
-                      >
-                        <div
-                          class="checkbox-option-item sub-item"
-                          v-for="sub in track.subtracks"
-                          :key="sub"
-                          @click="selectFocal(sub)"
-                          :class="{ selected: form.focalPoint === sub }"
-                        >
-                          <div class="custom-checkbox" :class="{ checked: form.focalPoint === sub }">
-                            <svg v-if="form.focalPoint === sub" width="10" height="10" viewBox="0 0 12 12" fill="none">
-                              <path d="M2 6.2L4.5 8.7L10 3" stroke="#0B0F13" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                          </div>
-                          <span class="option-text">{{ sub }}</span>
-                        </div>
+                    <!-- Main List of Tracks (Right Panel) -->
+                    <div
+                      class="focal-row-item"
+                      v-for="track in focalTracksList"
+                      :key="track.id"
+                      @mouseenter="hoveredFocalTrack = track"
+                      @click="!track.subtracks && selectFocal(track.title)"
+                      :class="{
+                        'is-hovered': hoveredFocalTrack?.id === track.id,
+                        'is-selected': isFocalChecked(track)
+                      }"
+                    >
+                      <div class="focal-checkbox-square" :class="{ checked: isFocalChecked(track) }">
+                        <svg v-if="isFocalChecked(track)" width="10" height="10" viewBox="0 0 12 12" fill="none">
+                          <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                       </div>
-
+                      <span class="focal-item-text">{{ track.title }}</span>
                     </div>
                   </div>
                 </div>
@@ -298,22 +291,22 @@
           </div>
 
           <!-- Bottom Consent & Submit Row matching Image 1 -->
-          <div class="form-bottom">
+          <div class="form-bottom" :class="{ 'has-error': errors.consent }">
             <!-- Consent Checkbox -->
-            <label class="consent-label" @click="form.consent = !form.consent">
-              <div class="custom-checkbox consent-box" :class="{ checked: form.consent }">
+            <label class="consent-label" @click="toggleConsent">
+              <div class="custom-checkbox consent-box" :class="{ checked: form.consent, 'error-box': errors.consent }">
                 <svg v-if="form.consent" width="10" height="10" viewBox="0 0 12 12" fill="none">
                   <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
               <span class="consent-text">
-                Yes, I agree that IT Park Uzbekistan team may contact me by e-mail to inquire about my request, and I am aware that my shared personal data will be saved. This consent can be withdrawn at any time.
+                {{ t('form.consent') }}
               </span>
             </label>
 
             <!-- Submit Button with top-right arrow ↗ -->
             <button type="submit" class="btn-register-submit" :disabled="submitting" id="reg-submit-btn">
-              <span>{{ submitting ? 'Submitting...' : 'Register now' }}</span>
+              <span>{{ submitting ? t('form.submitting') : t('form.submitBtn') }}</span>
               <svg v-if="!submitting" width="18" height="18" viewBox="0 0 24 24" fill="none" class="submit-arrow">
                 <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#0B0F13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -324,18 +317,21 @@
         </form>
       </div>
 
-      <!-- Thank You State -->
-      <div class="reg-card thank-you" v-if="submitted">
-        <div class="ty-icon">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="31" stroke="#1BDB86" stroke-width="2"/>
-            <path d="M20 32l8 8 16-16" stroke="#1BDB86" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+      <!-- Thank You State matching Figma 350:24 & media_1787844363947.png -->
+      <div class="thank-you-view" v-if="submitted">
+        <div class="thank-avatar-wrap">
+          <img src="@/assets/images/thank-you-avatar.png" alt="Success" class="thank-avatar-img" />
         </div>
-        <h2 class="ty-title">Registration Submitted!</h2>
-        <p class="ty-desc">Thank you for registering for ICTWEEK Uzbekistan 2026. A confirmation email with your registration details has been sent to your inbox.</p>
-        <button class="btn-register-submit" @click="submitted = false; resetForm()" id="reg-another-btn">
-          <span>Register Another Attendee</span>
+        <h1 class="thank-title">{{ t('thankYou.titleLine1') }}<br class="desktop-br" /> {{ t('thankYou.titleLine2') }}</h1>
+        <p class="thank-subtitle">
+          {{ t('thankYou.subtitle') }}
+        </p>
+        <button class="btn-back-home" @click="handleBackHome" id="reg-back-home-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M3 9.5L12 3L21 9.5V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.5Z" stroke="#84FFC1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 21V12H15V21" stroke="#84FFC1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>{{ t('thankYou.backHome') }}</span>
         </button>
       </div>
 
@@ -344,7 +340,12 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
+import { useI18n } from '@/composables/useI18n'
+
+const { t } = useI18n()
+
+const emit = defineEmits(['submitted', 'backToHome'])
 
 const submitted = ref(false)
 const submitting = ref(false)
@@ -365,102 +366,149 @@ const form = reactive({
   consent: false,
 })
 
+const errors = reactive({
+  name: '',
+  email: '',
+  company: '',
+  phone: '',
+  category: '',
+  country: '',
+  tracks: '',
+  consent: '',
+})
+
+// Formatting and mask helpers
+function formatName(e) {
+  const val = e.target.value
+  // Allow letters (including Cyrillic, Latin, Uzbek o', g'), spaces, hyphens, and apostrophes
+  form.name = val.replace(/[^a-zA-Zа-яА-ЯёЁ\u0400-\u04FF\s'’`\-]/g, '')
+  if (errors.name) validateField('name')
+}
+
+function formatPhone(e) {
+  let val = e.target.value.replace(/[^\d+]/g, '')
+  if (!val) {
+    form.phone = ''
+    return
+  }
+  if (!val.startsWith('+')) {
+    val = '+' + val
+  }
+  const digits = val.slice(1).replace(/\D/g, '')
+
+  if (digits.startsWith('998')) {
+    // Uzbek format: +998 (XX) XXX-XX-XX
+    let res = '+998'
+    const rest = digits.slice(3)
+    if (rest.length > 0) res += ' (' + rest.slice(0, 2)
+    if (rest.length >= 2) res += ') ' + rest.slice(2, 5)
+    if (rest.length >= 5) res += '-' + rest.slice(5, 7)
+    if (rest.length >= 7) res += '-' + rest.slice(7, 9)
+    form.phone = res
+  } else {
+    // International format: +XXX XX XXX XXXX
+    let res = '+'
+    for (let i = 0; i < digits.length && i < 15; i++) {
+      if (i === 3 || i === 5 || i === 8 || i === 11) res += ' '
+      res += digits[i]
+    }
+    form.phone = res
+  }
+  if (errors.phone) validateField('phone')
+}
+
+function validateField(field) {
+  if (field === 'name') {
+    if (!form.name.trim() || form.name.trim().length < 2) {
+      errors.name = t('form.errors.name')
+      return false
+    }
+    errors.name = ''
+    return true
+  }
+
+  if (field === 'email') {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+    if (!form.email.trim() || !emailRegex.test(form.email.trim())) {
+      errors.email = t('form.errors.email')
+      return false
+    }
+    errors.email = ''
+    return true
+  }
+
+  if (field === 'company') {
+    if (!form.company.trim()) {
+      errors.company = t('form.errors.company')
+      return false
+    }
+    errors.company = ''
+    return true
+  }
+
+  if (field === 'phone') {
+    const digitsOnly = form.phone.replace(/\D/g, '')
+    if (!form.phone.trim() || digitsOnly.length < 7) {
+      errors.phone = t('form.errors.phone')
+      return false
+    }
+    errors.phone = ''
+    return true
+  }
+
+  return true
+}
+
+function toggleConsent() {
+  form.consent = !form.consent
+  if (form.consent) errors.consent = ''
+}
+
 // 6 Categories matching Image 2
-const categoryList = [
-  'Investor',
-  'Corporate Delegate',
-  'Startup Founder',
-  'Ecosystem Builder',
-  'IT Outsourcing',
-  'Media',
-]
+const categoryList = computed(() => {
+  const list = t('form.categories')
+  return Array.isArray(list) ? list : []
+})
 
 // 4 Sources matching Image 1
-const sourceList = [
-  'Online Advertisement (Instagram, Facebook, LinkedIn, Google)',
-  'Partner Network',
-  'IT Park Representative',
-  'Organic Search / Website',
-]
+const sourceList = computed(() => {
+  const list = t('form.sources')
+  return Array.isArray(list) ? list : []
+})
 
 // Countries
-const countryList = [
-  'Uzbekistan',
-  'United States',
-  'United Kingdom',
-  'United Arab Emirates',
-  'Japan',
-  'Germany',
-  'Singapore',
-  'Kazakhstan',
-  'Turkey',
-  'South Korea',
-  'China',
-  'Saudi Arabia',
-  'Qatar',
-  'India',
-  'Other',
-]
+const countryList = computed(() => {
+  const list = t('form.countries')
+  return Array.isArray(list) ? list : []
+})
 
 // Simple tracks (no sub-pages) for Event track(s)
-const simpleTracksList = [
-  'Enterprise Uzbekistan Summit',
-  'Startup & Venture Summit',
-  'Tech & Service outsourcing conference',
-  'Global Bridge (International Partnerships)',
-  'GameGap: GameDev Conference',
-  'AI Native: Ideas to innovation',
-]
+const simpleTracksList = computed(() => {
+  const list = t('form.simpleTracks')
+  return Array.isArray(list) ? list : []
+})
 
 // Focal point tracks with left sub-pages matching user screenshot
-const focalTracksList = [
-  {
-    id: 'enterprise',
-    title: 'Enterprise Uzbekistan Summit',
-  },
-  {
-    id: 'startup',
-    title: 'Startup & Venture Summit',
-    subtracks: [
-      'Startup & Venture Summit',
-      'Startup blink Awards',
-      'Startup World Cup - Uzbekistan Regional Final',
-      'Ignyte Challenge',
-      'Taqdimot (Startup pitches)',
-    ],
-  },
-  {
-    id: 'service',
-    title: 'Tech & Service outsourcing conference',
-  },
-  {
-    id: 'bridge',
-    title: 'Global Bridge (International Partnerships)',
-    subtracks: [
-      'Uzbek-Japan Digital Community Forum',
-      'OTS Technology forum',
-      'Uzbekistan - Middle east tech summit',
-      'Sabriya: Women in Digital Economy',
-      'AWS Community Day',
-    ],
-  },
-  {
-    id: 'gamedev',
-    title: 'GameGap: GameDev Conference',
-  },
-  {
-    id: 'ai',
-    title: 'AI Native: Ideas to innovation',
-  },
-]
+const focalTracksList = computed(() => {
+  const list = t('form.focalTracks')
+  return Array.isArray(list) ? list : []
+})
 
 function toggleDropdown(name) {
-  openDropdown.value = openDropdown.value === name ? null : name
-  hoveredFocalTrack.value = null
+  if (openDropdown.value === name) {
+    openDropdown.value = null
+  } else {
+    openDropdown.value = name
+    if (name === 'focal') {
+      const active = focalTracksList.value.find(t => isFocalChecked(t)) || focalTracksList.value[1]
+      hoveredFocalTrack.value = active
+    }
+  }
 }
 
 function selectCategory(cat) {
   form.category = cat
+  errors.category = ''
   openDropdown.value = null
 }
 
@@ -471,6 +519,7 @@ function selectSource(src) {
 
 function selectCountry(c) {
   form.country = c
+  errors.country = ''
   openDropdown.value = null
 }
 
@@ -481,6 +530,7 @@ function toggleSimpleTrack(title) {
   } else {
     form.tracks.splice(idx, 1)
   }
+  if (form.tracks.length > 0) errors.tracks = ''
 }
 
 function selectFocal(name) {
@@ -494,15 +544,65 @@ function isFocalChecked(track) {
   return false
 }
 
-async function handleSubmit() {
+function validateAll() {
+  let valid = true
+
+  if (!validateField('name')) valid = false
+  if (!validateField('email')) valid = false
+  if (!validateField('company')) valid = false
+  if (!validateField('phone')) valid = false
+
+  if (!form.category) {
+    errors.category = t('form.errors.category')
+    valid = false
+  } else {
+    errors.category = ''
+  }
+
+  if (!form.country) {
+    errors.country = t('form.errors.country')
+    valid = false
+  } else {
+    errors.country = ''
+  }
+
+  if (!form.tracks || form.tracks.length === 0) {
+    errors.tracks = t('form.errors.tracks')
+    valid = false
+  } else {
+    errors.tracks = ''
+  }
+
   if (!form.consent) {
-    alert('Please agree to the terms to continue.')
+    errors.consent = t('form.errors.consent')
+    valid = false
+  } else {
+    errors.consent = ''
+  }
+
+  return valid
+}
+
+async function handleSubmit() {
+  if (!validateAll()) {
     return
   }
+
   submitting.value = true
-  await new Promise(r => setTimeout(r, 1200))
+  await new Promise(r => setTimeout(r, 800))
   submitting.value = false
   submitted.value = true
+  emit('submitted', { ...form })
+}
+
+function handleBackHome() {
+  submitted.value = false
+  resetForm()
+  emit('backToHome')
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
 }
 
 function resetForm() {
@@ -511,6 +611,7 @@ function resetForm() {
     source: '', country: '', phone: '', position: '',
     tracks: [], focalPoint: '', consent: false,
   })
+  Object.keys(errors).forEach(k => errors[k] = '')
 }
 
 function closeOnOutside(e) {
@@ -656,8 +757,9 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
 
 .select-display {
   width: 100%;
-  height: 46px;
-  padding: 0 16px;
+  min-height: 46px;
+  height: auto;
+  padding: 10px 16px;
   border-radius: 8px;
   background: #1F2732;
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -666,9 +768,10 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   justify-content: space-between;
   gap: 10px;
   font-family: 'Manrope', sans-serif;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 400;
   color: #FFFFFF;
+  line-height: 1.45;
   transition: all 0.2s ease;
   box-sizing: border-box;
 }
@@ -680,15 +783,25 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   box-shadow: none;
 }
 
+.select-display span {
+  flex: 1;
+  min-width: 0;
+  white-space: normal;
+  line-height: 1.45;
+  word-break: normal;
+  display: block;
+}
+
 .select-display .placeholder {
   color: rgba(255, 255, 255, 0.40);
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .chevron {
   flex-shrink: 0;
+  align-self: center;
   transition: transform 0.2s ease;
 }
 
@@ -903,13 +1016,19 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   background: #00E575;
 }
 
-/* Sub-page / Subtracks Flyout Submenu - positioned above when in dropup */
-.subtracks-flyout {
+/* Focal Point Dropdown matching screenshot media_1787844960797.png */
+#reg-focal {
+  position: relative;
+}
+
+#reg-focal .focal-main-menu {
   position: absolute;
-  top: 0;
-  right: calc(100% + 8px);
-  width: 320px;
-  background: #151e29;
+  top: auto;
+  bottom: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  min-width: 360px;
+  background: #18222d;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 12px;
   padding: 8px;
@@ -919,18 +1038,93 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  max-height: 240px;
-  overflow-y: auto;
+  gap: 3px;
+  box-sizing: border-box;
 }
 
-#reg-focal .subtracks-flyout {
-  top: auto;
-  bottom: 0;
+.focal-row-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  color: #FFFFFF;
 }
 
-.sub-item {
-  padding: 8px 10px;
+.focal-row-item:hover,
+.focal-row-item.is-hovered {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.focal-row-item.is-selected {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.focal-checkbox-square {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: #FFFFFF;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.focal-checkbox-square.checked {
+  background: #00E575;
+}
+
+.focal-item-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+/* Left Sub-page Flyout Menu matching screenshot */
+.focal-sub-flyout-left {
+  position: absolute;
+  top: 0;
+  right: calc(100% + 8px);
+  min-width: 320px;
+  max-width: 380px;
+  background: #18222d;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  padding: 8px;
+  z-index: 700;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  animation: flyoutFadeIn 0.15s ease;
+}
+
+@keyframes flyoutFadeIn {
+  from { opacity: 0; transform: translateX(6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 768px) {
+  #reg-focal .focal-main-menu {
+    min-width: 100%;
+  }
+  .focal-sub-flyout-left {
+    position: static;
+    margin-top: 4px;
+    margin-bottom: 6px;
+    border-left: 2px solid #00E575;
+    background: rgba(0, 0, 0, 0.35);
+  }
 }
 
 /* Bottom Row: Consent + Submit Button */
@@ -1014,31 +1208,95 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   to { transform: rotate(360deg); }
 }
 
-/* Thank You State */
-.thank-you {
+/* Error Border Styles (No error text) */
+.error-wrap {
+  border-color: #FF5E5E !important;
+  box-shadow: 0 0 14px rgba(255, 94, 94, 0.35) !important;
+}
+
+.error-box {
+  border: 1.5px solid #FF5E5E !important;
+  box-shadow: 0 0 10px rgba(255, 94, 94, 0.35) !important;
+}
+
+/* Thank You State matching Figma 350:24 & media_1787844363947.png */
+.thank-you-view {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 24px;
-  padding: 70px 48px;
+  padding: 80px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.thank-avatar-wrap {
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  background: rgba(10, 18, 26, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  display: flex;
+  align-items: center;
   justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), inset 0 1px 1.5px rgba(255, 255, 255, 0.15);
 }
 
-.ty-title {
+.thank-avatar-img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+}
+
+.thank-title {
   font-family: 'Manrope', sans-serif;
-  font-size: 36px;
-  font-weight: 800;
+  font-size: 48px;
+  font-weight: 700;
   color: #FFFFFF;
-  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px 0;
+  text-align: center;
 }
 
-.ty-desc {
+.thank-subtitle {
   font-family: 'Manrope', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.75);
-  margin: 0;
-  max-width: 560px;
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.55;
+  max-width: 760px;
+  margin: 0 0 36px 0;
+  text-align: center;
+}
+
+.btn-back-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 26px;
+  border-radius: 12px;
+  background: rgba(1, 20, 26, 0.6);
+  border: 1px solid #84FFC1;
+  color: #84FFC1;
+  font-family: 'Manrope', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn-back-home:hover {
+  background: rgba(132, 255, 193, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(132, 255, 193, 0.2);
 }
 
 @media (max-width: 960px) {
@@ -1048,6 +1306,19 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   }
   .reg-title {
     font-size: 30px;
+  }
+  .thank-title {
+    font-size: 32px;
+  }
+  .thank-subtitle {
+    font-size: 15px;
+  }
+  .thank-avatar-wrap {
+    width: 100px;
+    height: 100px;
+  }
+  .desktop-br {
+    display: none;
   }
   .form-cols {
     grid-template-columns: 1fr;
