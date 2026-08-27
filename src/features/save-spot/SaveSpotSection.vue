@@ -33,8 +33,14 @@
         <div class="image-col">
           <img
             :src="saveSpotBanner"
+            :srcset="`${saveSpotBannerSm} 680w, ${saveSpotBanner} 1000w`"
+            sizes="(max-width: 768px) 100vw, 600px"
             alt="ICT Week Uzbekistan Main Stage Conference"
             class="spot-image"
+            width="600"
+            height="336"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -44,7 +50,8 @@
 
 <script setup>
 import { useI18n } from '@/composables/useI18n'
-import saveSpotBanner from '@/assets/images/save-spot-banner.jpg'
+import saveSpotBanner from '@/assets/images/save-spot-banner.webp'
+import saveSpotBannerSm from '@/assets/images/save-spot-banner-sm.webp'
 
 const { t } = useI18n()
 
@@ -177,8 +184,13 @@ function scrollToRegister() {
 @media (max-width: 1024px) and (min-width: 768px) {
   .save-spot-card {
     flex-direction: column;
-    padding: 32px 30px;
-    gap: 24px;
+    padding: 28px 26px;
+    gap: 20px;
+  }
+  .image-col {
+    order: -1;
+    width: 100%;
+    height: 300px;
   }
   .headline-col {
     flex: none;
@@ -186,11 +198,7 @@ function scrollToRegister() {
     gap: 16px;
   }
   .section-title {
-    font-size: 36px;
-  }
-  .image-col {
-    width: 100%;
-    height: 280px;
+    font-size: 34px;
   }
 }
 

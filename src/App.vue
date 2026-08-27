@@ -11,23 +11,26 @@
       <!-- Hero Section -->
       <HeroSection />
 
-      <!-- Save Spot Section -->
-      <SaveSpotSection />
+      <!-- Below-the-fold content -->
+      <template v-if="showRest">
+        <!-- Save Spot Section -->
+        <SaveSpotSection />
 
-      <!-- Past Attendees -->
-      <PastAttendees />
+        <!-- Past Attendees -->
+        <PastAttendees />
 
-      <!-- Summit Tracks -->
-      <SummitTracks />
+        <!-- Summit Tracks -->
+        <SummitTracks />
 
-      <!-- Digital Startups Program & IT Park -->
-      <BentoFeatures />
+        <!-- Digital Startups Program & IT Park -->
+        <BentoFeatures />
 
-      <!-- Partners -->
-      <PartnersSection />
+        <!-- Partners -->
+        <PartnersSection />
 
-      <!-- Registration Form -->
-      <RegistrationSection @submitted="onRegistrationSubmitted" />
+        <!-- Registration Form -->
+        <RegistrationSection @submitted="onRegistrationSubmitted" />
+      </template>
     </main>
 
     <!-- Full-Page Thank You View -->
@@ -35,7 +38,7 @@
       <div class="thank-you-inner">
         <!-- 3D Avatar with checkmark -->
         <div class="thank-avatar-wrap">
-          <img src="@/assets/images/thank-you-avatar.png" alt="Success" class="thank-avatar-img" />
+          <img src="@/assets/images/thank-you-avatar.webp" alt="Success" class="thank-avatar-img" width="84" height="84" loading="lazy" decoding="async" />
         </div>
 
         <!-- Main Title -->
@@ -47,7 +50,7 @@
         </p>
 
         <!-- Back to Homepage Button -->
-        <button class="btn-back-home" @click="onBackHome" id="thank-back-home-btn">
+        <button class="btn-back-home" @click="onBackHome" id="thank-back-home-btn" aria-label="Back to Homepage">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
             <path d="M3 9.5L12 3L21 9.5V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.5Z" stroke="#84FFC1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M9 21V12H15V21" stroke="#84FFC1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -60,19 +63,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import HeroSection from '@/features/hero/HeroSection.vue'
-import SaveSpotSection from '@/features/save-spot/SaveSpotSection.vue'
-import PastAttendees from '@/features/attendees/PastAttendees.vue'
-import SummitTracks from '@/features/tracks/SummitTracks.vue'
-import BentoFeatures from '@/features/bento/BentoFeatures.vue'
-import PartnersSection from '@/features/partners/PartnersSection.vue'
-import RegistrationSection from '@/features/registration/RegistrationSection.vue'
+
+const SaveSpotSection = defineAsyncComponent(() => import('@/features/save-spot/SaveSpotSection.vue'))
+const PastAttendees = defineAsyncComponent(() => import('@/features/attendees/PastAttendees.vue'))
+const SummitTracks = defineAsyncComponent(() => import('@/features/tracks/SummitTracks.vue'))
+const BentoFeatures = defineAsyncComponent(() => import('@/features/bento/BentoFeatures.vue'))
+const PartnersSection = defineAsyncComponent(() => import('@/features/partners/PartnersSection.vue'))
+const RegistrationSection = defineAsyncComponent(() => import('@/features/registration/RegistrationSection.vue'))
 
 const { t } = useI18n()
 const isSubmitted = ref(false)
+const showRest = ref(false)
+
+onMounted(() => {
+  const loadRest = () => {
+    if (!showRest.value) {
+      showRest.value = true
+      window.removeEventListener('scroll', loadRest)
+      window.removeEventListener('touchstart', loadRest)
+      window.removeEventListener('mousemove', loadRest)
+    }
+  }
+
+  window.addEventListener('scroll', loadRest, { passive: true, once: true })
+  window.addEventListener('touchstart', loadRest, { passive: true, once: true })
+  window.addEventListener('mousemove', loadRest, { passive: true, once: true })
+
+  setTimeout(loadRest, 1200)
+})
 
 function onRegistrationSubmitted() {
   isSubmitted.value = true
@@ -100,7 +122,7 @@ function onBackHome() {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/images/full-page-bg.png');
+  background-image: url('@/assets/images/full-page-bg.webp');
   background-repeat: no-repeat;
   background-position: top center;
   background-size: 100% 100%;

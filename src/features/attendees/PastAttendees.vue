@@ -4,13 +4,14 @@
       <div class="attendees-card">
         <h2 class="section-title">{{ t('attendees.title') }}</h2>
 
-        <div class="logo-grid">
+        <!-- Desktop & Tablet Grid -->
+        <div class="logo-grid desktop-logo-grid">
 
           <!-- Row 1: 5 cards (Web Summit, Plug and Play, MIT, Google for Startups, AWS) -->
           <div class="logo-row row-5">
             <div class="logo-cell" v-for="logo in row1" :key="logo.name" :title="logo.name">
               <div class="logo-inner">
-                <img v-if="logo.src" :src="logo.src" :alt="logo.name" class="brand-logo-img" :style="logo.style" />
+                <img v-if="logo.src" :src="logo.src" :alt="logo.name" class="brand-logo-img" :style="logo.style" width="160" height="48" loading="lazy" decoding="async" />
                 <div v-else v-html="logo.svg" class="svg-wrap"></div>
               </div>
             </div>
@@ -20,7 +21,7 @@
           <div class="logo-row row-5">
             <div class="logo-cell" v-for="logo in row2" :key="logo.name" :title="logo.name">
               <div class="logo-inner">
-                <img v-if="logo.src" :src="logo.src" :alt="logo.name" class="brand-logo-img" :style="logo.style" />
+                <img v-if="logo.src" :src="logo.src" :alt="logo.name" class="brand-logo-img" :style="logo.style" width="160" height="48" loading="lazy" decoding="async" />
                 <div v-else v-html="logo.svg" class="svg-wrap"></div>
               </div>
             </div>
@@ -30,7 +31,7 @@
           <div class="logo-row row-5">
             <div class="logo-cell" v-for="logo in row3" :key="logo.name" :title="logo.name">
               <div class="logo-inner">
-                <img v-if="logo.src" :src="logo.src" :alt="logo.name" class="brand-logo-img" :style="logo.style" />
+                <img v-if="logo.src" :src="logo.src" :alt="logo.name" class="brand-logo-img" :style="logo.style" width="160" height="48" loading="lazy" decoding="async" />
                 <div v-else v-html="logo.svg" class="svg-wrap"></div>
               </div>
             </div>
@@ -40,12 +41,35 @@
           <div class="logo-row row-4">
             <div class="logo-cell wide" v-for="logo in row4" :key="logo.name" :title="logo.name">
               <div class="logo-inner">
-                <img v-if="logo.src" :src="logo.src" :alt="logo.name" class="brand-logo-img" :style="logo.style" />
+                <img v-if="logo.src" :src="logo.src" :alt="logo.name" class="brand-logo-img" :style="logo.style" width="160" height="48" loading="lazy" decoding="async" />
                 <div v-else v-html="logo.svg" class="svg-wrap"></div>
               </div>
             </div>
           </div>
 
+        </div>
+
+        <!-- Mobile Grid (Top 15 logos in 3 columns / 3-qator, Bottom 4 logos in 2 columns / 2-qator) -->
+        <div class="logo-grid mobile-logo-grid">
+          <!-- Top 15 logos in 3-columns grid -->
+          <div class="mobile-grid-3col">
+            <div class="logo-cell" v-for="logo in allFirst15" :key="logo.name" :title="logo.name">
+              <div class="logo-inner">
+                <img v-if="logo.src" :src="logo.src" :alt="logo.name" class="brand-logo-img" :style="logo.style" width="160" height="48" loading="lazy" decoding="async" />
+                <div v-else v-html="logo.svg" class="svg-wrap"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom 4 logos in 2-columns grid -->
+          <div class="mobile-grid-2col">
+            <div class="logo-cell" v-for="logo in row4" :key="logo.name" :title="logo.name">
+              <div class="logo-inner">
+                <img v-if="logo.src" :src="logo.src" :alt="logo.name" class="brand-logo-img" :style="logo.style" width="160" height="48" loading="lazy" decoding="async" />
+                <div v-else v-html="logo.svg" class="svg-wrap"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -54,25 +78,25 @@
 
 <script setup>
 import { useI18n } from '@/composables/useI18n'
-import websummitImg from '@/assets/attendee-logos/websummit.png'
-import plugandplayImg from '@/assets/attendee-logos/plugandplay.png'
-import mitImg from '@/assets/attendee-logos/mit.png'
-import googleImg from '@/assets/attendee-logos/google.png'
-import awsImg from '@/assets/attendee-logos/aws.png'
-import alchemistImg from '@/assets/attendee-logos/alchemist.png'
-import dealroomImg from '@/assets/attendee-logos/dealroom.png'
-import startupblinkImg from '@/assets/attendee-logos/startupblink.png'
-import dominoImg from '@/assets/attendee-logos/domino.png'
-import genomeImg from '@/assets/attendee-logos/genome.png'
-import accesaImg from '@/assets/attendee-logos/accesa.png'
-import sturgeonImg from '@/assets/attendee-logos/sturgeon.png'
-import salesforceImg from '@/assets/attendee-logos/salesforce.png'
-import eyImg from '@/assets/attendee-logos/ey.png'
-import globalawardsImg from '@/assets/attendee-logos/globalawards.png'
-import gbtpImg from '@/assets/attendee-logos/gbtp.png'
-import polyvalentImg from '@/assets/attendee-logos/polyvalent.png'
-import goldengateImg from '@/assets/attendee-logos/goldengate.png'
-import spscommerceImg from '@/assets/attendee-logos/spscommerce.png'
+import websummitImg from '@/assets/attendee-logos/websummit.webp'
+import plugandplayImg from '@/assets/attendee-logos/plugandplay.webp'
+import mitImg from '@/assets/attendee-logos/mit.webp'
+import googleImg from '@/assets/attendee-logos/google.webp'
+import awsImg from '@/assets/attendee-logos/aws.webp'
+import alchemistImg from '@/assets/attendee-logos/alchemist.webp'
+import dealroomImg from '@/assets/attendee-logos/dealroom.webp'
+import startupblinkImg from '@/assets/attendee-logos/startupblink.webp'
+import dominoImg from '@/assets/attendee-logos/domino.webp'
+import genomeImg from '@/assets/attendee-logos/genome.webp'
+import accesaImg from '@/assets/attendee-logos/accesa.webp'
+import sturgeonImg from '@/assets/attendee-logos/sturgeon.webp'
+import salesforceImg from '@/assets/attendee-logos/salesforce.webp'
+import eyImg from '@/assets/attendee-logos/ey.webp'
+import globalawardsImg from '@/assets/attendee-logos/globalawards.webp'
+import gbtpImg from '@/assets/attendee-logos/gbtp.webp'
+import polyvalentImg from '@/assets/attendee-logos/polyvalent.webp'
+import goldengateImg from '@/assets/attendee-logos/goldengate.webp'
+import spscommerceImg from '@/assets/attendee-logos/spscommerce.webp'
 
 const { t } = useI18n()
 
@@ -110,6 +134,9 @@ const row4 = [
   { name: 'Golden Gate Ventures', src: goldengateImg, style: { maxHeight: '54px', maxWidth: '90%' } },
   { name: 'SPS Commerce', src: spscommerceImg, style: { maxHeight: '48px', maxWidth: '90%' } },
 ]
+
+// All 15 logos combined for mobile 3-columns grid
+const allFirst15 = [...row1, ...row2, ...row3]
 </script>
 
 <style scoped>
@@ -153,6 +180,14 @@ const row4 = [
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.mobile-logo-grid {
+  display: none;
+}
+
+.desktop-logo-grid {
+  display: flex;
 }
 
 .logo-row.row-5 {
@@ -235,16 +270,16 @@ const row4 = [
     font-size: 34px;
   }
   .logo-row.row-5 {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
   }
   .logo-row.row-4 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
   }
   .logo-cell {
-    height: 104px;
-    padding: 12px 14px;
+    height: 84px;
+    padding: 10px 12px;
   }
 }
 
@@ -254,24 +289,49 @@ const row4 = [
   }
   .attendees-card {
     padding: 24px 16px;
-    gap: 20px;
+    gap: 18px;
     border-radius: 18px;
   }
   .section-title {
-    font-size: 26px;
+    font-size: 24px;
   }
-  .logo-grid {
-    gap: 10px;
+  .desktop-logo-grid {
+    display: none;
   }
-  .logo-row.row-5,
-  .logo-row.row-4 {
+  .mobile-logo-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+  .mobile-grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    width: 100%;
+  }
+  .mobile-grid-2col {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 6px;
+    width: 100%;
   }
   .logo-cell {
-    height: 82px;
-    padding: 10px;
-    border-radius: 10px;
+    height: 54px;
+    padding: 6px 8px;
+    border-radius: 8px;
+  }
+  .brand-logo-img {
+    max-height: 24px !important;
+    max-width: 82% !important;
+  }
+  .mobile-grid-2col .brand-logo-img {
+    max-height: 28px !important;
+    max-width: 82% !important;
+  }
+  .svg-wrap {
+    transform: scale(0.68);
+    transform-origin: center center;
   }
 }
 </style>

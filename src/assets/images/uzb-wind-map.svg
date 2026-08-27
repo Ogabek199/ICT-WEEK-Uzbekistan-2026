@@ -1,0 +1,23 @@
+<svg width="180" height="135" viewBox="0 0 180 135" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mapGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34C783"/>
+      <stop offset="100%" stop-color="#1B7A4E"/>
+    </linearGradient>
+    <filter id="mapGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#84FFC1" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Left Main Region (Karakalpakstan / Aral Sea area) in Bright Mint -->
+  <path d="M18 20L64 2L124 50L132 70L119 110L127 125L132 135L120 135L115 128L106 131L97 122L91 123L89 113L87 114L77 101L73 103L64 91L59 93L53 92L49 97L40 102L34 117L37 127L18 126V20Z" fill="#84FFC1" filter="url(#mapGlow)"/>
+
+  <!-- Aral Sea cut-out / island in North -->
+  <path d="M64 4C63 8 61 16 61 24C61 30 63 36 65 36C67 36 67 30 67 24C67 16 65 8 64 4Z" fill="#0C1B20" opacity="0.9"/>
+
+  <!-- Right Region (Navoi / Bukhara Wind Energy Zone) in Darker Emerald Gradient -->
+  <path d="M124 64C128 62 134 62 144 60C155 62 165 62 170 57L178 65C178 75 178 115 178 125C178 130 174 135 168 135H138C136 130 133 126 128 123L120 112L132 70L124 64Z" fill="url(#mapGreenGrad)"/>
+
+  <!-- South Connection Zone -->
+  <path d="M128 123L135 135H127L119 126L128 123Z" fill="#84FFC1" opacity="0.75"/>
+</svg>

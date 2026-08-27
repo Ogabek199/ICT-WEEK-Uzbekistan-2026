@@ -10,13 +10,14 @@
 
       <div class="hero-media-grid">
         <div class="video-showcase-card glass-panel" :class="{ 'is-video-playing': isPlaying }" @click="toggleInlineVideo">
+          <!-- Inline Video (only mounted on user interaction) -->
           <video
+            v-if="isPlaying"
             ref="inlineVideoRef"
             class="video-bg-media"
             playsinline
             loop
-            preload="auto"
-            :poster="posterUrl"
+            autoplay
             @play="isPlaying = true"
             @pause="isPlaying = false"
             @ended="isPlaying = false"
@@ -27,14 +28,18 @@
 
           <img 
             v-show="!isPlaying"
-            src="@/assets/images/hero-caex-balloon.png" 
+            src="/images/hero-caex-balloon.webp" 
+            srcset="/images/hero-caex-balloon-sm.webp 768w, /images/hero-caex-balloon.webp 1200w"
+            sizes="(max-width: 768px) 100vw, 700px"
             alt="CAEx Aerial View - ICT WEEK 2026" 
             class="video-bg-img"
+            width="640"
+            height="360"
             fetchpriority="high"
           />
           <div class="video-overlay" v-show="!isPlaying"></div>
           
-          <div class="play-btn-circle" :class="{ 'is-playing': isPlaying }" @click.stop="toggleInlineVideo">
+          <div class="play-btn-circle" :class="{ 'is-playing': isPlaying }" @click.stop="toggleInlineVideo" role="button" tabindex="0" aria-label="Play video">
             <div class="play-btn-inner">
               <svg v-if="!isPlaying" width="18" height="18" viewBox="0 0 24 24" fill="#030A12">
                 <polygon points="6 4 20 12 6 20 6 4"></polygon>
@@ -47,7 +52,7 @@
           </div>
 
           <div v-if="isPlaying" class="inline-video-bar" @click.stop>
-            <button class="video-ctrl-btn" @click="toggleMute" :title="isMuted ? 'Unmute' : 'Mute'">
+            <button class="video-ctrl-btn" @click="toggleMute" :title="isMuted ? 'Unmute' : 'Mute'" aria-label="Toggle audio">
               <svg v-if="!isMuted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                 <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -58,7 +63,7 @@
                 <line x1="17" y1="9" x2="23" y2="15"></line>
               </svg>
             </button>
-            <button class="video-ctrl-btn" @click="resetToPoster" title="Back to cover">
+            <button class="video-ctrl-btn" @click="resetToPoster" title="Back to cover" aria-label="Back to cover">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
                 <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -73,10 +78,15 @@
             <!-- Screen image -->
             <div class="screen-preview-wrapper">
               <img 
-                src="@/assets/images/hero-screen-thumb.png" 
+                src="/images/hero-screen-thumb-sm.webp" 
+                srcset="/images/hero-screen-thumb-sm.webp 720w, /images/hero-screen-thumb.webp 1200w"
+                sizes="(max-width: 768px) 100vw, 600px"
                 alt="ICTWEEK Stage Presentation" 
                 class="screen-thumb-img"
-                loading="eager"
+                width="640"
+                height="280"
+                loading="lazy"
+                decoding="async"
               />
             </div>
 
@@ -116,9 +126,13 @@
         <!-- Far Left: Medal Ribbon (150x150) -->
         <div class="medal-wrapper">
           <img 
-            src="@/assets/images/34d40235a885784b968f902082f60ccc6508a418.png" 
+            src="@/assets/images/34d40235a885784b968f902082f60ccc6508a418.webp" 
             alt="StartupBlink Country of the Year Medal" 
             class="medal-img"
+            width="150"
+            height="150"
+            loading="lazy"
+            decoding="async"
           />
         </div>
 
@@ -143,9 +157,13 @@
 
             <div class="dealroom-logo-box">
               <img 
-                src="@/assets/attendee-logos/dealroom.png" 
+                src="@/assets/attendee-logos/dealroom.webp" 
                 alt="dealroom.co" 
                 class="dealroom-logo-img" 
+                width="114"
+                height="28"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -155,6 +173,17 @@
             <div class="badge-year-top badge-startupblink">2026</div>
 
             <div class="card-inner-flex">
+              <!-- Mobile-only Medal on the left side of Card 2 matching Image 2 -->
+              <img 
+                src="@/assets/images/medal-sm.webp" 
+                alt="StartupBlink Country of the Year Medal" 
+                class="card-medal-mobile" 
+                width="80"
+                height="80"
+                loading="lazy"
+                decoding="async"
+              />
+
               <div class="stat-col stat-col-1">
                 <span class="stat-num">#1</span>
                 <span class="stat-label">{{ t('hero.stats.startupblinkGrowth') }}</span>
@@ -168,9 +197,13 @@
 
             <div class="startupblink-logo-box">
               <img 
-                src="@/assets/attendee-logos/startupblink.png" 
+                src="@/assets/attendee-logos/startupblink.webp" 
                 alt="StartupBlink" 
                 class="startupblink-logo-img" 
+                width="114"
+                height="28"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -201,9 +234,13 @@
               </div>
               <div class="brand-line">
                 <img 
-                  src="@/assets/attendee-logos/tbc-bank.png" 
+                  src="@/assets/attendee-logos/tbc-bank.webp" 
                   alt="TBC Bank" 
                   class="tbc-bank-logo-img" 
+                  width="95"
+                  height="24"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -216,10 +253,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 import CountdownTimer from './components/CountdownTimer.vue'
-import posterUrl from '@/assets/images/hero-caex-balloon.png'
 
 const { t } = useI18n()
 
@@ -228,25 +264,23 @@ const isPlaying = ref(false)
 const isMuted = ref(false)
 const inlineVideoRef = ref(null)
 
-const toggleInlineVideo = () => {
-  if (!inlineVideoRef.value) return
-  if (inlineVideoRef.value.paused) {
-    const playPromise = inlineVideoRef.value.play()
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        isPlaying.value = true
-      }).catch(() => {
+const toggleInlineVideo = async () => {
+  if (!isPlaying.value) {
+    isPlaying.value = true
+    await nextTick()
+    if (inlineVideoRef.value) {
+      inlineVideoRef.value.play().catch(() => {
         inlineVideoRef.value.muted = true
         isMuted.value = true
-        inlineVideoRef.value.play().then(() => {
-          isPlaying.value = true
-        }).catch(err => {
+        inlineVideoRef.value.play().catch(err => {
           console.warn('Video playback error:', err)
         })
       })
     }
   } else {
-    inlineVideoRef.value.pause()
+    if (inlineVideoRef.value) {
+      inlineVideoRef.value.pause()
+    }
     isPlaying.value = false
   }
 }
@@ -789,8 +823,9 @@ const resetToPoster = () => {
 /* Tablet (768px - 1024px) */
 @media (max-width: 1024px) and (min-width: 768px) {
   .hero-title {
-    font-size: 46px;
+    font-size: 44px;
     line-height: 1.15;
+    text-align: center;
   }
   .hero-heading-block {
     margin-bottom: 28px;
@@ -808,52 +843,60 @@ const resetToPoster = () => {
     gap: 20px;
   }
   .stats-valuation-bar {
-    flex-direction: column;
+    flex-direction: row;
     padding: 20px 24px;
     gap: 20px;
     align-items: center;
   }
   .medal-wrapper {
-    flex: 0 0 110px;
-    width: 110px;
-    height: 110px;
+    flex: 0 0 100px;
+    width: 100px;
+    height: 100px;
   }
   .medal-img {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
   }
   .stats-cards-row {
+    flex: 1;
     width: 100%;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: 14px;
+  }
+  .card-dealroom {
+    grid-column: 1 / -1;
   }
   .stat-num {
     font-size: 26px;
   }
   .stat-label {
-    font-size: 10.5px;
+    font-size: 11px;
   }
   .card-inner-flex {
-    left: 10px;
-    top: 10px;
-    gap: 8px;
+    left: 14px;
+    top: 14px;
+    gap: 12px;
   }
   .dealroom-logo-img {
-    width: 75px;
+    width: 85px;
   }
   .startupblink-logo-img {
-    width: 78px;
+    width: 85px;
   }
   .card-unicorns .unicorn-left-group {
-    left: 10px;
-    top: 10px;
+    left: 14px;
+    top: 14px;
   }
   .tbc-bank-logo-img {
-    width: 85px;
+    width: 90px;
   }
 }
 
-/* Mobile (< 768px) */
+.card-medal-mobile {
+  display: none;
+}
+
+/* Mobile (< 768px) - MATCHING IMAGE 2 EXACTLY */
 @media (max-width: 767px) {
   .hero-heading-block {
     margin-bottom: 20px;
@@ -899,36 +942,156 @@ const resetToPoster = () => {
     height: 44px;
     font-size: 13.5px;
   }
+
+  /* Key Stats Section on Mobile - 3 Separate Floating Cards matching Image 2 */
   .stats-valuation-bar {
-    flex-direction: column;
-    padding: 20px 14px;
-    gap: 16px;
-    border-radius: 18px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    box-shadow: none;
     margin-bottom: 24px;
+    width: 100%;
   }
   .medal-wrapper {
-    flex: 0 0 90px;
-    width: 90px;
-    height: 90px;
-  }
-  .medal-img {
-    width: 90px;
-    height: 90px;
+    display: none !important;
   }
   .stats-cards-row {
-    width: 100%;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 12px;
+    width: 100%;
   }
   .stat-neon-card {
-    height: 106px;
     width: 100%;
+    height: auto;
+    min-height: 104px;
+    background: rgba(13, 22, 30, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 16px 18px 14px 18px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+  }
+  .badge-year-top {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: auto;
+    height: auto;
+    padding: 3px 12px;
+    border-radius: 6px;
+    background: #73fbb3;
+    color: #041a12;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0;
+    z-index: 2;
   }
   .stat-num {
     font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
   }
   .stat-label {
     font-size: 11px;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 4px;
+  }
+
+  /* Card 1: Dealroom */
+  .card-dealroom .card-inner-flex {
+    position: static;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .card-dealroom .stat-col-1 {
+    max-width: 120px;
+  }
+  .card-dealroom .stat-col-2 {
+    max-width: 130px;
+  }
+  .dealroom-logo-box {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+  }
+  .dealroom-logo-img {
+    width: 82px;
+    height: auto;
+  }
+
+  /* Card 2: StartupBlink with Medal on Left */
+  .card-startupblink .card-inner-flex {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-medal-mobile {
+    display: block;
+    width: 44px;
+    height: 48px;
+    object-fit: contain;
+    flex-shrink: 0;
+    margin-right: 2px;
+  }
+  .card-startupblink .stat-col-1 {
+    max-width: 105px;
+  }
+  .card-startupblink .stat-col-2 {
+    max-width: 110px;
+  }
+  .startupblink-logo-box {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+  }
+  .startupblink-logo-img {
+    width: 82px;
+    height: auto;
+  }
+
+  /* Card 3: Unicorns with centered brands */
+  .card-unicorns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-unicorns .unicorn-left-group {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .unicorn-num-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .unicorn-head-svg {
+    width: 24px;
+    height: 25px;
+  }
+  .card-unicorns .brands-right-group {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    margin-left: auto;
+    margin-right: 48px;
+  }
+  .brand-line svg {
+    width: 78px;
+    height: auto;
+  }
+  .tbc-bank-logo-img {
+    width: 82px;
+    height: auto;
   }
 }
 
@@ -938,6 +1101,15 @@ const resetToPoster = () => {
   }
   .hero-info-ctas {
     flex-direction: column;
+  }
+  .card-dealroom .card-inner-flex {
+    gap: 14px;
+  }
+  .card-startupblink .card-inner-flex {
+    gap: 8px;
+  }
+  .card-unicorns .brands-right-group {
+    margin-right: 42px;
   }
 }
 </style>

@@ -34,7 +34,7 @@
             <!-- 2. Country (Row 1 Right on Desktop / Step 2 on Mobile) -->
             <div class="field-group field-country" :class="{ 'has-error': errors.country }">
               <label class="field-label">{{ t('form.country') }}</label>
-              <div class="select-wrap" @click="handleOpenCountry" :class="{ open: openDropdown === 'country', 'error-wrap': errors.country }" id="reg-country">
+              <div class="select-wrap" @click="toggleDropdown('country')" :class="{ open: openDropdown === 'country', 'error-wrap': errors.country }" id="reg-country">
                 <div class="select-display">
                   <span :class="{ placeholder: !form.country }">
                     {{ form.country || t('form.countryPlaceholder') || 'Select country...' }}
@@ -44,8 +44,8 @@
                   </svg>
                 </div>
 
-                <!-- Desktop Country Dropdown Menu -->
-                <div class="dropdown-menu country-menu desktop-only-dropdown" v-if="openDropdown === 'country'" @click.stop>
+                <!-- Country dropdown list -->
+                <div class="dropdown-menu country-menu" v-if="openDropdown === 'country'" @click.stop>
                   <div
                     class="dropdown-item"
                     v-for="c in countryList"
@@ -124,7 +124,7 @@
             <!-- 7. I am attending as (Row 4 Left on Desktop / Step 7 on Mobile) -->
             <div class="field-group field-category" :class="{ 'has-error': errors.category }">
               <label class="field-label">{{ t('form.category') }}</label>
-              <div class="select-wrap" @click="handleOpenCategory" :class="{ open: openDropdown === 'category', 'error-wrap': errors.category }" id="reg-category">
+              <div class="select-wrap" @click="toggleDropdown('category')" :class="{ open: openDropdown === 'category', 'error-wrap': errors.category }" id="reg-category">
                 <div class="select-display">
                   <span :class="{ placeholder: !form.category }">
                     {{ form.category || t('form.categoryPlaceholder') || 'Select category...' }}
@@ -134,8 +134,8 @@
                   </svg>
                 </div>
 
-                <!-- Desktop 2-column grid dropdown menu -->
-                <div class="dropdown-menu category-grid-menu desktop-only-dropdown" v-if="openDropdown === 'category'" @click.stop>
+                <!-- Category dropdown menu -->
+                <div class="dropdown-menu category-grid-menu" v-if="openDropdown === 'category'" @click.stop>
                   <div
                     class="radio-option-item"
                     v-for="cat in categoryList"
@@ -188,7 +188,7 @@
             <!-- 9. How did you hear about us? (Row 5 Left on Desktop / Step 9 on Mobile) -->
             <div class="field-group field-source">
               <label class="field-label">{{ t('form.source') }}</label>
-              <div class="select-wrap" @click="handleOpenSource" :class="{ open: openDropdown === 'source' }" id="reg-source">
+              <div class="select-wrap" @click="toggleDropdown('source')" :class="{ open: openDropdown === 'source' }" id="reg-source">
                 <div class="select-display">
                   <span :class="{ placeholder: !form.source }">
                     {{ form.source || t('form.sourcePlaceholder') || 'Select source...' }}
@@ -198,8 +198,8 @@
                   </svg>
                 </div>
 
-                <!-- Desktop Source radio list dropdown -->
-                <div class="dropdown-menu source-menu desktop-only-dropdown" v-if="openDropdown === 'source'" @click.stop>
+                <!-- Source radio list dropdown -->
+                <div class="dropdown-menu source-menu" v-if="openDropdown === 'source'" @click.stop>
                   <div
                     class="radio-option-item"
                     v-for="src in sourceList"
@@ -316,7 +316,7 @@
       <!-- Thank You State -->
       <div class="thank-you-view" v-if="submitted">
         <div class="thank-avatar-wrap">
-          <img src="@/assets/images/thank-you-avatar.png" alt="Success" class="thank-avatar-img" />
+          <img src="@/assets/images/thank-you-avatar.webp" alt="Success" class="thank-avatar-img" width="84" height="84" loading="lazy" decoding="async" />
         </div>
         <h1 class="thank-title">{{ t('thankYou.titleLine1') }}<br class="desktop-br" /> {{ t('thankYou.titleLine2') }}</h1>
         <p class="thank-subtitle">
@@ -424,101 +424,6 @@
             </div>
           </div>
 
-        </div>
-      </div>
-    </transition>
-
-    <!-- ========================================================================== -->
-    <!-- MOBILE BOTTOM SHEET MODAL FOR CATEGORY                                     -->
-    <!-- ========================================================================== -->
-    <transition name="sheet-anim">
-      <div class="mobile-sheet-backdrop" v-if="mobileCategoryModalOpen" @click="mobileCategoryModalOpen = false">
-        <div class="mobile-bottom-sheet" @click.stop>
-          <div class="sheet-drag-handle"></div>
-          <div class="sheet-header">
-            <h3 class="sheet-title">{{ t('form.category') }}</h3>
-            <p class="sheet-subtitle">Select your attendee category</p>
-          </div>
-          <div class="sheet-items-list">
-            <div
-              class="sheet-radio-row"
-              v-for="cat in categoryList"
-              :key="cat"
-              @click="selectCategoryMobile(cat)"
-              :class="{ selected: form.category === cat }"
-            >
-              <div class="sheet-radio-circle" :class="{ checked: form.category === cat }">
-                <div class="sheet-radio-dot" v-if="form.category === cat"></div>
-              </div>
-              <span class="sheet-row-label">{{ cat }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </transition>
-
-    <!-- ========================================================================== -->
-    <!-- MOBILE BOTTOM SHEET MODAL FOR SOURCE                                       -->
-    <!-- ========================================================================== -->
-    <transition name="sheet-anim">
-      <div class="mobile-sheet-backdrop" v-if="mobileSourceModalOpen" @click="mobileSourceModalOpen = false">
-        <div class="mobile-bottom-sheet" @click.stop>
-          <div class="sheet-drag-handle"></div>
-          <div class="sheet-header">
-            <h3 class="sheet-title">{{ t('form.source') }}</h3>
-            <p class="sheet-subtitle">How did you hear about ICTWEEK 2026?</p>
-          </div>
-          <div class="sheet-items-list">
-            <div
-              class="sheet-radio-row"
-              v-for="src in sourceList"
-              :key="src"
-              @click="selectSourceMobile(src)"
-              :class="{ selected: form.source === src }"
-            >
-              <div class="sheet-radio-circle" :class="{ checked: form.source === src }">
-                <div class="sheet-radio-dot" v-if="form.source === src"></div>
-              </div>
-              <span class="sheet-row-label">{{ src }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </transition>
-
-    <!-- ========================================================================== -->
-    <!-- MOBILE BOTTOM SHEET MODAL FOR COUNTRY                                      -->
-    <!-- ========================================================================== -->
-    <transition name="sheet-anim">
-      <div class="mobile-sheet-backdrop" v-if="mobileCountryModalOpen" @click="mobileCountryModalOpen = false">
-        <div class="mobile-bottom-sheet" @click.stop>
-          <div class="sheet-drag-handle"></div>
-          <div class="sheet-header">
-            <h3 class="sheet-title">{{ t('form.country') }}</h3>
-            <p class="sheet-subtitle">Select your country</p>
-          </div>
-          <div class="sheet-search-wrap">
-            <input
-              v-model="countrySearchQuery"
-              type="text"
-              placeholder="Search country..."
-              class="sheet-search-input"
-            />
-          </div>
-          <div class="sheet-items-list sheet-country-scroll">
-            <div
-              class="sheet-country-row"
-              v-for="c in filteredCountries"
-              :key="c"
-              @click="selectCountryMobile(c)"
-              :class="{ selected: form.country === c }"
-            >
-              <span class="sheet-row-label">{{ c }}</span>
-              <svg v-if="form.country === c" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8l4 4 6-6" stroke="#73fbb3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </div>
         </div>
       </div>
     </transition>
@@ -688,52 +593,9 @@ function closeMobileTracks() {
   mobileTracksSubpage.value = null
 }
 
-function handleOpenCategory() {
-  if (window.innerWidth < 768) {
-    mobileCategoryModalOpen.value = true
-  } else {
-    toggleDropdown('category')
-  }
-}
-
-function selectCategoryMobile(cat) {
-  form.category = cat
-  errors.category = ''
-  mobileCategoryModalOpen.value = false
-}
-
-function handleOpenSource() {
-  if (window.innerWidth < 768) {
-    mobileSourceModalOpen.value = true
-  } else {
-    toggleDropdown('source')
-  }
-}
-
-function selectSourceMobile(src) {
-  form.source = src
-  mobileSourceModalOpen.value = false
-}
-
-function handleOpenCountry() {
-  if (window.innerWidth < 768) {
-    countrySearchQuery.value = ''
-    mobileCountryModalOpen.value = true
-  } else {
-    toggleDropdown('country')
-  }
-}
-
-function selectCountryMobile(c) {
-  form.country = c
-  errors.country = ''
-  mobileCountryModalOpen.value = false
-}
-
 // Lock body scroll on modal open
-watch([mobileTracksModalOpen, mobileCategoryModalOpen, mobileSourceModalOpen, mobileCountryModalOpen], (vals) => {
-  const anyOpen = vals.some(v => v)
-  if (anyOpen) {
+watch(mobileTracksModalOpen, (isOpen) => {
+  if (isOpen) {
     document.body.style.overflow = 'hidden'
   } else {
     document.body.style.overflow = ''
@@ -1118,7 +980,7 @@ onUnmounted(() => {
 }
 
 .field-input::placeholder {
-  color: rgba(255, 255, 255, 0.40);
+  color: rgba(255, 255, 255, 0.70);
 }
 
 .field-input:focus {
@@ -1175,7 +1037,7 @@ onUnmounted(() => {
 }
 
 .select-display .placeholder {
-  color: rgba(255, 255, 255, 0.40);
+  color: rgba(255, 255, 255, 0.70);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1190,20 +1052,20 @@ onUnmounted(() => {
   transform: rotate(180deg);
 }
 
-/* Dropdown menus (desktop) */
+/* Dropdown menus (liquid glass effect) */
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
   right: 0;
-  background: #18222d;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.12) 0%, rgba(14, 22, 32, 0.38) 40%, rgba(8, 16, 24, 0.48) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
   padding: 8px;
   z-index: 600;
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.25);
   box-sizing: border-box;
 }
 
@@ -1607,21 +1469,40 @@ onUnmounted(() => {
    MOBILE RESPONSIVENESS (< 768px) - MATCHING USER SCREENSHOT IMAGE 1 & 2
    ========================================================================== */
 @media (max-width: 767px) {
+  .reg-section {
+    width: 100%;
+    background: #121B264D;
+    backdrop-filter: blur(43px);
+    -webkit-backdrop-filter: blur(43px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 36px 0 44px 0;
+  }
   .page-container {
     padding: 0 16px;
+    max-width: 100%;
   }
   .reg-card {
-    padding: 28px 16px 32px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
     gap: 20px;
-    border-radius: 18px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    box-sizing: border-box;
+    width: 100%;
   }
   .reg-title {
     font-size: 26px;
     line-height: 1.2;
+    text-align: center;
   }
   .reg-subtitle {
     font-size: 13.5px;
     line-height: 1.45;
+    text-align: center;
   }
   .form-cols {
     display: flex;
@@ -1653,16 +1534,36 @@ onUnmounted(() => {
   .field-input {
     height: 48px;
     font-size: 14px;
-    background: #1a232c;
+    background: #FFFFFF0D;
     border-radius: 8px;
-    border-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid #FFFFFF1A;
+    color: #FFFFFF;
   }
   .select-display {
     min-height: 48px;
     font-size: 14px;
-    background: #1a232c;
+    background: #FFFFFF0D;
     border-radius: 8px;
-    border-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid #FFFFFF1A;
+    color: #FFFFFF;
+  }
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-width: 100%;
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.14) 0%, rgba(14, 22, 32, 0.40) 40%, rgba(8, 16, 24, 0.50) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    z-index: 600;
+  }
+  .category-grid-menu {
+    min-width: 100%;
+    grid-template-columns: 1fr;
   }
   .form-bottom {
     flex-direction: column;
@@ -1701,14 +1602,14 @@ onUnmounted(() => {
 }
 
 /* ==========================================================================
-   MOBILE BOTTOM SHEET STYLES (Matching Image 2 exactly)
+   MOBILE BOTTOM SHEET STYLES (iOS Liquid Glass Effect)
    ========================================================================== */
 .mobile-sheet-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   z-index: 3000;
   display: flex;
   flex-direction: column;
@@ -1720,12 +1621,14 @@ onUnmounted(() => {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
-  background: #17202a;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 12px 18px 24px 18px;
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.14) 0%, rgba(14, 22, 32, 0.42) 35%, rgba(8, 16, 24, 0.55) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 14px 20px 28px 20px;
+  box-shadow: 0 -12px 50px rgba(0, 0, 0, 0.7), inset 0 1px 1.5px rgba(255, 255, 255, 0.25);
   max-height: 85vh;
   display: flex;
   flex-direction: column;
@@ -1734,11 +1637,11 @@ onUnmounted(() => {
 }
 
 .sheet-drag-handle {
-  width: 38px;
+  width: 44px;
   height: 4px;
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.25);
-  margin: 0 auto 16px auto;
+  margin: 0 auto 18px auto;
   flex-shrink: 0;
 }
 
@@ -1802,19 +1705,23 @@ onUnmounted(() => {
 .sheet-checkbox {
   width: 20px;
   height: 20px;
-  border-radius: 5px;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background: #FFFFFF;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   transition: all 0.15s ease;
-  background: transparent;
 }
 
 .sheet-checkbox.checked {
-  background: #1BDB86;
-  border-color: #1BDB86;
+  background: #52e396;
+}
+
+.sheet-checkbox.checked svg path {
+  stroke: #041a12;
+  stroke-width: 2.4;
 }
 
 .sheet-row-label {
@@ -1863,8 +1770,8 @@ onUnmounted(() => {
 
 .sheet-btn-confirm-main {
   width: 100%;
-  height: 48px;
-  border-radius: 10px;
+  height: 50px;
+  border-radius: 12px;
   background: #73fbb3;
   border: none;
   color: #041A12;
@@ -1890,27 +1797,27 @@ onUnmounted(() => {
 
 .sheet-btn-back {
   flex: 1;
-  height: 48px;
-  border-radius: 10px;
-  background: #1e2832;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  height: 50px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1.5px solid #52e396;
   color: #FFFFFF;
   font-family: 'Manrope', sans-serif;
-  font-size: 14.5px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .sheet-btn-confirm-sub {
   flex: 1;
-  height: 48px;
-  border-radius: 10px;
+  height: 50px;
+  border-radius: 12px;
   background: #73fbb3;
   border: none;
   color: #041A12;
   font-family: 'Manrope', sans-serif;
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.15s ease;

@@ -1,0 +1,27 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="techGrad" x1="0" y1="0" x2="0" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#84FFC1"/>
+    </linearGradient>
+  </defs>
+  <!-- Head of developer -->
+  <circle cx="10" cy="8.5" r="4.2" stroke="url(#techGrad)" stroke-width="2"/>
+  
+  <!-- Back & Arms -->
+  <path d="M7 16H12C14.2 16 16 17.8 16 20V23H13C10.8 23 9 21.2 9 19V16" stroke="url(#techGrad)" stroke-width="1.8" stroke-linejoin="round"/>
+  <path d="M16 20H21C22.1 20 23 20.9 23 22" stroke="url(#techGrad)" stroke-width="1.8" stroke-linecap="round"/>
+  
+  <!-- Legs -->
+  <path d="M12 23V31M15.5 23V31" stroke="url(#techGrad)" stroke-width="1.8" stroke-linecap="round"/>
+  
+  <!-- Chair Outline -->
+  <path d="M3 13L5.5 23H8M4.5 23L3 31" stroke="url(#techGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Desk Table -->
+  <path d="M14 20H33.5M30.5 20V31" stroke="url(#techGrad)" stroke-width="1.8" stroke-linecap="round"/>
+  
+  <!-- Vertical Monitor & Stand -->
+  <rect x="23.5" y="2" width="4.5" height="14" rx="1" stroke="url(#techGrad)" stroke-width="1.8"/>
+  <path d="M25.7 16V20" stroke="url(#techGrad)" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

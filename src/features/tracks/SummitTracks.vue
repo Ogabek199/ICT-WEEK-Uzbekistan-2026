@@ -64,12 +64,12 @@
             >
               <!-- Card Image on Top -->
               <div class="event-card-img-wrap" v-if="ev.image">
-                <img :src="ev.image" :alt="ev.title" class="event-card-img" loading="lazy" />
+                <img :src="ev.image" :alt="ev.title" class="event-card-img" width="360" height="220" loading="lazy" decoding="async" />
               </div>
 
               <!-- Card Content -->
               <div class="event-card-body">
-                <h4 class="event-card-title">{{ ev.title }}</h4>
+                <h3 class="event-card-title">{{ ev.title }}</h3>
 
                 <!-- Meta Row -->
                 <div class="event-card-meta">
@@ -130,11 +130,11 @@
           <div v-else :key="activeTab + '-single'" class="content-card">
             <!-- Left image with hover overlay -->
             <div class="single-image-wrap" :class="{ 'has-overlay': hasHoverOverlay }">
-              <img :src="activeTrackData.image" :alt="activeTrackData.title" class="single-track-img" />
+              <img :src="activeTrackData.image" :alt="activeTrackData.title" class="single-track-img" width="460" height="340" loading="lazy" decoding="async" />
               <!-- Hover Overlay -->
               <div v-if="hasHoverOverlay" class="event-card-hover-overlay">
                 <div class="hover-overlay-top">
-                  <h4 class="hover-overlay-title">{{ activeTrackData.cardTitle || activeTrackData.title }}</h4>
+                  <h3 class="hover-overlay-title">{{ activeTrackData.cardTitle || activeTrackData.title }}</h3>
                   <p class="hover-overlay-desc">{{ activeTrackData.cardSubtitle || activeTrackData.description }}</p>
                 </div>
                 <button class="hover-register-btn" @click="scrollToRegister">
@@ -180,23 +180,23 @@
 import { ref, computed } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 
-import enterpriseImg from '@/assets/images/ffadb69d87e61db3d1a80583155ff77a5538f32c.png'
-import serviceImg from '@/assets/images/2f2cf6a72bbf241d8deb2c1c03ca8bb140f8c6e5.png'
-import gamedevImg from '@/assets/images/863f8e03364a99d22061c9a9091478065d3e50fd.png'
-import aiImg from '@/assets/images/04c76006732b964d1725bead9842db8d9927fc37.png'
+import enterpriseImg from '@/assets/images/ffadb69d87e61db3d1a80583155ff77a5538f32c.webp'
+import serviceImg from '@/assets/images/2f2cf6a72bbf241d8deb2c1c03ca8bb140f8c6e5.webp'
+import gamedevImg from '@/assets/images/863f8e03364a99d22061c9a9091478065d3e50fd.webp'
+import aiImg from '@/assets/images/04c76006732b964d1725bead9842db8d9927fc37.webp'
 
 // Multi-card track images (matching Image 2)
-import trackStartupSummitImg from '@/assets/images/track-startup-summit.png'
-import trackStartupBlinkImg from '@/assets/images/track-startupblink-awards.png'
-import trackStartupWorldCupImg from '@/assets/images/track-startup-worldcup.png'
-import trackIgnyteImg from '@/assets/images/track-ignyte.png'
-import trackTaqdimotImg from '@/assets/images/track-taqdimot.png'
+import trackStartupSummitImg from '@/assets/images/track-startup-summit.webp'
+import trackStartupBlinkImg from '@/assets/images/track-startupblink-awards.webp'
+import trackStartupWorldCupImg from '@/assets/images/track-startup-worldcup.webp'
+import trackIgnyteImg from '@/assets/images/track-ignyte.webp'
+import trackTaqdimotImg from '@/assets/images/track-taqdimot.webp'
 
-import trackUzbekJapanImg from '@/assets/images/track-uzbek-japan.png'
-import trackOtsForumImg from '@/assets/images/track-ots-forum.png'
-import trackMiddleEastImg from '@/assets/images/track-middle-east.png'
-import trackSabriyaImg from '@/assets/images/track-sabriya.png'
-import trackAwsImg from '@/assets/images/track-aws.png'
+import trackUzbekJapanImg from '@/assets/images/track-uzbek-japan.webp'
+import trackOtsForumImg from '@/assets/images/track-ots-forum.webp'
+import trackMiddleEastImg from '@/assets/images/track-middle-east.webp'
+import trackSabriyaImg from '@/assets/images/track-sabriya.webp'
+import trackAwsImg from '@/assets/images/track-aws.webp'
 
 const { t } = useI18n()
 
@@ -908,73 +908,205 @@ function scrollToRegister() {
   }
 }
 
+/* ==========================================================================
+   MOBILE RESPONSIVENESS (< 768px) - MATCHING USER SCREENSHOT EXACTLY
+   ========================================================================== */
 @media (max-width: 767px) {
+  .summit-section {
+    width: 100%;
+    background: #121B264D;
+    backdrop-filter: blur(43px);
+    -webkit-backdrop-filter: blur(43px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 32px 0 36px 0;
+  }
   .page-container {
     padding: 0 16px;
+    max-width: 100%;
   }
   .summit-card {
-    padding: 24px 16px;
-    gap: 20px;
-    border-radius: 18px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    gap: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    box-sizing: border-box;
+    width: 100%;
   }
   .tab-bar {
+    display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding-bottom: 4px;
-    margin: 0 -8px;
-    padding-left: 8px;
-    padding-right: 8px;
+    gap: 8px;
+    padding-bottom: 2px;
+    margin: 0 -4px;
+    padding-left: 4px;
+    padding-right: 4px;
   }
   .tab-bar::-webkit-scrollbar {
     display: none;
   }
   .tab-btn {
-    font-size: 11.5px;
-    padding: 6px 14px;
-    height: 34px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0 18px;
+    height: 36px;
+    border-radius: 999px;
     flex-shrink: 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .tab-btn.active {
+    background: #84FFC1;
+    color: #041A12;
+    font-weight: 800;
+    border: none;
+  }
+  .tab-btn:not(.active) {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .title-block {
+    text-align: left;
+    margin: 16px 0 12px 0;
   }
   .summit-title {
     font-size: 24px;
-    line-height: 1.2;
+    font-weight: 800;
+    line-height: 1.18;
+    text-align: left;
+    color: #FFFFFF;
+    letter-spacing: -0.01em;
   }
   .meta-bar {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     height: auto;
-    gap: 8px;
-    padding: 12px 14px;
-    align-items: flex-start;
+    gap: 4px;
+    padding: 10px 10px;
+    background: rgba(14, 23, 31, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 14px;
   }
   .meta-item {
-    font-size: 13.5px;
+    font-size: 11px;
+    gap: 3px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    color: #FFFFFF;
+    letter-spacing: -0.2px;
+  }
+  .meta-icon {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
   }
   .meta-sep {
     display: none;
   }
   .content-card {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    display: flex;
     flex-direction: column;
-    padding: 16px;
-    gap: 16px;
-    border-radius: 16px;
+    gap: 0;
   }
   .single-image-wrap {
     flex: none;
     width: 100%;
-    height: 200px;
+    height: 210px;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .single-track-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+  }
+  .right-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
   .track-desc {
-    font-size: 14px;
+    font-size: 14.5px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #FFFFFF;
+    margin-bottom: 18px;
+  }
+  .bullets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .bullet-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .check-circle-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #73fbb3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
   }
   .bullet-text {
-    font-size: 13px;
+    font-size: 13.5px;
+    line-height: 1.48;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
   }
   .ideal-for-box {
-    padding: 10px 14px;
+    background: rgba(10, 24, 28, 0.6);
+    border: 1px solid rgba(132, 255, 193, 0.35);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 18px;
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .ideal-accent {
+    width: 2.5px;
+    background: #84FFC1;
+    border-radius: 2px;
+    flex-shrink: 0;
   }
   .ideal-text {
     font-size: 13px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+  }
+  .ideal-highlight {
+    color: #FFFFFF;
+    font-weight: 700;
   }
   .multi-events-grid {
     grid-template-columns: 1fr;

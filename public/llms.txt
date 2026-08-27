@@ -1,0 +1,12 @@
+# ICT WEEK Uzbekistan 2026
+
+> Central Asia's Premier Technology Summit and Exhibition in Tashkent, Uzbekistan.
+
+## Overview
+ICT WEEK Uzbekistan 2026 is the largest annual information and communications technology event in Central Asia, organized by IT Park Uzbekistan and the Ministry of Digital Technologies.
+
+## Quick Links
+- [Homepage](https://ictweek.uz/): Main event portal and overview
+- [Registration](https://ictweek.uz/#register): Free attendee and delegation registration
+- [Summit Tracks](https://ictweek.uz/#summit-tracks): Enterprise, Startup, IT Outsourcing, Global Bridge, GameGap, and AI Native summits
+- [Partners & Attendees](https://ictweek.uz/#partners): Global partners including AWS, StartupBlink, DIFC, and Pegasus Tech Ventures

@@ -32,7 +32,7 @@
       <!-- Right Actions on Desktop & Tablet: Language Dropdown + Register Now Button -->
       <div class="header-actions desktop-tablet-actions">
         <!-- Language selector dropdown -->
-        <div class="lang-selector" @click="toggleLang" id="lang-dropdown" role="combobox" :aria-expanded="langOpen">
+        <div class="lang-selector" @click="toggleLang" id="lang-dropdown" role="combobox" :aria-expanded="langOpen" aria-label="Select language" aria-haspopup="listbox">
           <div class="lang-current">
             <span>{{ currentLangLabel }}</span>
             <svg class="chevron" :class="{ open: langOpen }" width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -86,59 +86,63 @@
     </div>
 
     <!-- Mobile Slide-out Navigation Drawer Overlay -->
-    <transition name="drawer-fade">
-      <div class="mobile-drawer-overlay" v-if="mobileMenuOpen" @click="closeMobileMenu">
-        <div class="mobile-drawer-content" @click.stop>
-          <!-- Drawer Header -->
-          <div class="drawer-header">
-            <div class="drawer-logo">
-              <img
-                src="@/assets/images/ict-week-logo.svg"
-                alt="ICT WEEK 2026 | UZBEKISTAN"
-                class="drawer-logo-img"
-              />
-            </div>
-            <button class="drawer-close-btn" @click="closeMobileMenu" aria-label="Close menu">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M18 6L6 18M6 6L18 18" stroke="#83FFC1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-
-          <!-- Drawer Navigation Links -->
-          <nav class="drawer-nav">
-            <button
-              v-for="item in navItems"
-              :key="item.id"
-              class="drawer-nav-item"
-              :class="{ active: activeSection === item.id }"
-              @click="handleMobileNavClick(item.id)"
-            >
-              <span>{{ t(item.key) }}</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="drawer-arrow">
-                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </nav>
-
-          <!-- Drawer Language Selector -->
-          <div class="drawer-lang-section">
-            <span class="drawer-section-label">{{ t('form.language') || 'Language' }}</span>
-            <div class="drawer-lang-buttons">
-              <button
-                v-for="l in langs"
-                :key="l.code"
-                class="drawer-lang-btn"
-                :class="{ active: lang === l.code }"
-                @click="selectLang(l.code)"
-              >
-                {{ l.label }}
+    <Teleport to="body">
+      <transition name="drawer-fade">
+        <div class="mobile-drawer-overlay" v-if="mobileMenuOpen" @click="closeMobileMenu">
+          <div class="mobile-drawer-content" @click.stop>
+            <!-- Drawer Header -->
+            <div class="drawer-header">
+              <div class="drawer-logo">
+                <img
+                  src="@/assets/images/ict-week-logo.svg"
+                  alt="ICT WEEK 2026 | UZBEKISTAN"
+                  class="drawer-logo-img"
+                  width="60"
+                  height="38"
+                />
+              </div>
+              <button class="drawer-close-btn" @click="closeMobileMenu" aria-label="Close menu">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M18 6L6 18M6 6L18 18" stroke="#83FFC1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </button>
+            </div>
+
+            <!-- Drawer Navigation Links -->
+            <nav class="drawer-nav">
+              <button
+                v-for="item in navItems"
+                :key="item.id"
+                class="drawer-nav-item"
+                :class="{ active: activeSection === item.id }"
+                @click="handleMobileNavClick(item.id)"
+              >
+                <span>{{ t(item.key) }}</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="drawer-arrow">
+                  <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </nav>
+
+            <!-- Drawer Language Selector -->
+            <div class="drawer-lang-section">
+              <span class="drawer-section-label">{{ t('form.language') || 'Language' }}</span>
+              <div class="drawer-lang-buttons">
+                <button
+                  v-for="l in langs"
+                  :key="l.code"
+                  class="drawer-lang-btn"
+                  :class="{ active: lang === l.code }"
+                  @click="selectLang(l.code)"
+                >
+                  {{ l.label }}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </Teleport>
   </header>
 </template>
 
@@ -556,19 +560,42 @@ onUnmounted(() => {
 
 /* ==========================================================================
    MOBILE RESPONSIVENESS (< 768px)
-   - Hamburger menu ONLY on Mobile!
+   - Matching media_1787848111022.png exactly: Full-width glass header, Register pill, squircle hamburger
    ========================================================================== */
 @media (max-width: 767px) {
   .header-outer {
-    padding: 12px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 0;
+    background: #121B2666;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 1000;
+    pointer-events: auto;
   }
   .header-container {
-    width: calc(100% - 24px);
-    height: 60px;
-    padding: 6px 10px 6px 16px;
+    width: 100%;
+    max-width: 100%;
+    height: 64px;
+    margin: 0;
+    padding: 0 16px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .logo-img {
-    height: 30px;
+    height: 32px;
+    width: auto;
   }
   .header-nav {
     display: none;
@@ -582,32 +609,32 @@ onUnmounted(() => {
     gap: 10px;
   }
   .mobile-btn-register {
-    height: 38px;
-    padding: 0 20px;
+    height: 40px;
+    padding: 0 24px;
     border-radius: 999px;
-    background: #73fbb3;
+    background: #6ef6af;
     border: none;
-    color: #0d1e18;
+    color: #081d15;
     font-family: 'Manrope', sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    box-shadow: 0 2px 10px rgba(115, 251, 179, 0.3);
+    box-shadow: 0 2px 10px rgba(110, 246, 175, 0.25);
     transition: all 0.2s ease;
   }
   .mobile-btn-register:active {
     transform: scale(0.96);
-    background: #62efa4;
+    background: #5be09c;
   }
   .hamburger-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: #1b242e;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #17242e;
     border: 1px solid rgba(255, 255, 255, 0.08);
     display: flex;
     flex-direction: column;
@@ -616,30 +643,34 @@ onUnmounted(() => {
     gap: 4.5px;
     cursor: pointer;
     padding: 0;
+    pointer-events: auto;
+    touch-action: manipulation;
+    z-index: 10;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   }
   .hamburger-btn:active {
     transform: scale(0.95);
-    background: #25313e;
+    background: #22323e;
   }
   .hamburger-line {
-    width: 17px;
-    height: 2px;
+    width: 18px;
+    height: 2.2px;
     background: #FFFFFF;
     border-radius: 2px;
     transition: all 0.25s ease;
+    pointer-events: none;
   }
   .hamburger-btn.is-open .line-1 {
-    transform: translateY(6.5px) rotate(45deg);
-    background: #73fbb3;
+    transform: translateY(6.7px) rotate(45deg);
+    background: #6ef6af;
   }
   .hamburger-btn.is-open .line-2 {
     opacity: 0;
   }
   .hamburger-btn.is-open .line-3 {
-    transform: translateY(-6.5px) rotate(-45deg);
-    background: #73fbb3;
+    transform: translateY(-6.7px) rotate(-45deg);
+    background: #6ef6af;
   }
 }
 
@@ -652,7 +683,7 @@ onUnmounted(() => {
   background: rgba(3, 8, 14, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  z-index: 2000;
+  z-index: 99999;
   pointer-events: all;
   display: flex;
   flex-direction: column;

@@ -1,0 +1,25 @@
+<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="officeGrad" x1="0" y1="0" x2="0" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#84FFC1"/>
+    </linearGradient>
+  </defs>
+  <!-- High-rise Building Outline -->
+  <path d="M9 4V31M9 4H20C21.1 4 22 4.9 22 6V31M9 4H5C3.9 4 3 4.9 3 6V31M8 1.5H10.5M3 31H33" stroke="url(#officeGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Antenna -->
+  <path d="M9.5 1.5V4" stroke="url(#officeGrad)" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Windows Rows in Main Tower -->
+  <path d="M8 8H17M8 12H17M8 16H17M8 20H17M8 24H17" stroke="url(#officeGrad)" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Main Entrance -->
+  <path d="M12 31V27H16V31" stroke="url(#officeGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Adjacent Lower Building -->
+  <path d="M22 16H29C30.1 16 31 16.9 31 18V31" stroke="url(#officeGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Small Windows -->
+  <rect x="24.5" y="19" width="4.5" height="2" rx="0.5" stroke="url(#officeGrad)" stroke-width="1.5"/>
+  <rect x="24.5" y="23" width="4.5" height="2" rx="0.5" stroke="url(#officeGrad)" stroke-width="1.5"/>
+  <rect x="24.5" y="27" width="2" height="2" rx="0.5" stroke="url(#officeGrad)" stroke-width="1.5"/>
+  <!-- Side Bush/Tree Arcs -->
+  <path d="M0.5 31C0.5 28 2 26 4 26" stroke="url(#officeGrad)" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M32 31C32 28 33.5 26 35.5 26" stroke="url(#officeGrad)" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

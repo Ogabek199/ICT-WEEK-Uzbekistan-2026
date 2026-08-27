@@ -43,9 +43,13 @@
             <div class="partner-cell" title="Startup World Cup">
               <div class="partner-logo-inner">
                 <img
-                  src="@/assets/images/partner-startup-worldcup.png"
+                  src="@/assets/images/partner-startup-worldcup.webp"
                   alt="Startup World Cup"
                   class="partner-logo-img partner-swc-img"
+                  width="200"
+                  height="70"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -54,9 +58,13 @@
             <div class="partner-cell" title="DIFC Innovation Hub">
               <div class="partner-logo-inner">
                 <img
-                  src="@/assets/images/partner-difc.png"
+                  src="@/assets/images/partner-difc.webp"
                   alt="DIFC Innovation Hub"
                   class="partner-logo-img partner-difc-img"
+                  width="220"
+                  height="54"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -68,9 +76,13 @@
             <div class="partner-cell wide" title="Pegasus Tech Ventures">
               <div class="partner-logo-inner">
                 <img
-                  src="@/assets/images/partner-pegasus.png"
+                  src="@/assets/images/partner-pegasus.webp"
                   alt="Pegasus Tech Ventures"
                   class="partner-logo-img partner-pegasus-img"
+                  width="220"
+                  height="54"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -79,9 +91,13 @@
             <div class="partner-cell wide" title="JETRO">
               <div class="partner-logo-inner">
                 <img
-                  src="@/assets/images/partner-jetro.png"
+                  src="@/assets/images/partner-jetro.webp"
                   alt="JETRO"
                   class="partner-logo-img partner-jetro-img"
+                  width="200"
+                  height="68"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
@@ -289,19 +305,19 @@ const { t } = useI18n()
     font-size: 34px;
   }
   .partners-row.row-4 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
   }
   .partners-row.row-3 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
   }
   .partner-cell.wide:last-child {
-    grid-column: span 2;
+    grid-column: span 1;
   }
   .partner-cell {
-    height: 115px;
-    padding: 12px 18px;
+    height: 100px;
+    padding: 10px 14px;
   }
   .partner-swc-img {
     max-height: 70px;
