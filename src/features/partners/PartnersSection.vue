@@ -1,21 +1,9 @@
 <template>
-  <!--
-    Figma: Our Partners Section (130:21837)
-    Exact 1:1 Match with Figma Design:
-    - Title: "Our Partners"
-    - Row 1: 4 cards (AWS, StartupBlink, Startup World Cup, DIFC Innovation Hub)
-    - Row 2: 3 cards (Pegasus Tech Ventures, JETRO, IGNYTE)
-    - Card height: 140px, Radius: 12px
-    - Subtle 1px gradient border (#155B7F to #1BDB86)
-  -->
   <section id="partners" class="partners-section">
     <div class="page-container">
       <div class="partners-card">
-
-        <!-- Title: Centered bold "Our Partners" -->
         <h2 class="section-title">{{ t('partners.title') }}</h2>
 
-        <!-- Partner Logos Grid -->
         <div class="partners-grid">
           <!-- Row 1: 4 partner logo cards -->
           <div class="partners-row row-4">
@@ -51,7 +39,7 @@
               </div>
             </div>
 
-            <!-- 3. Startup World Cup (From Figma image 14383505) -->
+            <!-- 3. Startup World Cup -->
             <div class="partner-cell" title="Startup World Cup">
               <div class="partner-logo-inner">
                 <img
@@ -62,7 +50,7 @@
               </div>
             </div>
 
-            <!-- 4. DIFC Innovation Hub (From Figma image 14383508) -->
+            <!-- 4. DIFC Innovation Hub -->
             <div class="partner-cell" title="DIFC Innovation Hub">
               <div class="partner-logo-inner">
                 <img
@@ -74,9 +62,9 @@
             </div>
           </div>
 
-          <!-- Row 2: 3 partner logo cards (Wider) -->
+          <!-- Row 2: 3 partner logo cards -->
           <div class="partners-row row-3">
-            <!-- 5. Pegasus Tech Ventures (From Figma image 14383502) -->
+            <!-- 5. Pegasus Tech Ventures -->
             <div class="partner-cell wide" title="Pegasus Tech Ventures">
               <div class="partner-logo-inner">
                 <img
@@ -87,7 +75,7 @@
               </div>
             </div>
 
-            <!-- 6. JETRO (From Figma image 14383506) -->
+            <!-- 6. JETRO -->
             <div class="partner-cell wide" title="JETRO">
               <div class="partner-logo-inner">
                 <img
@@ -98,7 +86,7 @@
               </div>
             </div>
 
-            <!-- 7. IGNYTE (From Figma vector) -->
+            <!-- 7. IGNYTE -->
             <div class="partner-cell wide" title="IGNYTE">
               <div class="partner-logo-inner">
                 <div class="ignyte-logo">
@@ -137,10 +125,7 @@ const { t } = useI18n()
   padding: 0 24px;
 }
 
-/*
-  Figma: Our Partners Container Card
-  w=1280 radius=24 fill=rgba(14, 20, 27, 0.65) pad=48px gap=36px
-*/
+/* Our Partners Container Card */
 .partners-card {
   background: rgba(14, 20, 27, 0.65);
   border-radius: 24px;
@@ -155,7 +140,7 @@ const { t } = useI18n()
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Title: Manrope 40px w800 Centered #FFFFFF matching Figma */
+/* Title */
 .section-title {
   font-family: 'Manrope', sans-serif;
   font-size: 40px;
@@ -189,14 +174,7 @@ const { t } = useI18n()
   gap: 24px;
 }
 
-/*
-  Partner Card styling matching Figma Inspect:
-  - Width: Fill (268px in row 1, 368px in row 2)
-  - Height: Fixed (140px)
-  - Radius: 12px
-  - Border: 1px subtle Linear Gradient (#155B7F to #1BDB86 at 35% opacity)
-  - Padding: 12px 24px
-*/
+/* Partner Card */
 .partner-cell {
   height: 140px;
   border-radius: 12px;
@@ -229,7 +207,7 @@ const { t } = useI18n()
   height: 100%;
 }
 
-/* Image Logos from Figma with crisp pure white display */
+/* Image Logos */
 .partner-logo-img {
   display: block;
   width: auto;
@@ -299,9 +277,12 @@ const { t } = useI18n()
   transform: scale(1.05);
 }
 
-@media (max-width: 1024px) {
+/* ==========================================================================
+   Responsive Styling (Desktop >= 1025px completely preserved)
+   ========================================================================== */
+@media (max-width: 1024px) and (min-width: 768px) {
   .partners-card {
-    padding: 36px 28px 44px 28px;
+    padding: 36px 32px 44px 32px;
     gap: 28px;
   }
   .section-title {
@@ -319,78 +300,89 @@ const { t } = useI18n()
     grid-column: span 2;
   }
   .partner-cell {
-    height: 120px;
+    height: 115px;
     padding: 12px 18px;
   }
   .partner-swc-img {
-    max-height: 74px;
+    max-height: 70px;
   }
   .partner-difc-img {
-    max-height: 44px;
+    max-height: 42px;
   }
   .partner-pegasus-img {
-    max-height: 54px;
-  }
-  .partner-jetro-img {
     max-height: 50px;
   }
+  .partner-jetro-img {
+    max-height: 46px;
+  }
   .partner-svg-aws {
-    max-height: 60px;
-    width: 125px;
+    max-height: 56px;
+    width: 120px;
   }
   .partner-svg-sb {
-    max-height: 40px;
-    width: 185px;
+    max-height: 38px;
+    width: 175px;
   }
   .ignyte-logo {
     font-size: 24px;
-    gap: 18px;
+    gap: 16px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
+  .page-container {
+    padding: 0 16px;
+  }
   .partners-card {
-    padding: 28px 16px 36px 16px;
-    gap: 24px;
+    padding: 24px 16px 32px 16px;
+    gap: 20px;
     border-radius: 18px;
   }
   .section-title {
-    font-size: 28px;
+    font-size: 26px;
+  }
+  .partners-grid {
+    gap: 12px;
   }
   .partners-row.row-4,
   .partners-row.row-3 {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
   .partner-cell.wide:last-child {
-    grid-column: span 1;
+    grid-column: span 2;
   }
   .partner-cell {
-    height: 110px;
+    height: 84px;
+    padding: 8px 12px;
+    border-radius: 10px;
   }
   .partner-swc-img {
-    max-height: 66px;
+    max-height: 54px;
   }
   .partner-difc-img {
-    max-height: 38px;
+    max-height: 32px;
   }
   .partner-pegasus-img {
-    max-height: 46px;
+    max-height: 40px;
   }
   .partner-jetro-img {
-    max-height: 44px;
+    max-height: 38px;
   }
   .partner-svg-aws {
-    max-height: 52px;
-    width: 110px;
+    max-height: 42px;
+    width: 95px;
   }
   .partner-svg-sb {
-    max-height: 36px;
-    width: 165px;
+    max-height: 28px;
+    width: 130px;
+  }
+  .partner-svg-sb text {
+    font-size: 22px;
   }
   .ignyte-logo {
-    font-size: 22px;
-    gap: 14px;
+    font-size: 18px;
+    gap: 10px;
   }
 }
 </style>

@@ -1,5 +1,4 @@
 <template>
-  <!-- Floating Navbar matching Figma & user screenshot -->
   <header class="header-outer">
     <div class="header-container">
 
@@ -30,8 +29,8 @@
         </div>
       </nav>
 
-      <!-- Right Actions: Language Dropdown + Register Now Button -->
-      <div class="header-actions">
+      <!-- Right Actions on Desktop & Tablet: Language Dropdown + Register Now Button -->
+      <div class="header-actions desktop-tablet-actions">
         <!-- Language selector dropdown -->
         <div class="lang-selector" @click="toggleLang" id="lang-dropdown" role="combobox" :aria-expanded="langOpen">
           <div class="lang-current">
@@ -63,18 +62,95 @@
         </button>
       </div>
 
+      <!-- Mobile Right Actions: Register Button + Hamburger Toggle Button (Lang is inside drawer) -->
+      <div class="mobile-actions">
+        <!-- Mobile Register Button -->
+        <button class="mobile-btn-register" @click="scrollTo('register')" id="mobile-header-register-btn">
+          {{ t('nav.register') }}
+        </button>
+
+        <!-- Hamburger Toggle Button -->
+        <button
+          class="hamburger-btn"
+          :class="{ 'is-open': mobileMenuOpen }"
+          @click="toggleMobileMenu"
+          aria-label="Toggle navigation menu"
+          :aria-expanded="mobileMenuOpen"
+        >
+          <span class="hamburger-line line-1"></span>
+          <span class="hamburger-line line-2"></span>
+          <span class="hamburger-line line-3"></span>
+        </button>
+      </div>
+
     </div>
+
+    <!-- Mobile Slide-out Navigation Drawer Overlay -->
+    <transition name="drawer-fade">
+      <div class="mobile-drawer-overlay" v-if="mobileMenuOpen" @click="closeMobileMenu">
+        <div class="mobile-drawer-content" @click.stop>
+          <!-- Drawer Header -->
+          <div class="drawer-header">
+            <div class="drawer-logo">
+              <img
+                src="@/assets/images/ict-week-logo.svg"
+                alt="ICT WEEK 2026 | UZBEKISTAN"
+                class="drawer-logo-img"
+              />
+            </div>
+            <button class="drawer-close-btn" @click="closeMobileMenu" aria-label="Close menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M18 6L6 18M6 6L18 18" stroke="#83FFC1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Drawer Navigation Links -->
+          <nav class="drawer-nav">
+            <button
+              v-for="item in navItems"
+              :key="item.id"
+              class="drawer-nav-item"
+              :class="{ active: activeSection === item.id }"
+              @click="handleMobileNavClick(item.id)"
+            >
+              <span>{{ t(item.key) }}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="drawer-arrow">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </nav>
+
+          <!-- Drawer Language Selector -->
+          <div class="drawer-lang-section">
+            <span class="drawer-section-label">{{ t('form.language') || 'Language' }}</span>
+            <div class="drawer-lang-buttons">
+              <button
+                v-for="l in langs"
+                :key="l.code"
+                class="drawer-lang-btn"
+                :class="{ active: lang === l.code }"
+                @click="selectLang(l.code)"
+              >
+                {{ l.label }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
   </header>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 
 const { t, lang, setLanguage } = useI18n()
 
 const activeSection = ref('home')
 const langOpen = ref(false)
+const mobileMenuOpen = ref(false)
 
 const navItems = [
   { id: 'home', key: 'nav.home' },
@@ -94,6 +170,8 @@ const currentLangLabel = computed(() => {
   return found ? found.label : 'English'
 })
 
+const currentLangCodeUpper = computed(() => (lang.value || 'en').toUpperCase())
+
 function scrollTo(id) {
   const sectionMap = {
     home: 'home',
@@ -105,7 +183,8 @@ function scrollTo(id) {
   const targetId = sectionMap[id] || id
   const el = document.getElementById(targetId) || document.getElementById(id)
   if (el) {
-    const headerOffset = 105
+    const isMobile = window.innerWidth < 768
+    const headerOffset = isMobile ? 80 : 105
     const elementPosition = el.getBoundingClientRect().top
     const offsetPosition = elementPosition + window.pageYOffset - headerOffset
 
@@ -127,10 +206,35 @@ function selectLang(code) {
 }
 
 function closeLang(e) {
-  if (!e.target.closest('.lang-selector')) {
+  if (!e.target.closest('.lang-selector') && !e.target.closest('.mobile-lang-btn')) {
     langOpen.value = false
   }
 }
+
+function toggleMobileMenu() {
+  mobileMenuOpen.value = !mobileMenuOpen.value
+  langOpen.value = false
+}
+
+function closeMobileMenu() {
+  mobileMenuOpen.value = false
+}
+
+function handleMobileNavClick(id) {
+  closeMobileMenu()
+  setTimeout(() => {
+    scrollTo(id)
+  }, 100)
+}
+
+// Lock body scroll when mobile menu is open
+watch(mobileMenuOpen, (isOpen) => {
+  if (isOpen) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+})
 
 function handleScroll() {
   const scrollY = window.pageYOffset || document.documentElement.scrollTop
@@ -172,6 +276,7 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener('click', closeLang)
   window.removeEventListener('scroll', handleScroll)
+  document.body.style.overflow = ''
 })
 </script>
 
@@ -409,11 +514,297 @@ onUnmounted(() => {
   transform: translateY(0);
 }
 
-@media (max-width: 900px) {
-  .header-nav { display: none; }
+/* Mobile Actions & Hamburger (Hidden by default on Desktop & Tablet) */
+.mobile-actions {
+  display: none;
+}
+
+/* ==========================================================================
+   TABLET RESPONSIVENESS (768px - 1024px)
+   - Hamburger menu is NOT used on tablet.
+   - Fits full navbar with compact padding and font sizes.
+   ========================================================================== */
+@media (max-width: 1040px) and (min-width: 768px) {
   .header-container {
-    height: 68px;
-    padding: 8px 12px 8px 20px;
+    width: 96%;
+    max-width: 96%;
+    height: 70px;
+    padding: 8px 12px 8px 18px;
+    gap: 12px;
   }
+  .logo-img {
+    height: 32px;
+  }
+  .nav-item {
+    font-size: 13.5px;
+    padding: 8px 14px;
+    line-height: 18px;
+  }
+  .lang-selector {
+    height: 44px;
+    padding: 0 14px;
+  }
+  .lang-current {
+    font-size: 13.5px;
+  }
+  .btn-register {
+    height: 44px;
+    padding: 0 18px;
+    font-size: 13.5px;
+  }
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS (< 768px)
+   - Hamburger menu ONLY on Mobile!
+   ========================================================================== */
+@media (max-width: 767px) {
+  .header-outer {
+    padding: 12px 0;
+  }
+  .header-container {
+    width: calc(100% - 24px);
+    height: 60px;
+    padding: 6px 10px 6px 16px;
+  }
+  .logo-img {
+    height: 30px;
+  }
+  .header-nav {
+    display: none;
+  }
+  .desktop-tablet-actions {
+    display: none;
+  }
+  .mobile-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mobile-btn-register {
+    height: 38px;
+    padding: 0 20px;
+    border-radius: 999px;
+    background: #73fbb3;
+    border: none;
+    color: #0d1e18;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    box-shadow: 0 2px 10px rgba(115, 251, 179, 0.3);
+    transition: all 0.2s ease;
+  }
+  .mobile-btn-register:active {
+    transform: scale(0.96);
+    background: #62efa4;
+  }
+  .hamburger-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #1b242e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4.5px;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+  .hamburger-btn:active {
+    transform: scale(0.95);
+    background: #25313e;
+  }
+  .hamburger-line {
+    width: 17px;
+    height: 2px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+  }
+  .hamburger-btn.is-open .line-1 {
+    transform: translateY(6.5px) rotate(45deg);
+    background: #73fbb3;
+  }
+  .hamburger-btn.is-open .line-2 {
+    opacity: 0;
+  }
+  .hamburger-btn.is-open .line-3 {
+    transform: translateY(-6.5px) rotate(-45deg);
+    background: #73fbb3;
+  }
+}
+
+/* ==========================================================================
+   MOBILE DRAWER OVERLAY
+   ========================================================================== */
+.mobile-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 8, 14, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 2000;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 16px;
+  animation: fadeInDrawer 0.25s ease-out;
+}
+
+.mobile-drawer-content {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  background: 
+    radial-gradient(80% 60% at 50% 0%, rgba(21, 91, 127, 0.25) 0%, rgba(0, 0, 0, 0) 100%),
+    linear-gradient(180deg, rgba(8, 16, 24, 0.98) 0%, rgba(4, 10, 16, 0.98) 100%);
+  border: 1px solid rgba(132, 255, 193, 0.2);
+  border-radius: 24px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawer-logo-img {
+  height: 32px;
+  width: auto;
+}
+
+.drawer-close-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.drawer-close-btn:active {
+  background: rgba(132, 255, 193, 0.15);
+  transform: scale(0.95);
+}
+
+.drawer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drawer-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.drawer-nav-item.active {
+  background: rgba(132, 255, 193, 0.1);
+  border-color: rgba(132, 255, 193, 0.35);
+  color: #83FFC1;
+}
+
+.drawer-nav-item:active {
+  background: rgba(132, 255, 193, 0.15);
+}
+
+.drawer-arrow {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.drawer-nav-item.active .drawer-arrow {
+  color: #83FFC1;
+}
+
+.drawer-lang-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.drawer-section-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.drawer-lang-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.drawer-lang-btn {
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.75);
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.drawer-lang-btn.active {
+  background: rgba(132, 255, 193, 0.12);
+  border-color: #83FFC1;
+  color: #83FFC1;
+  font-weight: 700;
+}
+
+.drawer-fade-enter-active,
+.drawer-fade-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.drawer-fade-enter-from,
+.drawer-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+@keyframes fadeInDrawer {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>

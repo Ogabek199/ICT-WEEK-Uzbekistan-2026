@@ -171,18 +171,61 @@ function scrollToRegister() {
   transform: scale(1.02);
 }
 
-@media (max-width: 1024px) {
+/* ==========================================================================
+   Responsive Styling (Desktop >= 1025px preserved completely)
+   ========================================================================== */
+@media (max-width: 1024px) and (min-width: 768px) {
   .save-spot-card {
     flex-direction: column;
-    padding: 28px 24px;
+    padding: 32px 30px;
+    gap: 24px;
   }
   .headline-col {
     flex: none;
     max-width: 100%;
+    gap: 16px;
+  }
+  .section-title {
+    font-size: 36px;
   }
   .image-col {
     width: 100%;
-    height: 260px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-container {
+    padding: 0 16px;
+  }
+  .save-spot-card {
+    flex-direction: column;
+    padding: 24px 18px;
+    gap: 20px;
+    border-radius: 18px;
+  }
+  .headline-col {
+    flex: none;
+    max-width: 100%;
+    gap: 14px;
+  }
+  .section-title {
+    font-size: 28px;
+  }
+  .text-paragraph {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .btn-register-spot {
+    width: 100%;
+    justify-content: center;
+    height: 48px;
+    font-size: 15px;
+  }
+  .image-col {
+    width: 100%;
+    height: 200px;
+    border-radius: 14px;
   }
 }
 </style>

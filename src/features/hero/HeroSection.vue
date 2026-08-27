@@ -1,7 +1,6 @@
 <template>
   <section id="home" class="hero-section">
     <div class="page-container">
-      <!-- Main Centered Heading matching Figma -->
       <div class="hero-heading-block">
         <h1 class="hero-title">
           {{ t('hero.titleLine1') }} <br />
@@ -9,11 +8,8 @@
         </h1>
       </div>
 
-      <!-- Hero Two-Column Layout -->
       <div class="hero-media-grid">
-        <!-- Left: CAEx Aerial Video Showcase Card with Balloon -->
         <div class="video-showcase-card glass-panel" :class="{ 'is-video-playing': isPlaying }" @click="toggleInlineVideo">
-          <!-- Inline Video Element -->
           <video
             ref="inlineVideoRef"
             class="video-bg-media"
@@ -29,7 +25,6 @@
             <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
           </video>
 
-          <!-- Poster Image shown when video is not playing -->
           <img 
             v-show="!isPlaying"
             src="@/assets/images/hero-caex-balloon.png" 
@@ -39,7 +34,6 @@
           />
           <div class="video-overlay" v-show="!isPlaying"></div>
           
-          <!-- Circular Play/Pause Button matching Figma -->
           <div class="play-btn-circle" :class="{ 'is-playing': isPlaying }" @click.stop="toggleInlineVideo">
             <div class="play-btn-inner">
               <svg v-if="!isPlaying" width="18" height="18" viewBox="0 0 24 24" fill="#030A12">
@@ -52,7 +46,6 @@
             </div>
           </div>
 
-          <!-- Controls Bar when playing -->
           <div v-if="isPlaying" class="inline-video-bar" @click.stop>
             <button class="video-ctrl-btn" @click="toggleMute" :title="isMuted ? 'Unmute' : 'Mute'">
               <svg v-if="!isMuted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -118,7 +111,7 @@
         </div>
       </div>
 
-      <!-- Key Stats / Ecosystem Valuation Bar (Exact 1:1 Figma 259:3733) -->
+      <!-- Key Stats / Ecosystem Valuation Bar -->
       <div class="stats-valuation-bar">
         <!-- Far Left: Medal Ribbon (150x150) -->
         <div class="medal-wrapper">
@@ -278,7 +271,7 @@ const resetToPoster = () => {
   padding: 0;
 }
 
-/* Centered Title matching Figma */
+/* Centered Title */
 .hero-heading-block {
   text-align: center;
   margin-bottom: 36px;
@@ -346,7 +339,7 @@ const resetToPoster = () => {
   z-index: 3;
 }
 
-/* Play Button matching exact Figma Inspector: media_1787844669175.png */
+/* Circular Play Button */
 .play-btn-circle {
   position: absolute;
   top: 50%;
@@ -558,7 +551,7 @@ const resetToPoster = () => {
 }
 
 /* ==========================================================================
-   Key Stats / Ecosystem Valuation Bar (Exact 1:1 Figma & Reference)
+   Key Stats / Ecosystem Valuation Bar
    ========================================================================== */
 .stats-valuation-bar {
   display: flex;
@@ -600,7 +593,7 @@ const resetToPoster = () => {
   align-items: center;
 }
 
-/* Neon Green Bordered Card matching Figma */
+/* Neon Green Bordered Card */
 .stat-neon-card {
   position: relative;
   height: 112px;
@@ -779,39 +772,172 @@ const resetToPoster = () => {
   display: block;
 }
 
-/* Media Queries */
-@media (max-width: 1240px) {
+/* ==========================================================================
+   Media Queries & Responsive Styling (Preserves Desktop >= 1025px completely)
+   ========================================================================== */
+@media (max-width: 1240px) and (min-width: 1025px) {
   .stats-valuation-bar {
     padding: 16px 20px;
-    gap: 20px;
-  }
-  .stats-cards-row {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 16px;
   }
-  .stat-neon-card {
-    width: 100%;
+  .stats-cards-row {
+    grid-template-columns: 1.2fr 1fr 0.85fr;
+    gap: 14px;
   }
 }
 
-@media (max-width: 1100px) {
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .hero-title {
+    font-size: 46px;
+    line-height: 1.15;
+  }
+  .hero-heading-block {
+    margin-bottom: 28px;
+  }
   .hero-media-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
-}
-
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 40px;
+  .video-showcase-card {
+    height: 380px;
+  }
+  .hero-info-card {
+    height: auto;
+    padding: 24px;
+    gap: 20px;
   }
   .stats-valuation-bar {
     flex-direction: column;
-    padding: 20px 16px;
+    padding: 20px 24px;
+    gap: 20px;
+    align-items: center;
+  }
+  .medal-wrapper {
+    flex: 0 0 110px;
+    width: 110px;
+    height: 110px;
+  }
+  .medal-img {
+    width: 110px;
+    height: 110px;
+  }
+  .stats-cards-row {
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .stat-num {
+    font-size: 26px;
+  }
+  .stat-label {
+    font-size: 10.5px;
+  }
+  .card-inner-flex {
+    left: 10px;
+    top: 10px;
+    gap: 8px;
+  }
+  .dealroom-logo-img {
+    width: 75px;
+  }
+  .startupblink-logo-img {
+    width: 78px;
+  }
+  .card-unicorns .unicorn-left-group {
+    left: 10px;
+    top: 10px;
+  }
+  .tbc-bank-logo-img {
+    width: 85px;
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .hero-heading-block {
+    margin-bottom: 20px;
+  }
+  .hero-title {
+    font-size: 32px;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
+  .hero-media-grid {
+    grid-template-columns: 1fr;
     gap: 16px;
+    margin-bottom: 20px;
+  }
+  .video-showcase-card {
+    height: 230px;
+    border-radius: 16px;
+  }
+  .play-btn-circle {
+    width: 58px;
+    height: 58px;
+  }
+  .play-btn-inner {
+    width: 34px;
+    height: 34px;
+  }
+  .hero-info-card {
+    height: auto;
+    border-radius: 16px;
+    padding: 16px;
+    gap: 16px;
+  }
+  .hero-info-desc {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+  .hero-info-ctas {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .hero-main-btn,
+  .hero-agenda-btn {
+    height: 44px;
+    font-size: 13.5px;
+  }
+  .stats-valuation-bar {
+    flex-direction: column;
+    padding: 20px 14px;
+    gap: 16px;
+    border-radius: 18px;
+    margin-bottom: 24px;
+  }
+  .medal-wrapper {
+    flex: 0 0 90px;
+    width: 90px;
+    height: 90px;
+  }
+  .medal-img {
+    width: 90px;
+    height: 90px;
   }
   .stats-cards-row {
     width: 100%;
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .stat-neon-card {
+    height: 106px;
+    width: 100%;
+  }
+  .stat-num {
+    font-size: 26px;
+  }
+  .stat-label {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-title {
+    font-size: 28px;
+  }
+  .hero-info-ctas {
+    flex-direction: column;
   }
 }
 </style>

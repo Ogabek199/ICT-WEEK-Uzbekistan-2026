@@ -1,11 +1,4 @@
 <template>
-  <!--
-    Figma: Registration Section (214:77)
-    - Left Column: Full name, Email, Company, I am attending as (2-col radio), How did you hear about us? (radio)
-    - Right Column: Country (select), Phone number, Position,
-      Event track(s) you plan to attend (clean multi-select without subpages),
-      Name of focal point in IT Park (if available) (SELECT DROPDOWN WITH SUBPAGES matching user screenshot!)
-  -->
   <section id="register" class="registration-section">
     <div class="page-container">
       <div class="reg-card" v-if="!submitted">
@@ -19,275 +12,277 @@
         <!-- Form -->
         <form @submit.prevent="handleSubmit" class="reg-form">
 
-          <!-- 2 Columns Grid -->
+          <!-- Form Fields Grid -->
           <div class="form-cols">
 
-            <!-- LEFT COLUMN -->
-            <div class="form-col">
-
-              <!-- Full name -->
-              <div class="field-group" :class="{ 'has-error': errors.name }">
-                <label class="field-label" for="reg-fullname">{{ t('form.fullName') }}</label>
-                <div class="input-wrap" :class="{ 'error-wrap': errors.name }">
-                  <input
-                    v-model="form.name"
-                    @input="formatName"
-                    @blur="validateField('name')"
-                    type="text"
-                    :placeholder="t('form.fullNamePlaceholder')"
-                    class="field-input"
-                    id="reg-fullname"
-                  />
-                </div>
+            <!-- 1. Full name -->
+            <div class="field-group field-name" :class="{ 'has-error': errors.name }">
+              <label class="field-label" for="reg-fullname">{{ t('form.fullName') }}</label>
+              <div class="input-wrap" :class="{ 'error-wrap': errors.name }">
+                <input
+                  v-model="form.name"
+                  @input="formatName"
+                  @blur="validateField('name')"
+                  type="text"
+                  :placeholder="t('form.fullNamePlaceholder') || 'e.g. John Doe'"
+                  class="field-input"
+                  id="reg-fullname"
+                />
               </div>
-
-              <!-- Email -->
-              <div class="field-group" :class="{ 'has-error': errors.email }">
-                <label class="field-label" for="reg-email">{{ t('form.email') }}</label>
-                <div class="input-wrap" :class="{ 'error-wrap': errors.email }">
-                  <input
-                    v-model="form.email"
-                    @input="errors.email = ''"
-                    @blur="validateField('email')"
-                    type="email"
-                    :placeholder="t('form.emailPlaceholder')"
-                    class="field-input"
-                    id="reg-email"
-                  />
-                </div>
-              </div>
-
-              <!-- Company -->
-              <div class="field-group" :class="{ 'has-error': errors.company }">
-                <label class="field-label" for="reg-company">{{ t('form.company') }}</label>
-                <div class="input-wrap" :class="{ 'error-wrap': errors.company }">
-                  <input
-                    v-model="form.company"
-                    @input="errors.company = ''"
-                    @blur="validateField('company')"
-                    type="text"
-                    :placeholder="t('form.companyPlaceholder')"
-                    class="field-input"
-                    id="reg-company"
-                  />
-                </div>
-              </div>
-
-              <!-- I am attending as (2-col radio dropdown matching Image 2) -->
-              <div class="field-group" :class="{ 'has-error': errors.category }">
-                <label class="field-label">{{ t('form.category') }}</label>
-                <div class="select-wrap" @click="toggleDropdown('category')" :class="{ open: openDropdown === 'category', 'error-wrap': errors.category }" id="reg-category">
-                  <div class="select-display">
-                    <span :class="{ placeholder: !form.category }">
-                      {{ form.category || t('form.categoryPlaceholder') }}
-                    </span>
-                    <svg class="chevron" :class="{ open: openDropdown === 'category' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
-                      <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-
-                  <!-- 2-column grid dropdown menu matching Image 2 -->
-                  <div class="dropdown-menu category-grid-menu" v-if="openDropdown === 'category'" @click.stop>
-                    <div
-                      class="radio-option-item"
-                      v-for="cat in categoryList"
-                      :key="cat"
-                      @click="selectCategory(cat)"
-                      :class="{ selected: form.category === cat }"
-                    >
-                      <div class="radio-circle" :class="{ checked: form.category === cat }">
-                        <div class="radio-dot" v-if="form.category === cat"></div>
-                      </div>
-                      <span class="option-text">{{ cat }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- How did you hear about us? (Radio dropdown matching Image 1) -->
-              <div class="field-group">
-                <label class="field-label">{{ t('form.source') }}</label>
-                <div class="select-wrap" @click="toggleDropdown('source')" :class="{ open: openDropdown === 'source' }" id="reg-source">
-                  <div class="select-display">
-                    <span :class="{ placeholder: !form.source }">
-                      {{ form.source || t('form.sourcePlaceholder') }}
-                    </span>
-                    <svg class="chevron" :class="{ open: openDropdown === 'source' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
-                      <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-
-                  <!-- Source radio list dropdown matching Image 1 -->
-                  <div class="dropdown-menu source-menu" v-if="openDropdown === 'source'" @click.stop>
-                    <div
-                      class="radio-option-item"
-                      v-for="src in sourceList"
-                      :key="src"
-                      @click="selectSource(src)"
-                      :class="{ selected: form.source === src }"
-                    >
-                      <div class="radio-circle" :class="{ checked: form.source === src }">
-                        <div class="radio-dot" v-if="form.source === src"></div>
-                      </div>
-                      <span class="option-text">{{ src }}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
             </div>
 
-            <!-- RIGHT COLUMN -->
-            <div class="form-col">
+            <!-- 2. Country (Row 1 Right on Desktop / Step 2 on Mobile) -->
+            <div class="field-group field-country" :class="{ 'has-error': errors.country }">
+              <label class="field-label">{{ t('form.country') }}</label>
+              <div class="select-wrap" @click="handleOpenCountry" :class="{ open: openDropdown === 'country', 'error-wrap': errors.country }" id="reg-country">
+                <div class="select-display">
+                  <span :class="{ placeholder: !form.country }">
+                    {{ form.country || t('form.countryPlaceholder') || 'Select country...' }}
+                  </span>
+                  <svg class="chevron" :class="{ open: openDropdown === 'country' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
 
-              <!-- Country (Dropdown) -->
-              <div class="field-group" :class="{ 'has-error': errors.country }">
-                <label class="field-label">{{ t('form.country') }}</label>
-                <div class="select-wrap" @click="toggleDropdown('country')" :class="{ open: openDropdown === 'country', 'error-wrap': errors.country }" id="reg-country">
-                  <div class="select-display">
-                    <span :class="{ placeholder: !form.country }">
-                      {{ form.country || t('form.countryPlaceholder') }}
-                    </span>
-                    <svg class="chevron" :class="{ open: openDropdown === 'country' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
-                      <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                <!-- Desktop Country Dropdown Menu -->
+                <div class="dropdown-menu country-menu desktop-only-dropdown" v-if="openDropdown === 'country'" @click.stop>
+                  <div
+                    class="dropdown-item"
+                    v-for="c in countryList"
+                    :key="c"
+                    @click="selectCountry(c)"
+                    :class="{ selected: form.country === c }"
+                  >
+                    <span>{{ c }}</span>
                   </div>
+                </div>
+              </div>
+            </div>
 
-                  <!-- Country List Menu -->
-                  <div class="dropdown-menu country-menu" v-if="openDropdown === 'country'" @click.stop>
-                    <div
-                      class="dropdown-item"
-                      v-for="c in countryList"
-                      :key="c"
-                      @click="selectCountry(c)"
-                      :class="{ selected: form.country === c }"
-                    >
-                      <span>{{ c }}</span>
+            <!-- 3. Email (Row 2 Left on Desktop / Step 3 on Mobile) -->
+            <div class="field-group field-email" :class="{ 'has-error': errors.email }">
+              <label class="field-label" for="reg-email">{{ t('form.email') }}</label>
+              <div class="input-wrap" :class="{ 'error-wrap': errors.email }">
+                <input
+                  v-model="form.email"
+                  @input="errors.email = ''"
+                  @blur="validateField('email')"
+                  type="email"
+                  :placeholder="t('form.emailPlaceholder') || 'e.g. alex@company.com'"
+                  class="field-input"
+                  id="reg-email"
+                />
+              </div>
+            </div>
+
+            <!-- 4. Phone number (Row 2 Right on Desktop / Step 4 on Mobile) -->
+            <div class="field-group field-phone" :class="{ 'has-error': errors.phone }">
+              <label class="field-label" for="reg-phone">{{ t('form.phone') }}</label>
+              <div class="input-wrap" :class="{ 'error-wrap': errors.phone }">
+                <input
+                  v-model="form.phone"
+                  @input="formatPhone"
+                  @blur="validateField('phone')"
+                  type="tel"
+                  :placeholder="t('form.phonePlaceholder') || 'e.g. +1 (555) 019-2834'"
+                  class="field-input"
+                  id="reg-phone"
+                />
+              </div>
+            </div>
+
+            <!-- 5. Company (Row 3 Left on Desktop / Step 5 on Mobile) -->
+            <div class="field-group field-company" :class="{ 'has-error': errors.company }">
+              <label class="field-label" for="reg-company">{{ t('form.company') }}</label>
+              <div class="input-wrap" :class="{ 'error-wrap': errors.company }">
+                <input
+                  v-model="form.company"
+                  @input="errors.company = ''"
+                  @blur="validateField('company')"
+                  type="text"
+                  :placeholder="t('form.companyPlaceholder') || 'e.g. Tech Global Inc.'"
+                  class="field-input"
+                  id="reg-company"
+                />
+              </div>
+            </div>
+
+            <!-- 6. Position (Row 3 Right on Desktop / Step 6 on Mobile) -->
+            <div class="field-group field-position">
+              <label class="field-label" for="reg-position">{{ t('form.position') }}</label>
+              <div class="input-wrap">
+                <input
+                  v-model="form.position"
+                  type="text"
+                  :placeholder="t('form.positionPlaceholder') || 'e.g. Managing Director'"
+                  class="field-input"
+                  id="reg-position"
+                />
+              </div>
+            </div>
+
+            <!-- 7. I am attending as (Row 4 Left on Desktop / Step 7 on Mobile) -->
+            <div class="field-group field-category" :class="{ 'has-error': errors.category }">
+              <label class="field-label">{{ t('form.category') }}</label>
+              <div class="select-wrap" @click="handleOpenCategory" :class="{ open: openDropdown === 'category', 'error-wrap': errors.category }" id="reg-category">
+                <div class="select-display">
+                  <span :class="{ placeholder: !form.category }">
+                    {{ form.category || t('form.categoryPlaceholder') || 'Select category...' }}
+                  </span>
+                  <svg class="chevron" :class="{ open: openDropdown === 'category' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+
+                <!-- Desktop 2-column grid dropdown menu -->
+                <div class="dropdown-menu category-grid-menu desktop-only-dropdown" v-if="openDropdown === 'category'" @click.stop>
+                  <div
+                    class="radio-option-item"
+                    v-for="cat in categoryList"
+                    :key="cat"
+                    @click="selectCategory(cat)"
+                    :class="{ selected: form.category === cat }"
+                  >
+                    <div class="radio-circle" :class="{ checked: form.category === cat }">
+                      <div class="radio-dot" v-if="form.category === cat"></div>
                     </div>
+                    <span class="option-text">{{ cat }}</span>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <!-- Phone number -->
-              <div class="field-group" :class="{ 'has-error': errors.phone }">
-                <label class="field-label" for="reg-phone">{{ t('form.phone') }}</label>
-                <div class="input-wrap" :class="{ 'error-wrap': errors.phone }">
-                  <input
-                    v-model="form.phone"
-                    @input="formatPhone"
-                    @blur="validateField('phone')"
-                    type="tel"
-                    :placeholder="t('form.phonePlaceholder')"
-                    class="field-input"
-                    id="reg-phone"
-                  />
+            <!-- 8. Event track(s) you plan to attend (Row 4 Right on Desktop / Step 8 on Mobile) -->
+            <div class="field-group field-tracks" :class="{ 'has-error': errors.tracks }">
+              <label class="field-label">{{ t('form.tracks') }} (Select all that apply)</label>
+              <div class="select-wrap" @click="handleOpenTracks" :class="{ open: openDropdown === 'tracks', 'error-wrap': errors.tracks }" id="reg-tracks">
+                <div class="select-display" :title="form.tracks.length ? form.tracks.join(', ') : ''">
+                  <span :class="{ placeholder: !form.tracks.length }">
+                    {{ form.tracks.length ? form.tracks.join(', ') : (t('form.tracksPlaceholder') || 'Select track(s)...') }}
+                  </span>
+                  <svg class="chevron" :class="{ open: openDropdown === 'tracks' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
                 </div>
-              </div>
 
-              <!-- Position -->
-              <div class="field-group">
-                <label class="field-label" for="reg-position">{{ t('form.position') }}</label>
-                <div class="input-wrap">
-                  <input
-                    v-model="form.position"
-                    type="text"
-                    :placeholder="t('form.positionPlaceholder')"
-                    class="field-input"
-                    id="reg-position"
-                  />
-                </div>
-              </div>
-
-              <!-- Event track(s) you plan to attend (Multi-select WITHOUT sub-pages) -->
-              <div class="field-group" :class="{ 'has-error': errors.tracks }">
-                <label class="field-label">{{ t('form.tracks') }}</label>
-                <div class="select-wrap" @click="toggleDropdown('tracks')" :class="{ open: openDropdown === 'tracks', 'error-wrap': errors.tracks }" id="reg-tracks">
-                  <div class="select-display" :title="form.tracks.length ? form.tracks.join(', ') : ''">
-                    <span :class="{ placeholder: !form.tracks.length }">
-                      {{ form.tracks.length ? form.tracks.join(', ') : t('form.tracksPlaceholder') }}
-                    </span>
-                    <svg class="chevron" :class="{ open: openDropdown === 'tracks' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
-                      <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
-
-                  <!-- Simple Tracks dropdown (no sub-pages) -->
-                  <div class="dropdown-menu tracks-menu" v-if="openDropdown === 'tracks'" @click.stop>
-                    <div
-                      class="checkbox-option-item"
-                      v-for="tName in simpleTracksList"
-                      :key="tName"
-                      @click="toggleSimpleTrack(tName)"
-                      :class="{ selected: form.tracks.includes(tName) }"
-                    >
-                      <div class="custom-checkbox" :class="{ checked: form.tracks.includes(tName) }">
-                        <svg v-if="form.tracks.includes(tName)" width="10" height="10" viewBox="0 0 12 12" fill="none">
-                          <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </div>
-                      <span class="option-text">{{ tName }}</span>
+                <!-- Desktop Simple Tracks dropdown -->
+                <div class="dropdown-menu tracks-menu desktop-only-dropdown" v-if="openDropdown === 'tracks'" @click.stop>
+                  <div
+                    class="checkbox-option-item"
+                    v-for="tName in simpleTracksList"
+                    :key="tName"
+                    @click="toggleSimpleTrack(tName)"
+                    :class="{ selected: form.tracks.includes(tName) }"
+                  >
+                    <div class="custom-checkbox" :class="{ checked: form.tracks.includes(tName) }">
+                      <svg v-if="form.tracks.includes(tName)" width="10" height="10" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
                     </div>
+                    <span class="option-text">{{ tName }}</span>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <!-- Name of focal point in IT Park (SELECT DROPDOWN WITH SUBPAGES matching screenshot) -->
-              <div class="field-group">
-                <label class="field-label">{{ t('form.focalPoint') }}</label>
-                <div class="select-wrap" @click="toggleDropdown('focal')" :class="{ open: openDropdown === 'focal' }" id="reg-focal">
-                  <div class="select-display">
-                    <span :class="{ placeholder: !form.focalPoint }">
-                      {{ form.focalPoint || t('form.focalPointPlaceholder') }}
-                    </span>
-                    <svg class="chevron" :class="{ open: openDropdown === 'focal' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
-                      <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                  </div>
+            <!-- 9. How did you hear about us? (Row 5 Left on Desktop / Step 9 on Mobile) -->
+            <div class="field-group field-source">
+              <label class="field-label">{{ t('form.source') }}</label>
+              <div class="select-wrap" @click="handleOpenSource" :class="{ open: openDropdown === 'source' }" id="reg-source">
+                <div class="select-display">
+                  <span :class="{ placeholder: !form.source }">
+                    {{ form.source || t('form.sourcePlaceholder') || 'Select source...' }}
+                  </span>
+                  <svg class="chevron" :class="{ open: openDropdown === 'source' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
 
-                  <!-- Main Focal Dropdown matching screenshot media_1787844960797.png -->
-                  <div class="focal-main-menu" v-if="openDropdown === 'focal'" @click.stop>
-                    <!-- Left Sub-page Flyout Menu (Only shown when hovered track has subtracks) -->
-                    <div class="focal-sub-flyout-left" v-if="hoveredFocalTrack?.subtracks">
-                      <div
-                        class="focal-row-item"
-                        v-for="sub in hoveredFocalTrack.subtracks"
-                        :key="sub"
-                        @click="selectFocal(sub)"
-                        :class="{ 'is-selected': form.focalPoint === sub }"
-                      >
-                        <div class="focal-checkbox-square" :class="{ checked: form.focalPoint === sub }">
-                          <svg v-if="form.focalPoint === sub" width="10" height="10" viewBox="0 0 12 12" fill="none">
-                            <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        </div>
-                        <span class="focal-item-text">{{ sub }}</span>
-                      </div>
+                <!-- Desktop Source radio list dropdown -->
+                <div class="dropdown-menu source-menu desktop-only-dropdown" v-if="openDropdown === 'source'" @click.stop>
+                  <div
+                    class="radio-option-item"
+                    v-for="src in sourceList"
+                    :key="src"
+                    @click="selectSource(src)"
+                    :class="{ selected: form.source === src }"
+                  >
+                    <div class="radio-circle" :class="{ checked: form.source === src }">
+                      <div class="radio-dot" v-if="form.source === src"></div>
                     </div>
+                    <span class="option-text">{{ src }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                    <!-- Main List of Tracks (Right Panel) -->
+            <!-- 10. Name of focal point in IT Park (Row 5 Right on Desktop / Step 10 on Mobile) -->
+            <div class="field-group field-focal">
+              <label class="field-label">{{ t('form.focalPoint') }}</label>
+              
+              <!-- On Mobile: Direct text input matching Image 1 -->
+              <div class="input-wrap mobile-focal-input">
+                <input
+                  v-model="form.focalPoint"
+                  type="text"
+                  :placeholder="t('form.focalPointPlaceholder') || 'e.g. Contact person or team member name'"
+                  class="field-input"
+                  id="reg-focal-mobile"
+                />
+              </div>
+
+              <!-- On Desktop: Dropdown menu with subtracks -->
+              <div class="select-wrap desktop-focal-select" @click="toggleDropdown('focal')" :class="{ open: openDropdown === 'focal' }" id="reg-focal">
+                <div class="select-display">
+                  <span :class="{ placeholder: !form.focalPoint }">
+                    {{ form.focalPoint || t('form.focalPointPlaceholder') || 'e.g. Contact person or team member name' }}
+                  </span>
+                  <svg class="chevron" :class="{ open: openDropdown === 'focal' }" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 6l4 4 4-4" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+
+                <!-- Desktop Focal Dropdown -->
+                <div class="focal-main-menu" v-if="openDropdown === 'focal'" @click.stop>
+                  <div class="focal-sub-flyout-left" v-if="hoveredFocalTrack?.subtracks">
                     <div
                       class="focal-row-item"
-                      v-for="track in focalTracksList"
-                      :key="track.id"
-                      @mouseenter="hoveredFocalTrack = track"
-                      @click="!track.subtracks && selectFocal(track.title)"
-                      :class="{
-                        'is-hovered': hoveredFocalTrack?.id === track.id,
-                        'is-selected': isFocalChecked(track)
-                      }"
+                      v-for="sub in hoveredFocalTrack.subtracks"
+                      :key="sub"
+                      @click="selectFocal(sub)"
+                      :class="{ 'is-selected': form.focalPoint === sub }"
                     >
-                      <div class="focal-checkbox-square" :class="{ checked: isFocalChecked(track) }">
-                        <svg v-if="isFocalChecked(track)" width="10" height="10" viewBox="0 0 12 12" fill="none">
+                      <div class="focal-checkbox-square" :class="{ checked: form.focalPoint === sub }">
+                        <svg v-if="form.focalPoint === sub" width="10" height="10" viewBox="0 0 12 12" fill="none">
                           <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </div>
-                      <span class="focal-item-text">{{ track.title }}</span>
+                      <span class="focal-item-text">{{ sub }}</span>
                     </div>
+                  </div>
+
+                  <div
+                    class="focal-row-item"
+                    v-for="track in focalTracksList"
+                    :key="track.id"
+                    @mouseenter="hoveredFocalTrack = track"
+                    @click="!track.subtracks && selectFocal(track.title)"
+                    :class="{
+                      'is-hovered': hoveredFocalTrack?.id === track.id,
+                      'is-selected': isFocalChecked(track)
+                    }"
+                  >
+                    <div class="focal-checkbox-square" :class="{ checked: isFocalChecked(track) }">
+                      <svg v-if="isFocalChecked(track)" width="10" height="10" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <span class="focal-item-text">{{ track.title }}</span>
                   </div>
                 </div>
               </div>
-
             </div>
+
           </div>
 
           <!-- Bottom Consent & Submit Row matching Image 1 -->
@@ -296,7 +291,7 @@
             <label class="consent-label" @click="toggleConsent">
               <div class="custom-checkbox consent-box" :class="{ checked: form.consent, 'error-box': errors.consent }">
                 <svg v-if="form.consent" width="10" height="10" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M2 6.2L4.5 8.7L10 3" stroke="#041A12" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
               <span class="consent-text">
@@ -304,20 +299,21 @@
               </span>
             </label>
 
-            <!-- Submit Button with top-right arrow ↗ -->
+            <!-- Submit Button (Desktop version with arrow / Mobile version full width 'Submit Application' matching Image 1) -->
             <button type="submit" class="btn-register-submit" :disabled="submitting" id="reg-submit-btn">
-              <span>{{ submitting ? t('form.submitting') : t('form.submitBtn') }}</span>
-              <svg v-if="!submitting" width="18" height="18" viewBox="0 0 24 24" fill="none" class="submit-arrow">
+              <span class="desktop-btn-text">{{ submitting ? t('form.submitting') : t('form.submitBtn') }}</span>
+              <span class="mobile-btn-text">{{ submitting ? 'Submitting...' : 'Submit Application' }}</span>
+              <svg v-if="!submitting" width="18" height="18" viewBox="0 0 24 24" fill="none" class="submit-arrow desktop-arrow-only">
                 <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#0B0F13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <div v-else class="spinner"></div>
+              <div v-if="submitting" class="spinner"></div>
             </button>
           </div>
 
         </form>
       </div>
 
-      <!-- Thank You State matching Figma 350:24 & media_1787844363947.png -->
+      <!-- Thank You State -->
       <div class="thank-you-view" v-if="submitted">
         <div class="thank-avatar-wrap">
           <img src="@/assets/images/thank-you-avatar.png" alt="Success" class="thank-avatar-img" />
@@ -336,11 +332,202 @@
       </div>
 
     </div>
+
+    <!-- ========================================================================== -->
+    <!-- MOBILE BOTTOM SHEET MODAL FOR TRACKS (Matching Image 2 exactly)           -->
+    <!-- ========================================================================== -->
+    <transition name="sheet-anim">
+      <div class="mobile-sheet-backdrop" v-if="mobileTracksModalOpen" @click="closeMobileTracks">
+        <div class="mobile-bottom-sheet" @click.stop>
+          <!-- Top drag handle -->
+          <div class="sheet-drag-handle"></div>
+
+          <!-- 1. MAIN TRACKS LIST (when mobileTracksSubpage is null) -->
+          <div class="sheet-view-content" v-if="!mobileTracksSubpage">
+            <div class="sheet-header">
+              <h3 class="sheet-title">Event track(s) you plan to attend</h3>
+              <p class="sheet-subtitle">Choose multiple summits or conferences to attend</p>
+            </div>
+
+            <div class="sheet-items-list">
+              <div
+                class="sheet-track-row"
+                v-for="track in mobileTracksData"
+                :key="track.id"
+                @click="handleTrackRowClick(track)"
+              >
+                <!-- Checkbox -->
+                <div
+                  class="sheet-checkbox"
+                  :class="{ checked: isTrackSelected(track) }"
+                  @click.stop="toggleMainTrack(track)"
+                >
+                  <svg v-if="isTrackSelected(track)" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+
+                <!-- Label -->
+                <span class="sheet-row-label">{{ track.title }}</span>
+
+                <!-- Chevron Right (for items with subtracks) -->
+                <div class="sheet-chevron-wrap" v-if="track.hasSubtracks" @click.stop="openTracksSubpage(track.id)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18L15 12L9 6" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Confirm Selection Button matching Image 2 -->
+            <div class="sheet-footer">
+              <button class="sheet-btn-confirm-main" @click="closeMobileTracks">
+                Confirm selection ({{ form.tracks.length }})
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. SUBPAGE TRACKS LIST (when mobileTracksSubpage is active, matching Image 2 Right) -->
+          <div class="sheet-view-content" v-else>
+            <div class="sheet-header">
+              <h3 class="sheet-title">{{ currentSubpageTrack?.title }}</h3>
+              <p class="sheet-subtitle">Choose multiple summits or conferences to attend</p>
+            </div>
+
+            <div class="sheet-items-list">
+              <div
+                class="sheet-track-row"
+                v-for="sub in currentSubpageTrack?.subtracks || []"
+                :key="sub"
+                @click="toggleSubtrack(sub)"
+              >
+                <!-- Checkbox -->
+                <div class="sheet-checkbox" :class="{ checked: form.tracks.includes(sub) }">
+                  <svg v-if="form.tracks.includes(sub)" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6.2L4.5 8.7L10 3" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+
+                <!-- Label -->
+                <span class="sheet-row-label">{{ sub }}</span>
+              </div>
+            </div>
+
+            <!-- Subpage Bottom Row: [Go back] and [Confirm] matching Image 2 Right -->
+            <div class="sheet-footer sheet-footer-dual">
+              <button class="sheet-btn-back" @click="mobileTracksSubpage = null">
+                Go back
+              </button>
+              <button class="sheet-btn-confirm-sub" @click="mobileTracksSubpage = null">
+                Confirm
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </transition>
+
+    <!-- ========================================================================== -->
+    <!-- MOBILE BOTTOM SHEET MODAL FOR CATEGORY                                     -->
+    <!-- ========================================================================== -->
+    <transition name="sheet-anim">
+      <div class="mobile-sheet-backdrop" v-if="mobileCategoryModalOpen" @click="mobileCategoryModalOpen = false">
+        <div class="mobile-bottom-sheet" @click.stop>
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-header">
+            <h3 class="sheet-title">{{ t('form.category') }}</h3>
+            <p class="sheet-subtitle">Select your attendee category</p>
+          </div>
+          <div class="sheet-items-list">
+            <div
+              class="sheet-radio-row"
+              v-for="cat in categoryList"
+              :key="cat"
+              @click="selectCategoryMobile(cat)"
+              :class="{ selected: form.category === cat }"
+            >
+              <div class="sheet-radio-circle" :class="{ checked: form.category === cat }">
+                <div class="sheet-radio-dot" v-if="form.category === cat"></div>
+              </div>
+              <span class="sheet-row-label">{{ cat }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+
+    <!-- ========================================================================== -->
+    <!-- MOBILE BOTTOM SHEET MODAL FOR SOURCE                                       -->
+    <!-- ========================================================================== -->
+    <transition name="sheet-anim">
+      <div class="mobile-sheet-backdrop" v-if="mobileSourceModalOpen" @click="mobileSourceModalOpen = false">
+        <div class="mobile-bottom-sheet" @click.stop>
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-header">
+            <h3 class="sheet-title">{{ t('form.source') }}</h3>
+            <p class="sheet-subtitle">How did you hear about ICTWEEK 2026?</p>
+          </div>
+          <div class="sheet-items-list">
+            <div
+              class="sheet-radio-row"
+              v-for="src in sourceList"
+              :key="src"
+              @click="selectSourceMobile(src)"
+              :class="{ selected: form.source === src }"
+            >
+              <div class="sheet-radio-circle" :class="{ checked: form.source === src }">
+                <div class="sheet-radio-dot" v-if="form.source === src"></div>
+              </div>
+              <span class="sheet-row-label">{{ src }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+
+    <!-- ========================================================================== -->
+    <!-- MOBILE BOTTOM SHEET MODAL FOR COUNTRY                                      -->
+    <!-- ========================================================================== -->
+    <transition name="sheet-anim">
+      <div class="mobile-sheet-backdrop" v-if="mobileCountryModalOpen" @click="mobileCountryModalOpen = false">
+        <div class="mobile-bottom-sheet" @click.stop>
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-header">
+            <h3 class="sheet-title">{{ t('form.country') }}</h3>
+            <p class="sheet-subtitle">Select your country</p>
+          </div>
+          <div class="sheet-search-wrap">
+            <input
+              v-model="countrySearchQuery"
+              type="text"
+              placeholder="Search country..."
+              class="sheet-search-input"
+            />
+          </div>
+          <div class="sheet-items-list sheet-country-scroll">
+            <div
+              class="sheet-country-row"
+              v-for="c in filteredCountries"
+              :key="c"
+              @click="selectCountryMobile(c)"
+              :class="{ selected: form.country === c }"
+            >
+              <span class="sheet-row-label">{{ c }}</span>
+              <svg v-if="form.country === c" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8l4 4 6-6" stroke="#73fbb3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+
   </section>
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useI18n } from '@/composables/useI18n'
 
 const { t } = useI18n()
@@ -351,6 +538,14 @@ const submitted = ref(false)
 const submitting = ref(false)
 const openDropdown = ref(null)
 const hoveredFocalTrack = ref(null)
+
+// Mobile Modals State
+const mobileTracksModalOpen = ref(false)
+const mobileTracksSubpage = ref(null)
+const mobileCategoryModalOpen = ref(false)
+const mobileSourceModalOpen = ref(false)
+const mobileCountryModalOpen = ref(false)
+const countrySearchQuery = ref('')
 
 const form = reactive({
   name: '',
@@ -377,10 +572,177 @@ const errors = reactive({
   consent: '',
 })
 
+// Mobile Tracks Data Structure matching Image 2
+const mobileTracksData = [
+  {
+    id: 'enterprise',
+    title: 'Enterprise Uzbekistan Summit',
+    hasSubtracks: false,
+  },
+  {
+    id: 'startup',
+    title: 'Startup & Venture Summit',
+    hasSubtracks: true,
+    subtracks: [
+      'Startup & Venture Summit',
+      'Startup blink Awards',
+      'Startup World Cup - Uzbekistan Regional Final',
+      'Ignyte Challenge',
+      'Taqdimot (Startup pitches)',
+    ]
+  },
+  {
+    id: 'service',
+    title: 'Tech & Service outsourcing conference',
+    hasSubtracks: false,
+  },
+  {
+    id: 'bridge',
+    title: 'Global Bridge (International Partnerships)',
+    hasSubtracks: true,
+    subtracks: [
+      'Uzbekistan – Japan IT Bridge',
+      'OTS Forum',
+      'Middle East Forum',
+      'Sabriya: Central Asian Women in Tech',
+      'AWS Community Day'
+    ]
+  },
+  {
+    id: 'gamedev',
+    title: 'GameGap: GameDev Conference',
+    hasSubtracks: false,
+  },
+  {
+    id: 'ai',
+    title: 'AI Native: Ideas to innovation',
+    hasSubtracks: false,
+  }
+]
+
+const currentSubpageTrack = computed(() => {
+  return mobileTracksData.find(t => t.id === mobileTracksSubpage.value)
+})
+
+function isTrackSelected(track) {
+  if (track.hasSubtracks) {
+    return (track.subtracks || []).some(s => form.tracks.includes(s))
+  }
+  return form.tracks.includes(track.title)
+}
+
+function handleTrackRowClick(track) {
+  if (track.hasSubtracks) {
+    openTracksSubpage(track.id)
+  } else {
+    toggleMainTrack(track)
+  }
+}
+
+function openTracksSubpage(id) {
+  mobileTracksSubpage.value = id
+}
+
+function toggleMainTrack(track) {
+  if (track.hasSubtracks) {
+    const allSelected = (track.subtracks || []).every(s => form.tracks.includes(s))
+    if (allSelected) {
+      form.tracks = form.tracks.filter(t => !(track.subtracks || []).includes(t))
+    } else {
+      track.subtracks.forEach(s => {
+        if (!form.tracks.includes(s)) form.tracks.push(s)
+      })
+    }
+  } else {
+    const idx = form.tracks.indexOf(track.title)
+    if (idx === -1) {
+      form.tracks.push(track.title)
+    } else {
+      form.tracks.splice(idx, 1)
+    }
+  }
+  if (form.tracks.length > 0) errors.tracks = ''
+}
+
+function toggleSubtrack(sub) {
+  const idx = form.tracks.indexOf(sub)
+  if (idx === -1) {
+    form.tracks.push(sub)
+  } else {
+    form.tracks.splice(idx, 1)
+  }
+  if (form.tracks.length > 0) errors.tracks = ''
+}
+
+function handleOpenTracks() {
+  if (window.innerWidth < 768) {
+    mobileTracksModalOpen.value = true
+    mobileTracksSubpage.value = null
+  } else {
+    toggleDropdown('tracks')
+  }
+}
+
+function closeMobileTracks() {
+  mobileTracksModalOpen.value = false
+  mobileTracksSubpage.value = null
+}
+
+function handleOpenCategory() {
+  if (window.innerWidth < 768) {
+    mobileCategoryModalOpen.value = true
+  } else {
+    toggleDropdown('category')
+  }
+}
+
+function selectCategoryMobile(cat) {
+  form.category = cat
+  errors.category = ''
+  mobileCategoryModalOpen.value = false
+}
+
+function handleOpenSource() {
+  if (window.innerWidth < 768) {
+    mobileSourceModalOpen.value = true
+  } else {
+    toggleDropdown('source')
+  }
+}
+
+function selectSourceMobile(src) {
+  form.source = src
+  mobileSourceModalOpen.value = false
+}
+
+function handleOpenCountry() {
+  if (window.innerWidth < 768) {
+    countrySearchQuery.value = ''
+    mobileCountryModalOpen.value = true
+  } else {
+    toggleDropdown('country')
+  }
+}
+
+function selectCountryMobile(c) {
+  form.country = c
+  errors.country = ''
+  mobileCountryModalOpen.value = false
+}
+
+// Lock body scroll on modal open
+watch([mobileTracksModalOpen, mobileCategoryModalOpen, mobileSourceModalOpen, mobileCountryModalOpen], (vals) => {
+  const anyOpen = vals.some(v => v)
+  if (anyOpen) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = ''
+  }
+})
+
 // Formatting and mask helpers
 function formatName(e) {
   const val = e.target.value
-  // Allow letters (including Cyrillic, Latin, Uzbek o', g'), spaces, hyphens, and apostrophes
   form.name = val.replace(/[^a-zA-Zа-яА-ЯёЁ\u0400-\u04FF\s'’`\-]/g, '')
   if (errors.name) validateField('name')
 }
@@ -397,7 +759,6 @@ function formatPhone(e) {
   const digits = val.slice(1).replace(/\D/g, '')
 
   if (digits.startsWith('998')) {
-    // Uzbek format: +998 (XX) XXX-XX-XX
     let res = '+998'
     const rest = digits.slice(3)
     if (rest.length > 0) res += ' (' + rest.slice(0, 2)
@@ -406,7 +767,6 @@ function formatPhone(e) {
     if (rest.length >= 7) res += '-' + rest.slice(7, 9)
     form.phone = res
   } else {
-    // International format: +XXX XX XXX XXXX
     let res = '+'
     for (let i = 0; i < digits.length && i < 15; i++) {
       if (i === 3 || i === 5 || i === 8 || i === 11) res += ' '
@@ -420,7 +780,7 @@ function formatPhone(e) {
 function validateField(field) {
   if (field === 'name') {
     if (!form.name.trim() || form.name.trim().length < 2) {
-      errors.name = t('form.errors.name')
+      errors.name = t('form.errors.name') || 'Please enter your full name'
       return false
     }
     errors.name = ''
@@ -430,7 +790,7 @@ function validateField(field) {
   if (field === 'email') {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
     if (!form.email.trim() || !emailRegex.test(form.email.trim())) {
-      errors.email = t('form.errors.email')
+      errors.email = t('form.errors.email') || 'Please enter a valid email'
       return false
     }
     errors.email = ''
@@ -439,7 +799,7 @@ function validateField(field) {
 
   if (field === 'company') {
     if (!form.company.trim()) {
-      errors.company = t('form.errors.company')
+      errors.company = t('form.errors.company') || 'Please enter your company'
       return false
     }
     errors.company = ''
@@ -449,7 +809,7 @@ function validateField(field) {
   if (field === 'phone') {
     const digitsOnly = form.phone.replace(/\D/g, '')
     if (!form.phone.trim() || digitsOnly.length < 7) {
-      errors.phone = t('form.errors.phone')
+      errors.phone = t('form.errors.phone') || 'Please enter a valid phone number'
       return false
     }
     errors.phone = ''
@@ -464,31 +824,32 @@ function toggleConsent() {
   if (form.consent) errors.consent = ''
 }
 
-// 6 Categories matching Image 2
 const categoryList = computed(() => {
   const list = t('form.categories')
   return Array.isArray(list) ? list : []
 })
 
-// 4 Sources matching Image 1
 const sourceList = computed(() => {
   const list = t('form.sources')
   return Array.isArray(list) ? list : []
 })
 
-// Countries
 const countryList = computed(() => {
   const list = t('form.countries')
   return Array.isArray(list) ? list : []
 })
 
-// Simple tracks (no sub-pages) for Event track(s)
+const filteredCountries = computed(() => {
+  if (!countrySearchQuery.value.trim()) return countryList.value
+  const q = countrySearchQuery.value.toLowerCase()
+  return countryList.value.filter(c => c.toLowerCase().includes(q))
+})
+
 const simpleTracksList = computed(() => {
   const list = t('form.simpleTracks')
   return Array.isArray(list) ? list : []
 })
 
-// Focal point tracks with left sub-pages matching user screenshot
 const focalTracksList = computed(() => {
   const list = t('form.focalTracks')
   return Array.isArray(list) ? list : []
@@ -553,28 +914,28 @@ function validateAll() {
   if (!validateField('phone')) valid = false
 
   if (!form.category) {
-    errors.category = t('form.errors.category')
+    errors.category = t('form.errors.category') || 'Please select a category'
     valid = false
   } else {
     errors.category = ''
   }
 
   if (!form.country) {
-    errors.country = t('form.errors.country')
+    errors.country = t('form.errors.country') || 'Please select a country'
     valid = false
   } else {
     errors.country = ''
   }
 
   if (!form.tracks || form.tracks.length === 0) {
-    errors.tracks = t('form.errors.tracks')
+    errors.tracks = t('form.errors.tracks') || 'Please select at least one track'
     valid = false
   } else {
     errors.tracks = ''
   }
 
   if (!form.consent) {
-    errors.consent = t('form.errors.consent')
+    errors.consent = t('form.errors.consent') || 'Please agree to the terms'
     valid = false
   } else {
     errors.consent = ''
@@ -622,7 +983,10 @@ function closeOnOutside(e) {
 }
 
 onMounted(() => document.addEventListener('click', closeOnOutside))
-onUnmounted(() => document.removeEventListener('click', closeOnOutside))
+onUnmounted(() => {
+  document.removeEventListener('click', closeOnOutside)
+  document.body.style.overflow = ''
+})
 </script>
 
 <style scoped>
@@ -637,7 +1001,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   padding: 0 24px;
 }
 
-/* Outer Card matching Figma & Images */
+/* Outer Card */
 .reg-card {
   background: rgba(14, 20, 27, 0.68);
   border-radius: 24px;
@@ -676,6 +1040,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   color: rgba(255, 255, 255, 0.70);
   line-height: 1.55;
   margin: 0;
+  max-width: 780px;
 }
 
 /* Form Layout */
@@ -685,16 +1050,34 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   gap: 28px;
 }
 
+/* Desktop 2-column grid mapping */
 .form-cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
 
-.form-col {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.field-name     { grid-column: 1; grid-row: 1; }
+.field-country  { grid-column: 2; grid-row: 1; }
+.field-email    { grid-column: 1; grid-row: 2; }
+.field-phone    { grid-column: 2; grid-row: 2; }
+.field-company  { grid-column: 1; grid-row: 3; }
+.field-position { grid-column: 2; grid-row: 3; }
+.field-category { grid-column: 1; grid-row: 4; }
+.field-tracks   { grid-column: 2; grid-row: 4; }
+.field-source   { grid-column: 1; grid-row: 5; }
+.field-focal    { grid-column: 2; grid-row: 5; }
+
+.mobile-focal-input {
+  display: none;
+}
+
+.desktop-focal-select {
+  display: block;
+}
+
+.mobile-btn-text {
+  display: none;
 }
 
 /* Field Group */
@@ -712,7 +1095,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   line-height: 1.4;
 }
 
-/* Input matching Image 1 & 2 (#1F2732) */
+/* Input */
 .input-wrap {
   position: relative;
   width: 100%;
@@ -776,7 +1159,6 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   box-sizing: border-box;
 }
 
-/* When select is OPEN - clean neutral styling without green hover glow */
 .select-wrap.open .select-display {
   border-color: rgba(255, 255, 255, 0.28);
   background: #252F3D;
@@ -800,120 +1182,114 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
 }
 
 .chevron {
-  flex-shrink: 0;
-  align-self: center;
   transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
 .chevron.open {
   transform: rotate(180deg);
 }
 
-/* Floating Dropdown Menus */
+/* Dropdown menus (desktop) */
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 6px);
   left: 0;
   right: 0;
-  background: #151e29;
+  background: #18222d;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 12px;
   padding: 8px;
-  z-index: 500;
+  z-index: 600;
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95);
   box-sizing: border-box;
+}
+
+.country-menu {
   max-height: 240px;
   overflow-y: auto;
 }
 
-/* Dropup: ONLY 'Name of focal point' opens UPWARDS to fit on screen */
-#reg-focal .dropdown-menu {
-  top: auto;
-  bottom: calc(100% + 8px);
-}
-
-/* Custom scrollbars */
-.dropdown-menu::-webkit-scrollbar,
-.country-menu::-webkit-scrollbar,
-.subtracks-flyout::-webkit-scrollbar {
-  width: 5px;
-}
-
-.dropdown-menu::-webkit-scrollbar-track,
-.country-menu::-webkit-scrollbar-track,
-.subtracks-flyout::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.04);
+.dropdown-item {
+  padding: 10px 14px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  color: #FFFFFF;
   border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
 }
 
-.dropdown-menu::-webkit-scrollbar-thumb,
-.country-menu::-webkit-scrollbar-thumb,
-.subtracks-flyout::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 6px;
+.dropdown-item:hover,
+.dropdown-item.selected {
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.dropdown-menu::-webkit-scrollbar-thumb:hover,
-.country-menu::-webkit-scrollbar-thumb:hover,
-.subtracks-flyout::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.45);
-}
-
-/* Category 2-Column Menu matching Image 2 */
-.category-grid-menu {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 16px;
-  padding: 12px;
-}
-
-/* Radio Option Items - Neutral hover, no color */
-.radio-option-item {
+/* Radio & Checkbox options inside dropdowns */
+.radio-option-item,
+.checkbox-option-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.15s ease;
   color: #FFFFFF;
 }
 
-.radio-option-item:hover {
+.radio-option-item:hover,
+.checkbox-option-item:hover {
   background: rgba(255, 255, 255, 0.08);
-  color: #FFFFFF;
 }
 
-.radio-option-item.selected {
-  background: rgba(255, 255, 255, 0.12);
-  color: #FFFFFF;
+.category-grid-menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  min-width: 440px;
 }
 
-/* Radio circle */
 .radio-circle {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background: #FFFFFF;
-  border: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .radio-circle.checked {
-  background: #00E575;
+  border-color: #00E575;
 }
 
 .radio-dot {
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: #0B0F13;
+  background: #00E575;
+}
+
+.custom-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.custom-checkbox.checked {
+  background: #00E575;
+  border-color: #00E575;
 }
 
 .option-text {
@@ -924,99 +1300,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   line-height: 1.35;
 }
 
-/* Source Menu */
-.source-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 8px;
-}
-
-/* Country Menu */
-.country-menu {
-  max-height: 220px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 8px;
-}
-
-.dropdown-item {
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-family: 'Manrope', sans-serif;
-  font-size: 13.5px;
-  font-weight: 500;
-  color: #FFFFFF;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #FFFFFF;
-}
-
-.dropdown-item.selected {
-  background: rgba(255, 255, 255, 0.14);
-  color: #FFFFFF;
-  font-weight: 600;
-}
-
-/* Tracks Menu */
-.tracks-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 8px;
-}
-
-.track-menu-row {
-  position: relative;
-}
-
-/* Checkbox Option Item - Neutral hover, no color */
-.checkbox-option-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.15s ease;
-  color: #FFFFFF;
-}
-
-.checkbox-option-item:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #FFFFFF;
-}
-
-.checkbox-option-item.selected {
-  background: rgba(255, 255, 255, 0.12);
-  color: #FFFFFF;
-}
-
-/* Custom Checkbox */
-.custom-checkbox {
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  background: #FFFFFF;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: all 0.2s ease;
-}
-
-.custom-checkbox.checked {
-  background: #00E575;
-}
-
-/* Focal Point Dropdown matching screenshot media_1787844960797.png */
+/* Focal Menu */
 #reg-focal {
   position: relative;
 }
@@ -1088,7 +1372,6 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   white-space: nowrap;
 }
 
-/* Left Sub-page Flyout Menu matching screenshot */
 .focal-sub-flyout-left {
   position: absolute;
   top: 0;
@@ -1106,25 +1389,6 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   display: flex;
   flex-direction: column;
   gap: 3px;
-  animation: flyoutFadeIn 0.15s ease;
-}
-
-@keyframes flyoutFadeIn {
-  from { opacity: 0; transform: translateX(6px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@media (max-width: 768px) {
-  #reg-focal .focal-main-menu {
-    min-width: 100%;
-  }
-  .focal-sub-flyout-left {
-    position: static;
-    margin-top: 4px;
-    margin-bottom: 6px;
-    border-left: 2px solid #00E575;
-    background: rgba(0, 0, 0, 0.35);
-  }
 }
 
 /* Bottom Row: Consent + Submit Button */
@@ -1145,7 +1409,22 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
 }
 
 .consent-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: #1F2732;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   margin-top: 2px;
+  transition: all 0.2s ease;
+}
+
+.consent-box.checked {
+  background: #73fbb3;
+  border-color: #73fbb3;
 }
 
 .consent-text {
@@ -1156,7 +1435,6 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   line-height: 1.45;
 }
 
-/* Register Now Button with Arrow ↗ matching Image 1 */
 .btn-register-submit {
   display: inline-flex;
   align-items: center;
@@ -1208,7 +1486,6 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   to { transform: rotate(360deg); }
 }
 
-/* Error Border Styles (No error text) */
 .error-wrap {
   border-color: #FF5E5E !important;
   box-shadow: 0 0 14px rgba(255, 94, 94, 0.35) !important;
@@ -1219,7 +1496,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   box-shadow: 0 0 10px rgba(255, 94, 94, 0.35) !important;
 }
 
-/* Thank You State matching Figma 350:24 & media_1787844363947.png */
+/* Thank You State */
 .thank-you-view {
   display: flex;
   flex-direction: column;
@@ -1299,47 +1576,405 @@ onUnmounted(() => document.removeEventListener('click', closeOnOutside))
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5), 0 0 20px rgba(132, 255, 193, 0.2);
 }
 
-@media (max-width: 960px) {
+/* ==========================================================================
+   TABLET RESPONSIVENESS (768px - 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) and (min-width: 768px) {
   .reg-card {
-    padding: 32px 24px 40px 24px;
-    gap: 24px;
+    padding: 36px 32px 44px 32px;
+    gap: 28px;
   }
   .reg-title {
-    font-size: 30px;
-  }
-  .thank-title {
-    font-size: 32px;
-  }
-  .thank-subtitle {
-    font-size: 15px;
-  }
-  .thank-avatar-wrap {
-    width: 100px;
-    height: 100px;
-  }
-  .desktop-br {
-    display: none;
+    font-size: 34px;
   }
   .form-cols {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .form-bottom {
+    gap: 20px;
+  }
+  .focal-sub-flyout-left {
+    right: auto;
+    left: 0;
+    top: calc(100% + 4px);
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS (< 768px) - MATCHING USER SCREENSHOT IMAGE 1 & 2
+   ========================================================================== */
+@media (max-width: 767px) {
+  .page-container {
+    padding: 0 16px;
+  }
+  .reg-card {
+    padding: 28px 16px 32px 16px;
+    gap: 20px;
+    border-radius: 18px;
+  }
+  .reg-title {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+  .reg-subtitle {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+  .form-cols {
+    display: flex;
+    flex-direction: column;
     gap: 16px;
   }
-  .category-grid-menu {
-    grid-template-columns: 1fr;
+  .field-name,
+  .field-country,
+  .field-email,
+  .field-phone,
+  .field-company,
+  .field-position,
+  .field-category,
+  .field-tracks,
+  .field-source,
+  .field-focal {
+    grid-column: auto !important;
+    grid-row: auto !important;
   }
-  .subtracks-flyout {
-    position: static;
-    width: 100%;
-    margin-top: 8px;
+  .mobile-focal-input {
+    display: block;
+  }
+  .desktop-focal-select {
+    display: none;
+  }
+  .desktop-only-dropdown {
+    display: none !important;
+  }
+  .field-input {
+    height: 48px;
+    font-size: 14px;
+    background: #1a232c;
+    border-radius: 8px;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+  .select-display {
+    min-height: 48px;
+    font-size: 14px;
+    background: #1a232c;
+    border-radius: 8px;
+    border-color: rgba(255, 255, 255, 0.12);
   }
   .form-bottom {
     flex-direction: column;
     align-items: stretch;
     gap: 20px;
+    margin-top: 6px;
+  }
+  .consent-text {
+    font-size: 12px;
+    line-height: 1.4;
   }
   .btn-register-submit {
     width: 100%;
     justify-content: center;
+    height: 50px;
+    border-radius: 10px;
+    background: #73fbb3;
+    color: #041A12;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(115, 251, 179, 0.35);
   }
+  .desktop-btn-text,
+  .desktop-arrow-only {
+    display: none;
+  }
+  .mobile-btn-text {
+    display: inline;
+  }
+  .thank-you-view {
+    padding: 40px 16px;
+  }
+  .desktop-br {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   MOBILE BOTTOM SHEET STYLES (Matching Image 2 exactly)
+   ========================================================================== */
+.mobile-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  animation: fadeInBackdrop 0.2s ease;
+}
+
+.mobile-bottom-sheet {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background: #17202a;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 18px 24px 18px;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUpSheet 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.sheet-drag-handle {
+  width: 38px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 0 auto 16px auto;
+  flex-shrink: 0;
+}
+
+.sheet-view-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.sheet-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sheet-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.sheet-subtitle {
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.sheet-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 52vh;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.sheet-track-row,
+.sheet-radio-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  user-select: none;
+}
+
+.sheet-track-row:active,
+.sheet-radio-row:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.sheet-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  background: transparent;
+}
+
+.sheet-checkbox.checked {
+  background: #1BDB86;
+  border-color: #1BDB86;
+}
+
+.sheet-row-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+  flex: 1;
+  line-height: 1.35;
+}
+
+.sheet-chevron-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.sheet-radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sheet-radio-circle.checked {
+  border-color: #73fbb3;
+}
+
+.sheet-radio-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #73fbb3;
+}
+
+.sheet-footer {
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.sheet-btn-confirm-main {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  background: #73fbb3;
+  border: none;
+  color: #041A12;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  box-shadow: 0 4px 16px rgba(115, 251, 179, 0.35);
+}
+
+.sheet-btn-confirm-main:active {
+  transform: scale(0.98);
+}
+
+.sheet-footer-dual {
+  display: flex;
+  gap: 12px;
+}
+
+.sheet-btn-back {
+  flex: 1;
+  height: 48px;
+  border-radius: 10px;
+  background: #1e2832;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sheet-btn-confirm-sub {
+  flex: 1;
+  height: 48px;
+  border-radius: 10px;
+  background: #73fbb3;
+  border: none;
+  color: #041A12;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sheet-btn-back:active,
+.sheet-btn-confirm-sub:active {
+  transform: scale(0.98);
+}
+
+/* Country sheet search */
+.sheet-search-wrap {
+  margin-bottom: 8px;
+}
+
+.sheet-search-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 8px;
+  background: #1e2832;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13.5px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.sheet-country-scroll {
+  max-height: 45vh;
+}
+
+.sheet-country-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sheet-country-row:active,
+.sheet-country-row.selected {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sheet-anim-enter-active,
+.sheet-anim-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.sheet-anim-enter-from,
+.sheet-anim-leave-to {
+  opacity: 0;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUpSheet {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 </style>

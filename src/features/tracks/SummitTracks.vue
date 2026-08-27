@@ -1,13 +1,9 @@
 <template>
-  <!--
-    Figma: Enterprise Uzbekistan Summit - Premium Dark (259:3986 & 118:7058)
-    Matching user screenshot Image 2 exactly
-  -->
   <section id="summit-tracks" class="summit-section">
     <div class="page-container">
       <div class="summit-card">
 
-        <!-- Tab Bar: 6 tabs with ALL-CAPS uppercase pills -->
+        <!-- Tab Bar -->
         <div class="tab-bar" role="tablist" aria-label="Summit tracks">
           <button
             v-for="tab in tabs"
@@ -23,12 +19,12 @@
           </button>
         </div>
 
-        <!-- Main Title: CENTERED & ALL CAPS matching Image 2 -->
+        <!-- Main Title -->
         <div class="title-block">
           <h2 class="summit-title">{{ activeTrackData.title?.toUpperCase() || '' }}</h2>
         </div>
 
-        <!-- Metadata Bar matching Image 2 (green icons + 3 balanced columns) -->
+        <!-- Metadata Bar -->
         <div class="meta-bar" v-if="!activeTrackData.isMultiCard && activeTrackData.date">
           <div class="meta-item">
             <svg width="18" height="18" viewBox="0 0 20 20" fill="none" class="meta-icon">
@@ -59,7 +55,7 @@
         <!-- Tab Content Area -->
         <transition name="fade-tab" mode="out-in">
 
-          <!-- MULTI-EVENT VIEW: For Startup & VC and Global Bridge (Row 1: 2 cards, Row 2: 3 cards matching Image 2) -->
+          <!-- Multi-event view -->
           <div v-if="activeTrackData.isMultiCard" :key="activeTab + '-multi'" class="multi-events-grid">
             <div
               v-for="(ev, idx) in activeTrackData.events"
@@ -75,7 +71,7 @@
               <div class="event-card-body">
                 <h4 class="event-card-title">{{ ev.title }}</h4>
 
-                <!-- Meta Row: Calendar, Clock, Pin with green icons -->
+                <!-- Meta Row -->
                 <div class="event-card-meta">
                   <div class="meta-badge-item" v-if="ev.date">
                     <svg width="14" height="14" viewBox="0 0 20 20" fill="none" class="meta-badge-svg">
@@ -106,7 +102,7 @@
                 <!-- Description -->
                 <p class="event-card-desc">{{ ev.desc }}</p>
 
-                <!-- Bullets List matching Figma Image 2 -->
+                <!-- Bullets List -->
                 <div class="event-bullets-list" v-if="ev.bullets && ev.bullets.length">
                   <div class="event-bullet-item" v-for="(b, bi) in ev.bullets" :key="bi">
                     <div class="event-bullet-icon">
@@ -118,7 +114,7 @@
                   </div>
                 </div>
 
-                <!-- Ideal for Box matching Figma Image 2 -->
+                <!-- Ideal for Box -->
                 <div class="event-ideal-for-box" v-if="ev.idealFor">
                   <div class="ideal-accent-line"></div>
                   <div class="ideal-for-text-group">
@@ -130,12 +126,12 @@
             </div>
           </div>
 
-          <!-- SINGLE SHOWCASE VIEW matching GameGap & AI Native Figma Images -->
+          <!-- Single Showcase View -->
           <div v-else :key="activeTab + '-single'" class="content-card">
-            <!-- Left image with hover overlay (only for Enterprise & Service) -->
+            <!-- Left image with hover overlay -->
             <div class="single-image-wrap" :class="{ 'has-overlay': hasHoverOverlay }">
               <img :src="activeTrackData.image" :alt="activeTrackData.title" class="single-track-img" />
-              <!-- Hover Overlay (Only on Enterprise Uzbekistan & Service Companies) -->
+              <!-- Hover Overlay -->
               <div v-if="hasHoverOverlay" class="event-card-hover-overlay">
                 <div class="hover-overlay-top">
                   <h4 class="hover-overlay-title">{{ activeTrackData.cardTitle || activeTrackData.title }}</h4>
@@ -147,11 +143,11 @@
               </div>
             </div>
 
-            <!-- Right content matching Figma Images -->
+            <!-- Right content -->
             <div class="right-content">
               <p class="track-desc">{{ activeTrackData.description }}</p>
 
-              <!-- Bullets with green checkmark circle matching Figma -->
+              <!-- Bullets with green checkmark -->
               <div class="bullets-list">
                 <div class="bullet-item" v-for="(bullet, i) in activeTrackData.bullets" :key="i">
                   <div class="check-circle-icon">
@@ -163,7 +159,7 @@
                 </div>
               </div>
 
-              <!-- Ideal for box matching Figma Images -->
+              <!-- Ideal for box -->
               <div class="ideal-for-box" v-if="activeTrackData.idealFor">
                 <div class="ideal-accent"></div>
                 <p class="ideal-text">
@@ -867,15 +863,31 @@ function scrollToRegister() {
   transform: translateY(-6px);
 }
 
-@media (max-width: 1024px) {
+/* ==========================================================================
+   Responsive Styling (Desktop >= 1025px preserved completely)
+   ========================================================================== */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .summit-card {
+    padding: 36px 32px 40px 32px;
+    gap: 26px;
+  }
+  .summit-title {
+    font-size: 36px;
+  }
+  .tab-btn {
+    font-size: 12.5px;
+    padding: 7px 18px;
+    height: 38px;
+  }
   .content-card {
     flex-direction: column;
     padding: 24px;
+    gap: 20px;
   }
   .single-image-wrap {
     flex: none;
     width: 100%;
-    height: 260px;
+    height: 280px;
   }
   .multi-events-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -891,40 +903,87 @@ function scrollToRegister() {
   .event-sub-card:nth-child(5) {
     grid-column: span 2;
   }
-  .event-card-img-wrap,
-  .event-sub-card:nth-child(1) .event-card-img-wrap,
-  .event-sub-card:nth-child(2) .event-card-img-wrap,
-  .event-sub-card:nth-child(3) .event-card-img-wrap,
-  .event-sub-card:nth-child(4) .event-card-img-wrap,
-  .event-sub-card:nth-child(5) .event-card-img-wrap {
+  .event-card-img-wrap {
     height: 180px;
   }
 }
 
-@media (max-width: 768px) {
-  .summit-card {
-    padding: 28px 20px;
-    gap: 20px;
+@media (max-width: 767px) {
+  .page-container {
+    padding: 0 16px;
   }
-  .summit-title {
-    font-size: 30px;
+  .summit-card {
+    padding: 24px 16px;
+    gap: 20px;
+    border-radius: 18px;
+  }
+  .tab-bar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    margin: 0 -8px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .tab-bar::-webkit-scrollbar {
+    display: none;
   }
   .tab-btn {
-    font-size: 12px;
+    font-size: 11.5px;
     padding: 6px 14px;
-    height: auto;
+    height: 34px;
+    flex-shrink: 0;
+  }
+  .summit-title {
+    font-size: 24px;
+    line-height: 1.2;
   }
   .meta-bar {
     flex-direction: column;
     height: auto;
     gap: 8px;
-    padding: 12px;
+    padding: 12px 14px;
+    align-items: flex-start;
+  }
+  .meta-item {
+    font-size: 13.5px;
   }
   .meta-sep {
     display: none;
   }
+  .content-card {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+    border-radius: 16px;
+  }
+  .single-image-wrap {
+    flex: none;
+    width: 100%;
+    height: 200px;
+  }
+  .track-desc {
+    font-size: 14px;
+  }
+  .bullet-text {
+    font-size: 13px;
+  }
+  .ideal-for-box {
+    padding: 10px 14px;
+  }
+  .ideal-text {
+    font-size: 13px;
+  }
   .multi-events-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .event-sub-card {
+    padding: 14px;
+    border-radius: 16px;
+    gap: 14px;
   }
   .event-sub-card:nth-child(1),
   .event-sub-card:nth-child(2),
@@ -933,8 +992,20 @@ function scrollToRegister() {
   .event-sub-card:nth-child(5) {
     grid-column: span 1;
   }
+  .event-sub-card .event-card-img-wrap {
+    height: 160px !important;
+  }
+  .event-card-title {
+    font-size: 16px;
+  }
   .event-card-meta {
     gap: 8px;
+  }
+  .meta-badge-item {
+    font-size: 11.5px;
+  }
+  .event-card-desc {
+    font-size: 12.5px;
   }
 }
 </style>

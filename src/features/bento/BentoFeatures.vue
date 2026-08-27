@@ -1,15 +1,11 @@
 <template>
-  <!--
-    Figma: Frame 2085665247 (130:19073) & Sliders (130:19074, 124:10086, 891:2299, 129:11743)
-    100% Exact 1:1 Match with Figma & User 1st Screenshot
-  -->
   <section id="incentives" class="bento-section">
     <div class="page-container">
       <div class="bento-card-outer">
 
-        <!-- MAIN BENTO SLIDE CARD WITH FIGMA HONEYCOMB / HEXAGON TECH BACKGROUND -->
+        <!-- Main Bento Slide Card with Hexagonal Background -->
         <div class="bento-main-card">
-          <!-- Hexagonal Tech Background (Figma: Group 1321317553) -->
+          <!-- Hexagonal Background -->
           <div class="hexagon-bg" aria-hidden="true">
             <svg class="hex-svg" viewBox="0 0 1280 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -39,14 +35,14 @@
             </svg>
           </div>
 
-          <!-- CARD HEADER BAR (Mint gradient bar with title + Ministry & IT Park logos) -->
+          <!-- Card Header Bar -->
           <div class="card-header-bar">
             <div class="header-badge-pill">
               <span class="badge-accent-line"></span>
               <h3 class="badge-title">{{ currentSlideData.title }}</h3>
             </div>
 
-            <!-- Top Right Official Logos from Figma (Ministry of Digital Technologies + IT Park Uzbekistan) -->
+            <!-- Top Right Official Logos -->
             <div class="header-logos-group">
               <img
                 src="@/assets/images/partner-gov.png"
@@ -627,9 +623,7 @@
           </div>
         </div>
 
-        <!-- =============================================================== -->
-        <!-- BOTTOM CAROUSEL CONTROLLER (Matching Figma 130:21826 & 1st Pic) -->
-        <!-- =============================================================== -->
+        <!-- Bottom Carousel Controller -->
         <div class="bento-navigation-bar">
           <button class="nav-btn-circle prev-btn" @click="prevSlide" aria-label="Previous card">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -849,7 +843,7 @@ const enterpriseCards = computed(() => [
   transition: all 0.4s ease;
 }
 
-/* Hexagonal Tech Background (Figma: Group 1321317553) */
+/* Hexagonal Background */
 .hexagon-bg {
   position: absolute;
   top: 0;
@@ -1786,7 +1780,7 @@ const enterpriseCards = computed(() => [
 }
 
 /* ==========================================================================
-   BOTTOM NAVIGATION BAR (Matching Figma 130:21826 & 1st Screenshot)
+   Bottom Navigation Bar
    ========================================================================== */
 .bento-navigation-bar {
   display: flex;
@@ -1883,25 +1877,43 @@ const enterpriseCards = computed(() => [
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN (Desktop >= 1025px completely preserved)
    ========================================================================== */
-@media (max-width: 1024px) {
+@media (max-width: 1024px) and (min-width: 768px) {
+  .bento-main-card {
+    padding: 32px 28px;
+    gap: 24px;
+  }
+  .card-header-bar {
+    gap: 16px;
+  }
+  .badge-title {
+    font-size: 18px;
+  }
   .startups-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
   .startups-bottom-row {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
-  .analytics-row-top,
+  .analytics-row-top {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
   .analytics-row-bottom {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   .enterprise-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
   .export-top-row,
   .export-bottom-row {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   .offices-bar-card {
     flex-direction: column;
@@ -1910,31 +1922,120 @@ const enterpriseCards = computed(() => [
   }
   .offices-flags-list {
     flex-wrap: wrap;
+    gap: 12px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
+  .page-container {
+    padding: 0 16px;
+  }
+  .bento-main-card {
+    padding: 20px 16px;
+    gap: 18px;
+    border-radius: 18px;
+  }
   .card-header-bar {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
   .badge-title {
-    font-size: 16px;
+    font-size: 15px;
     white-space: normal;
+    line-height: 1.3;
+  }
+  .header-logos-group {
+    gap: 10px;
+  }
+  .gov-logo-img {
+    height: 28px;
+  }
+  .itpark-logo-img {
+    height: 24px;
+  }
+  .startups-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .startup-card {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .startups-bottom-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .startupbase-card {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .analytics-row-top,
+  .analytics-row-bottom {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .analytics-card {
+    padding: 16px;
+  }
+  .donut-chart-container {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+  .donut-legend-left,
+  .donut-legend-right {
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    width: 100%;
   }
   .enterprise-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .enterprise-card {
+    padding: 16px;
+  }
+  .export-top-row,
+  .export-bottom-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .export-card {
+    padding: 16px;
+  }
+  .datavolt-metrics-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .datavolt-bottom-mini-cards {
+    grid-template-columns: 1fr;
+  }
+  .offices-bar-card {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+  }
+  .offices-flags-list {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .bento-navigation-bar {
+    gap: 10px;
   }
   .nav-title-pill {
-    padding: 10px 16px;
+    padding: 8px 14px;
   }
   .pill-text {
-    font-size: 12px;
+    font-size: 11.5px;
+    letter-spacing: 0.4px;
   }
   .nav-btn-circle {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
   }
 }
 </style>

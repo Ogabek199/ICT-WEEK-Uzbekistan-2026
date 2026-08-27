@@ -1,15 +1,9 @@
 <template>
-  <!--
-    Figma: Past Attendees Include (118:6654)
-    w=1280 h=auto radius=24 fill=rgba(10,20,28,0.65) pad=T48 R56 B48 L56 gap=40 dir=VERTICAL
-  -->
   <section id="attendees" class="attendees-section">
     <div class="page-container">
       <div class="attendees-card">
-        <!-- Title: Centered Manrope 44 w800 rgba(255,255,255,1) -->
         <h2 class="section-title">{{ t('attendees.title') }}</h2>
 
-        <!-- Logo Grid: 4 Rows matching Figma 118:6654 & user screenshot -->
         <div class="logo-grid">
 
           <!-- Row 1: 5 cards (Web Summit, Plug and Play, MIT, Google for Startups, AWS) -->
@@ -229,38 +223,55 @@ const row4 = [
   transform: scale(1.06);
 }
 
-@media (max-width: 1100px) {
-  .logo-row.row-5 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .logo-row.row-4 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
+/* ==========================================================================
+   Responsive Styling (Desktop >= 1025px preserved completely)
+   ========================================================================== */
+@media (max-width: 1024px) and (min-width: 768px) {
   .attendees-card {
-    padding: 32px 20px;
-    gap: 24px;
+    padding: 36px 32px;
+    gap: 28px;
   }
   .section-title {
-    font-size: 30px;
+    font-size: 34px;
+  }
+  .logo-row.row-5 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .logo-row.row-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .logo-cell {
+    height: 104px;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-container {
+    padding: 0 16px;
+  }
+  .attendees-card {
+    padding: 24px 16px;
+    gap: 20px;
+    border-radius: 18px;
+  }
+  .section-title {
+    font-size: 26px;
+  }
+  .logo-grid {
+    gap: 10px;
   }
   .logo-row.row-5,
   .logo-row.row-4 {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
   .logo-cell {
-    height: 96px;
-    padding: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo-row.row-5,
-  .logo-row.row-4 {
-    grid-template-columns: 1fr;
+    height: 82px;
+    padding: 10px;
+    border-radius: 10px;
   }
 }
 </style>

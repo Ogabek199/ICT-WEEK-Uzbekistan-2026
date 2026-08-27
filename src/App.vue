@@ -1,6 +1,6 @@
 <template>
   <div class="app-root">
-    <!-- Full-page Background: Figma Matrix Aurora Background (1013x4096) -->
+    <!-- Full-page Background -->
     <div class="bg-full-page" aria-hidden="true"></div>
 
     <!-- Header Navigation (visible on main page) -->
@@ -11,26 +11,26 @@
       <!-- Hero Section -->
       <HeroSection />
 
-      <!-- Save Spot Section (118:6649) -->
+      <!-- Save Spot Section -->
       <SaveSpotSection />
 
-      <!-- Past Attendees (118:6654) -->
+      <!-- Past Attendees -->
       <PastAttendees />
 
-      <!-- Summit Tracks (118:7058) -->
+      <!-- Summit Tracks -->
       <SummitTracks />
 
-      <!-- Digital Startups Program & IT Park (130:19073) -->
+      <!-- Digital Startups Program & IT Park -->
       <BentoFeatures />
 
-      <!-- Partners (130:21837) -->
+      <!-- Partners -->
       <PartnersSection />
 
-      <!-- Registration Form (214:77) -->
+      <!-- Registration Form -->
       <RegistrationSection @submitted="onRegistrationSubmitted" />
     </main>
 
-    <!-- Full-Page Thank You View matching Figma 350:24 & media_1787844363947.png -->
+    <!-- Full-Page Thank You View -->
     <div class="thank-you-fullscreen" v-else>
       <div class="thank-you-inner">
         <!-- 3D Avatar with checkmark -->
@@ -124,23 +124,23 @@ main {
   padding-bottom: 120px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1024px) and (min-width: 768px) {
   main {
-    gap: 52px;
-    padding-top: 140px;
+    gap: 48px;
+    padding-top: 130px;
     padding-bottom: 96px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   main {
-    gap: 36px;
-    padding-top: 120px;
-    padding-bottom: 80px;
+    gap: 32px;
+    padding-top: 96px;
+    padding-bottom: 64px;
   }
 }
 
-/* Full-Screen Thank You Page matching Figma 350:24 & media_1787844363947.png */
+/* Full-Screen Thank You Page */
 .thank-you-fullscreen {
   min-height: 100vh;
   width: 100%;
